@@ -21,5 +21,15 @@
   "human_review_completed": false,
   "browser": "20/20 images loaded; CSV export 20 rows and quote/comma escaping pass. Single-line input strips newlines as expected. All five demo pages visually checked individually.",
   "clean_output_reproduction": "4 rankings, all evaluator metrics and paired bootstrap exactly match; runtime/timestamps may differ",
-  "make_setup": "make -n setup resolves Python3.12 and requirements-lock.txt"
+  "make_setup": "make -n setup resolves Python3.12 and requirements-lock.txt",
+  "clean_committed_source": {
+    "commit": "1d2d4a6bd0587ed2b2531c42572cda72a43d1e5b",
+    "method": "git archive to new /tmp directory; reused installed .venv interpreter only",
+    "tests": "69 passed, 39 skipped in 5.74s",
+    "evidence_verifier": "pass",
+    "preflight": "0 FAIL, 3 WARN: optional data/models and no .git in archive",
+    "full_offline_reproduction": "exit 0; all 4 rankings and evaluator metrics match snapshot",
+    "official_gt": "not available",
+    "remote_submission": "not pushed"
+  }
 }

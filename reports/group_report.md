@@ -12,7 +12,7 @@
 | Challenge | T02 · Raw QC Triage: ảnh mờ, lóa, tối và nén JPEG |
 | Thành viên (5–6) + vai trò | 1. Vũ Duy Khánh, kiêm toàn bộ vai trò (Lead/Integrator) · 2. Không áp dụng (Data & fixtures) · 3. Không áp dụng (Core algorithm) · 4. Không áp dụng (QA/metric) · 5. Không áp dụng (Review + report) · 6. Không áp dụng; nhóm thực tế **1 người**. Tên suy từ thư mục, cần xác nhận; AI hỗ trợ code/draft, chưa thay review người thật. |
 | Git URL | https://github.com/o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy (commit/tag hiện cục bộ, chưa push) |
-| Tag `demo-180m` (commit) | `demo-180m^{commit}` — xem `git rev-parse demo-180m^{commit}`; tạo thực tế khi hoàn tất demo, không khẳng định đúng phút 180 của lớp. |
+| Tag `demo-180m` (commit) | `demo-180m` → `1d2d4a6bd0587ed2b2531c42572cda72a43d1e5b` (tạo 2026-11-14 16:40:25 +07); tạo thực tế khi hoàn tất demo, không khẳng định đúng phút 180 của lớp. |
 | Tag `final-24h` (commit) | `final-24h^{commit}` — xem `git rev-parse final-24h^{commit}`; hash bàn giao sau commit, không khẳng định đúng deadline +24h. |
 | Deadline (giờ VN) | Chưa được cung cấp. Bạn điền hạn lớp theo Asia/Ho_Chi_Minh; hướng dẫn tại [các bước hoàn tất](../docs/HUONG_DAN_HOAN_TAT_T004.md). |
 

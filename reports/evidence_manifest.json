@@ -64,7 +64,7 @@
     "reports/evidence/poc/run_info.json": "47b0d33b9c52217b510f0cd7a93efd71882fc6f1f47871659778d260088bfe63",
     "reports/failure_cases.json": "9afe7f1375e5d0a7aa8a15493c7a2d4904c153083792ea7c8ccb1ed90926b9dc",
     "reports/failure_gallery.html": "997ea7bc53eb37825f0a9ab39425efc5bc7a700ab140953d0d6abddb49ee40b0",
-    "reports/group_report.md": "471b1bcfc031cf7a2590afc39faff90f88c84610df6a5b321847809bb2339a94",
+    "reports/group_report.md": "b3562c908612f022a2ab423efdf0e2cffd258223a8abcff2c38d5383dc9c7f04",
     "reports/metric_contract.md": "01d1f1bbe24612402f5f0d36bec813caa649db086caa1e4ce42d70f4f83d4adb",
     "reports/metrics_baseline.json": "875e0fbc201f4f1fdb95b844bcbe6a30665ce86c2f792cdd49367d696bc17eb2",
     "reports/metrics_global_thresholds.json": "7bbe7f8695171b4b07faf78753125deb0ecc9ae9735c91a661f372b33b9ee72e",
@@ -80,7 +80,7 @@
     "reports/slices_no_roi.csv": "86dc116ae994b5d9bf49c0d5a19680c61ee5debf56ede90dd4d3a82a08a446b0",
     "reports/slices_poc.csv": "ee2ee20be95609317f672ae5b64da1d9780fe9de7556998c9166df0d7ae24c62",
     "reports/table1_baseline_vs_poc.md": "7a31729b05d8274be8b46d7c54569584f4dd3053cbcce02b6daea0377ffb39c4",
-    "reports/team_contributions.csv": "951ff20b52ca74185e5f3a098c8a4eb48b50ce0bdbf85da36d05da616de070b3",
-    "reports/verification.json": "51f3abc43c14fcdb3771aafdbc4f968c9a82e7844c43041b0c4ae676fa89ce5e"
+    "reports/team_contributions.csv": "3fd10b458fc40c963f811b8505e2d278e6851a8ddd26b0d243b7d87cd008df0e",
+    "reports/verification.json": "0194acc66ce48e9fca6c0346d89a6c90cbd9aaa9316c71bec7956aadcd4d0b06"
   }
 }
