@@ -5,20 +5,20 @@
 
 | Mục | Khai báo của nhóm |
 |---|---|
-| Track | T__ |
-| Primary metric (tên đúng như evaluator in ra) | |
-| Tăng tốt hay giảm tốt? | higher / lower |
-| Đơn vị đánh giá (image / region / pair / release / batch / case …) | |
-| Công thức + numerator / denominator | |
-| Cách ghép prediction ↔ GT (IoU? id? tolerance?) | |
-| Candidate pool cố định | |
-| Review budget B / K | |
+| Track | T02 · Raw QC Triage · T004 (1 thành viên) |
+| Primary metric (tên đúng như evaluator in ra) | Defect Recall@B; báo kèm Precision@B |
+| Tăng tốt hay giảm tốt? | higher (Recall/Precision); lower (false alarm) |
+| Đơn vị đánh giá (image / region / pair / release / batch / case …) | image; group bootstrap theo scene trong manifest |
+| Công thức + numerator / denominator | Recall = TP@20 / số ảnh lỗi eval; Precision = TP@20 / 20; FP = ảnh sạch trong top20; FN = ảnh lỗi ngoài top20. Mẫu không có positive: n/a, không tự đổi denominator. |
+| Cách ghép prediction ↔ GT (IoU? id? tolerance?) | image_id duy nhất, lọc split eval trước khi sort score giảm dần; tie-break image_id tăng dần; không dùng nhãn để rank. |
+| Candidate pool cố định | 96 input synthetic; eval gồm 40 ảnh / 10 scene; dev gồm 56 ảnh / 14 scene. Queue chỉ từ eval; không đổi pool sau freeze. |
+| Review budget B / K | B = 20, giống nhau ở baseline/PoC/ablation; không lấy 20 trên cả dev+eval. |
 | Seed | 42 |
-| Threshold policy (chọn trên dev như thế nào) | |
-| Eval split (không dùng để tune) | |
-| Chỉ số lỗi xấu (miss / false alarm / false reject) | |
-| Slices sẽ báo cáo (≥2) | |
-| Cách báo độ bất định khi N nhỏ (Wilson CI / bootstrap) | |
-| Ngày giờ chốt + người chốt | |
+| Threshold policy (chọn trên dev như thế nào) | Xem 56 ảnh dev và thống kê pixel: baseline Laplacian <400; PoC sharpness cam_A=60/cam_B=30; mean day=45/dusk=28/night=10; saturation ROI=0.10; blockiness=1.8; component t/(t+x) hoặc x/(x+t); max component >=0.5 đề nghị RECAPTURE. Chi tiết configs/lab.yaml. Không fit/tune eval. |
+| Eval split (không dùng để tune) | eval có sẵn theo scene; chỉ tạo nhãn AI nội bộ sau commit freeze. GT giảng viên không có. Nhãn nội bộ là quan sát AI, phải được người thật kiểm lại; không phải điểm chính thức. |
+| Chỉ số lỗi xấu (miss / false alarm / false reject) | FN ngoài top20; FP sạch trong top20 theo light và camera; pred_action chỉ là đề nghị, batch HOLD đến khi review thật. |
+| Slices sẽ báo cáo (≥2) | day/dusk/night; cam_A/cam_B; blur/glare/dark/compression; nêu riêng N=0/n nhỏ. |
+| Cách báo độ bất định khi N nhỏ (Wilson CI / bootstrap) | Bootstrap 2000 lần seed42 theo 10 scene eval, giữ chung draw cho baseline/PoC; resample đóng góp TP/positive của ranking cố định, không rank lại; 95% percentile CI, mô tả nội bộ không bảo đảm tổng quát hóa. |
+| Ngày giờ chốt + người chốt | 2026-11-14, trước lần xem ảnh/chấm eval; Codex hỗ trợ T004, thời điểm/commit chính xác trong reports/protocol_freeze.json. Vũ Duy Khánh xác nhận sau. |
 
 Nếu baseline = 0 thì ghi rõ "baseline = 0" thay vì phần trăm cải thiện.

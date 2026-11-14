@@ -1,16 +1,23 @@
-# ============================================================
-# Group config — EDIT ME (one per group). Values here override
-# the track defaults loaded from `track_config`.
-# ============================================================
-group_id: G00                     # e.g. G07
-owner: "TODO: tên người ký duyệt (role)"   # mandatory for every Decision
-track_config: tracks/t02.yaml     # pick your challenge: tracks/t01.yaml ... tracks/t14.yaml
-track: t02                        # must match track_config
-input: fixtures/t02_raw_qc        # or data/real/... if your instructor provided a real pack
-output: out/
+# T004: one member. Identity inferred from project name; confirm before submitting.
+group_id: T004
+owner: "Vũ Duy Khánh — T004 / reviewer (chờ xác nhận người thật)"
+track_config: tracks/t02.yaml
+track: t02
+input: fixtures/t02_raw_qc
+output: out/poc
 seed: 42
-offline: true                     # demo/eval must not touch the network
-strict_provenance: true           # fail if manifest.csv hashes do not match
-
-# Track params (merged over track_config.params). Freeze before evaluation.
-params: {}
+offline: true
+strict_provenance: true
+# Set true ONLY after a real person reviews and signs review_queue_reviewed.csv.
+human_review_confirmed: false
+# Frozen from visual inspection of 56 dev images; no eval images/labels used.
+params:
+  budget: 20
+  review_split: eval
+  baseline_laplacian_threshold: 400.0
+  sharpness_thresholds: {cam_A: 60.0, cam_B: 30.0}
+  brightness_thresholds: {day: 45.0, dusk: 28.0, night: 10.0}
+  unknown_camera_threshold: 60.0
+  unknown_light_threshold: 28.0
+  roi_saturation_threshold: 0.10
+  blockiness_threshold: 1.8

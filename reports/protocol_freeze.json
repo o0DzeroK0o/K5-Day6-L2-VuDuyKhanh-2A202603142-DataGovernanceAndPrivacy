@@ -1,0 +1,23 @@
+{
+  "frozen_at": "2026-11-14T09:24:17.308945+00:00",
+  "status": "frozen_before_viewing_eval_images_or_labels",
+  "seed": 42,
+  "budget": 20,
+  "eval_pool": 40,
+  "eval_scenes": 10,
+  "dev_pool": 56,
+  "dev_scenes": 14,
+  "official_gt_available": false,
+  "internal_labels": "AI visual annotations, to be made AFTER this freeze; require human verification",
+  "ablations": [
+    "no_roi",
+    "global_thresholds"
+  ],
+  "ood_protocol": "first 10 image IDs sorted in T13 fixture, pixels only; unknown camera/light -> HOLD; cross-fixture synthetic proxy, not real-world generalization",
+  "hashes": {
+    "configs/lab.yaml": "689b6022de7bde53e0bbcb780ca91ae1510b0b5faf49a2157f7e0b274c4696b7",
+    "src/pipeline.py": "5ac7a50c71282c553aa43fa6f56bd2cb705af82e4edead51638350df6e94ccc4",
+    "src/t02_baseline.py": "31312d314b78696ff7d371c70a030e09f68c0d99543eb9939db4ffb341256625",
+    "reports/metric_contract.md": "01d1f1bbe24612402f5f0d36bec813caa649db086caa1e4ce42d70f4f83d4adb"
+  }
+}
