@@ -7,3 +7,5 @@
 - [Thực hiện T02 / T004](2026-11-14-162300-thuc-hien-t02-t004.md)
 - [Checklist và hướng dẫn xác nhận của học viên](HUONG_DAN_HOAN_TAT_T004.md)
 - [Đánh dấu checklist đã đạt](2026-11-14-165400-danh-dau-checklist.md)
+- [Hướng dẫn chạy demo T004](HUONG_DAN_CHAY_DEMO_T004.md)
+- [Nhật ký kiểm tra cách chạy demo](2026-11-14-173843-huong-dan-chay-demo.md)
