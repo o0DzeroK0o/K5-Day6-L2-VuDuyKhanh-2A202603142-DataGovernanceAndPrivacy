@@ -384,15 +384,21 @@
       border: 1px solid var(--line);
       border-radius: 10px;
     }
-    .checklist li::before {
-      content: "";
+    .checklist input[type="checkbox"] {
       position: absolute;
       left: 0.75rem;
       top: 0.75rem;
       width: 1rem;
       height: 1rem;
-      border: 2px solid var(--teal);
-      border-radius: 4px;
+      margin: 0;
+      accent-color: var(--teal);
+      opacity: 1;
+    }
+    .checklist .pending-note {
+      display: block;
+      margin-top: 0.3rem;
+      color: var(--ink-soft);
+      font-size: 0.9rem;
     }
 
     .who {
@@ -883,14 +889,15 @@ make tag-final   <span class="c"># +24h nộp</span></pre>
         </ol>
 
         <h3>Checklist nhanh riêng T02</h3>
+        <p>T004: <strong>6/7 mục đã đạt</strong>; còn review người thật.</p>
         <ul class="checklist">
-          <li>Đã đọc <code>docs/tracks/T02.md</code></li>
-          <li><code>lab.yaml</code> trỏ <code>track: t02</code> + <code>fixtures/t02_raw_qc</code></li>
-          <li>Baseline T02 chạy được</li>
-          <li><code>process()</code> trả DataFrame có <code>image_id, score</code></li>
-          <li>PoC chạy xong → có <code>out/poc/ranked_review.csv</code></li>
-          <li>Có ít nhất một vòng review người thật</li>
-          <li>Report nêu failure mode (night / glare / cam_B)</li>
+          <li><input type="checkbox" checked disabled aria-label="Đã đạt">Đã đọc <code>docs/tracks/T02.md</code></li>
+          <li><input type="checkbox" checked disabled aria-label="Đã đạt"><code>lab.yaml</code> trỏ <code>track: t02</code> + <code>fixtures/t02_raw_qc</code></li>
+          <li><input type="checkbox" checked disabled aria-label="Đã đạt">Baseline T02 chạy được</li>
+          <li><input type="checkbox" checked disabled aria-label="Đã đạt"><code>process()</code> trả DataFrame có <code>image_id, score</code></li>
+          <li><input type="checkbox" checked disabled aria-label="Đã đạt">PoC chạy xong → có <code>out/poc/ranked_review.csv</code></li>
+          <li><input type="checkbox" disabled aria-label="Chưa đạt">Có ít nhất một vòng review người thật<span class="pending-note">Chưa đạt: bạn cần tự review ảnh và xuất CSV; vòng review AI chưa thay cho người thật.</span></li>
+          <li><input type="checkbox" checked disabled aria-label="Đã đạt">Report nêu failure mode (night / glare / cam_B)</li>
         </ul>
       </section>
 
@@ -912,15 +919,16 @@ make tag-final   <span class="c"># +24h nộp</span></pre>
 
       <section id="checklist">
         <h2>Checklist trước khi nộp</h2>
+        <p>T004: <strong>6/8 mục đã đạt</strong>. Các mục chưa tích có ghi rõ việc còn lại. <a href="docs/HUONG_DAN_HOAN_TAT_T004.md">Xem hướng dẫn thực hiện</a>.</p>
         <ul class="checklist">
-          <li>Đã chọn 1 track và đọc hết đề <code>docs/tracks/TXX.md</code></li>
-          <li>Đã sửa <code>configs/lab.yaml</code> (group_id, owner, track)</li>
-          <li>Setup + test chạy ổn (theo tab hệ điều hành ở bước “Bật máy”)</li>
-          <li>PoC chạy ra file đúng contract trong <code>out/poc/</code></li>
-          <li>Có baseline + PoC + giải thích trong report</li>
-          <li>Có vòng review người thật (queue / audit)</li>
-          <li>Có <code>group_report.md</code> + <code>team_contributions.csv</code></li>
-          <li>Đã tag demo / final theo mốc thời gian</li>
+          <li><input type="checkbox" checked disabled aria-label="Đã đạt">Đã chọn 1 track và đọc hết đề <code>docs/tracks/TXX.md</code></li>
+          <li><input type="checkbox" checked disabled aria-label="Đã đạt">Đã sửa <code>configs/lab.yaml</code> (group_id, owner, track)</li>
+          <li><input type="checkbox" checked disabled aria-label="Đã đạt">Setup + test chạy ổn (theo tab hệ điều hành ở bước “Bật máy”)</li>
+          <li><input type="checkbox" checked disabled aria-label="Đã đạt">PoC chạy ra file đúng contract trong <code>out/poc/</code></li>
+          <li><input type="checkbox" checked disabled aria-label="Đã đạt">Có baseline + PoC + giải thích trong report</li>
+          <li><input type="checkbox" disabled aria-label="Chưa đạt">Có vòng review người thật (queue / audit)<span class="pending-note">Chưa đạt: cần review thật 20 ảnh và lưu tên reviewer/quyết định vào audit.</span></li>
+          <li><input type="checkbox" checked disabled aria-label="Đã đạt">Có <code>group_report.md</code> + <code>team_contributions.csv</code></li>
+          <li><input type="checkbox" disabled aria-label="Chưa đạt">Đã tag demo / final theo mốc thời gian<span class="pending-note">Đã tạo hai tag cục bộ demo-180m và final-24h. Còn xác nhận đúng mốc giờ của lớp; chưa push/nộp.</span></li>
         </ul>
 
         <div class="callout" style="margin-top: 1.25rem;">

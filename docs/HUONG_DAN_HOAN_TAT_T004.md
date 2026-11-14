@@ -4,16 +4,23 @@ Bài có 1 thành viên. Tên Vũ Duy Khánh được suy từ tên thư mục, 
 
 ## Checklist trước khi nộp — đối chiếu nguyên ý hướng dẫn
 
-| Mục trong HUONG_DAN_HOC_VIEN.html | Trạng thái thực tế | Bằng chứng / việc còn lại |
-|---|---|---|
-| Đã chọn 1 track và đọc hết đề docs/tracks/TXX.md | Đã xong | T02, nhật ký và metric contract |
-| Đã sửa configs/lab.yaml (group_id, owner, track) | Đã điền | T004, 1 người; tên/owner cần bạn xác nhận |
-| Setup + test chạy ổn | Đã chạy | requirements-lock.txt; kết quả đầy đủ trong nhật ký và reports/verification.json |
-| PoC chạy ra file đúng contract trong out/poc/ | Đã xong | ranked_review.csv, review queue, contact sheet, decision, audit; snapshot reports/evidence/poc/ |
-| Có baseline + PoC + giải thích trong report | Đã xong ở đánh giá nội bộ | Baseline Laplacian và PoC cùng pool, budget, seed; GT chính thức do giảng viên giữ |
-| Có vòng review người thật (queue / audit) | **CHỜ BẠN** | AI đã review 20 ảnh, có 2 override. Không thể gọi đó là người thật. Làm mục 1 bên dưới |
-| Có group_report.md + team_contributions.csv | Đã điền | Giữ cấu trúc/câu hỏi của mẫu, ghi nhóm 1 người và hỗ trợ AI minh bạch |
-| Đã tag demo / final theo mốc thời gian | Có tag cục bộ khi bàn giao; **không chứng nhận đúng giờ lớp** | Tag ghi thời điểm tạo thực tế. Bạn đối chiếu deadline và push khi sẵn sàng |
+**Đã đạt 6/8 mục.** Dấu `[x]` là đã có bằng chứng; dấu `[ ]` là bạn còn cần xử lý.
+
+- [x] Đã chọn 1 track và đọc hết đề `docs/tracks/TXX.md` — T02; có nhật ký và metric contract.
+- [x] Đã sửa `configs/lab.yaml` (group_id, owner, track) — T004, nhóm 1 người. Tên/owner đã điền, bạn kiểm tra lại thông tin cá nhân.
+- [x] Setup + test chạy ổn — 69 passed, 39 skipped do thiếu GT giảng viên; xem `reports/verification.json`.
+- [x] PoC chạy ra file đúng contract trong `out/poc/` — có ranked_review, queue, contact sheet, decision và audit.
+- [x] Có baseline + PoC + giải thích trong report — cùng pool, budget, seed; số liệu tự kiểm bằng nhãn AI, chưa phải điểm chính thức.
+- [ ] Có vòng review người thật (queue / audit) — **bạn cần tự xem 20 ảnh, xuất CSV và chạy lại để có audit mang tên mình**. AI đã review, nhưng chưa thay người thật. Làm mục 1 bên dưới.
+- [x] Có `group_report.md` + `team_contributions.csv` — đã điền đủ, ghi đúng nhóm 1 người và hỗ trợ AI.
+- [ ] Đã tag demo / final theo mốc thời gian — **hai tag cục bộ đã có**, nhưng chưa có thông tin để xác nhận đúng mốc giờ của lớp. Bạn xác nhận deadline; push/nộp theo mục 4.
+
+**Các việc đã làm liên quan đến mục còn mở:**
+
+- [x] Tạo tag `demo-180m` tại commit `1d2d4a6` và `final-24h` tại commit `83ca5cc`, ghi thời điểm thực tế.
+- [x] Chuẩn bị 20 quyết định review AI và 2 override có audit để bạn tham khảo.
+- [ ] Xác nhận tên/mã học viên và điền deadline chính thức.
+- [ ] Push commit/tag cần nộp và gửi link qua cổng lớp.
 
 Checklist riêng T02: đã có threshold theo camera/ánh sáng, ROI glare, phân tích night/glare/cam_B và đã xem 10 ảnh proxy OOD (synthetic T13). Chưa phải 10 ảnh đời thực và tập proxy này không có ảnh lỗi nên recall không xác định. Không đánh dấu review người thật hoặc deadline là đạt khi chưa có bằng chứng.
 

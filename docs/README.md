@@ -6,3 +6,4 @@
 - [Chuẩn bị của giảng viên](INSTRUCTOR_SETUP.md)
 - [Thực hiện T02 / T004](2026-11-14-162300-thuc-hien-t02-t004.md)
 - [Checklist và hướng dẫn xác nhận của học viên](HUONG_DAN_HOAN_TAT_T004.md)
+- [Đánh dấu checklist đã đạt](2026-11-14-165400-danh-dau-checklist.md)
