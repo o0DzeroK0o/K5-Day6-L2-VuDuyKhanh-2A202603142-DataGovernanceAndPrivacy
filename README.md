@@ -1,5 +1,29 @@
 # Day 06 · Data Lab · Field-to-Release PoC (AI20K · Data Track)
 
+> **Bài làm T004 · T02 · 1 thành viên:** Vũ Duy Khánh (suy từ tên dự án, cần xác nhận).
+> [Report đã điền](reports/group_report.md) · [Metric contract](reports/metric_contract.md) · [Kết quả do script sinh](reports/table1_baseline_vs_poc.md) · [Demo 5 trang offline](demo/t004_demo.html) · [Checklist và thao tác còn lại](docs/HUONG_DAN_HOAN_TAT_T004.md).
+>
+> Repo: [o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy](https://github.com/o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy).
+> Tag cục bộ: `demo-180m`, `final-24h` (tạo theo thời điểm làm bài thực tế, không xác nhận mốc lớp). [Demo trên remote sau khi push](https://github.com/o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy/tree/demo-180m) · [Final trên remote sau khi push](https://github.com/o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy/tree/final-24h). Agent chưa push.
+>
+> **Trạng thái trung thực:** pipeline và tự kiểm đã chạy; số liệu dùng nhãn quan sát AI nội bộ, không phải GT giảng viên. Có review AI và audit, còn chờ review người thật. Batch **HOLD**. Chi tiết/bằng chứng: `reports/analysis_summary.json` và `reports/evidence/`.
+
+```bash
+# Python 3.12, đã cài .venv; activate để dùng đúng python của bài:
+source .venv/bin/activate
+# 1 lệnh run (không tải model hay dữ liệu)
+python -m src.main --input fixtures/t02_raw_qc --config configs/lab.yaml --output out/poc --offline --seed 42
+# 1 lệnh evaluate nội bộ; nhãn AI đã ghi rõ nguồn, chưa được người thật xác nhận
+python -m src.evaluate --track t02 --gt reports/annotations/internal_eval_labels.csv --pred out/poc/ranked_review.csv --out out/metrics_poc_internal.json
+# 1 lệnh tests
+python -m pytest -q
+# Tái tạo baseline + PoC + review AI + ablation + OOD + CI ở thư mục riêng
+make t02-submission
+```
+
+Thiết lập máy mới: Python 3.12, `python3.12 -m venv .venv`, rồi `.venv/bin/python -m pip install -r requirements-lock.txt`. Bước cài dependency cần cache/wheelhouse hoặc mạng; inference/evaluate/tests không dùng mạng. Máy hiện tại đã cài toàn bộ từ cache offline. `requirements-lock.txt` ghi phiên bản đã kiểm tra. Baseline đúng đề T02: `make t02-baseline`; `make baseline TRACK=t02` vẫn là ví dụ random của starter. Giảng viên có GT chạy evaluator chuẩn, không cần thay thuật toán.
+
+
 Starter repo cho bài lab **Data Pipeline, Privacy & Production PoC**: 14 challenge (T01–T14), một contract chung.
 Repo cung cấp **dữ liệu offline + hạ tầng dùng chung + metric chuẩn + template báo cáo** để nhóm tập trung vào phần quan trọng:
 vấn đề, baseline, thuật toán, đánh giá trung thực, human-in-the-loop và quyết định GO/HOLD/REWORK.

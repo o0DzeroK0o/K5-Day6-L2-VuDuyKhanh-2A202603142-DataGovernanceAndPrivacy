@@ -1,0 +1,11 @@
+image_id,raw_action,pred_action,review_state,reviewer
+pool_002,KEEP,KEEP,unreviewed,
+pool_007,KEEP,KEEP,unreviewed,
+pool_008,KEEP,KEEP,unreviewed,
+pool_009,KEEP,KEEP,unreviewed,
+pool_003,KEEP,KEEP,unreviewed,
+pool_004,KEEP,KEEP,unreviewed,
+pool_006,KEEP,KEEP,unreviewed,
+pool_005,KEEP,KEEP,unreviewed,
+pool_001,KEEP,KEEP,unreviewed,
+pool_000,KEEP,KEEP,unreviewed,

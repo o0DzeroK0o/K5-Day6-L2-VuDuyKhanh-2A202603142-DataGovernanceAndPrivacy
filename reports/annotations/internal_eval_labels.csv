@@ -1,0 +1,41 @@
+image_id,split,camera_id,light,scene_id,is_defect,defect_type,severity,annotator,annotation_basis,human_verified,note,annotated_at
+img_01_0,eval,cam_A,night,img_01,0,none,0,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,night hữu ích: xe/người/đường còn phân biệt rõ,2026-11-14T09:25:34+00:00
+img_01_1,eval,cam_A,night,img_01,0,none,0,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,"night hữu ích: cạnh xe, đường và chữ synthetic còn rõ",2026-11-14T09:25:34+00:00
+img_01_2,eval,cam_A,night,img_01,1,dark,2,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,"tối mạnh, xe và người gần hòa vào nền",2026-11-14T09:25:34+00:00
+img_01_3,eval,cam_A,night,img_01,1,compression,2,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,khối nén/ringing rõ trên đèn và cạnh xe,2026-11-14T09:25:34+00:00
+img_03_0,eval,cam_B,night,img_03,0,none,0,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,"cam_B mềm nhẹ, xe/người vẫn phân biệt được",2026-11-14T09:25:34+00:00
+img_03_1,eval,cam_B,night,img_03,0,none,0,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,cảnh đêm còn chi tiết xe và người,2026-11-14T09:25:34+00:00
+img_03_2,eval,cam_B,night,img_03,1,glare,1,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,quầng sáng vùng chân trời làm giảm tương phản cục bộ,2026-11-14T09:25:34+00:00
+img_03_3,eval,cam_B,night,img_03,1,compression,1,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,cạnh xe và chữ xuất hiện ô khối/ringing,2026-11-14T09:25:34+00:00
+img_05_0,eval,cam_A,day,img_05,0,none,0,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,"ban ngày, cạnh người/xe rõ",2026-11-14T09:25:34+00:00
+img_05_1,eval,cam_A,day,img_05,0,none,0,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,"ban ngày, xe và biển synthetic đọc được",2026-11-14T09:25:34+00:00
+img_05_2,eval,cam_A,day,img_05,1,compression,2,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,"khối lớn trên nhà và xe, ringing rõ",2026-11-14T09:25:34+00:00
+img_05_3,eval,cam_A,day,img_05,1,glare,1,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,đốm trắng che biển synthetic của xe bên trái,2026-11-14T09:25:34+00:00
+img_06_0,eval,cam_B,night,img_06,0,none,0,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,cam_B đêm mềm nhẹ nhưng đối tượng còn hữu ích,2026-11-14T09:25:34+00:00
+img_06_1,eval,cam_B,night,img_06,0,none,0,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,"đêm nét, người và xe rõ",2026-11-14T09:25:34+00:00
+img_06_2,eval,cam_B,night,img_06,1,compression,2,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,khối nén ở các cửa sáng và xe phía trước,2026-11-14T09:25:34+00:00
+img_06_3,eval,cam_B,night,img_06,1,glare,1,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,màn sáng vùng giữa che tương phản của người/xe,2026-11-14T09:25:34+00:00
+img_13_0,eval,cam_A,night,img_13,0,none,0,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,đêm nhưng cạnh xe và người sắc nét,2026-11-14T09:25:34+00:00
+img_13_1,eval,cam_A,night,img_13,0,none,0,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,"biển synthetic, xe và người rõ",2026-11-14T09:25:34+00:00
+img_13_2,eval,cam_A,night,img_13,1,compression,2,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,nhiễu khối mạnh ở đèn và xe,2026-11-14T09:25:34+00:00
+img_13_3,eval,cam_A,night,img_13,1,blur,2,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,"mờ toàn ảnh, xe/người mất cạnh",2026-11-14T09:25:34+00:00
+img_15_0,eval,cam_B,dusk,img_15,0,none,0,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,cam_B hoàng hôn mềm nhẹ nhưng dùng được,2026-11-14T09:25:34+00:00
+img_15_1,eval,cam_B,dusk,img_15,0,none,0,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,hoàng hôn vẫn thấy rõ đối tượng,2026-11-14T09:25:34+00:00
+img_15_2,eval,cam_B,dusk,img_15,1,blur,2,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,"mờ toàn ảnh, mất chi tiết xe và biển",2026-11-14T09:25:34+00:00
+img_15_3,eval,cam_B,dusk,img_15,1,dark,2,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,"rất tối, người/xe bị chìm",2026-11-14T09:25:34+00:00
+img_16_0,eval,cam_A,day,img_16,0,none,0,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,"cạnh xe, đường, người còn sắc",2026-11-14T09:25:34+00:00
+img_16_1,eval,cam_A,day,img_16,0,none,0,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,xe/người và biển synthetic rõ,2026-11-14T09:25:34+00:00
+img_16_2,eval,cam_A,day,img_16,1,blur,1,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,"mờ toàn cục, biển và cạnh xe mất chi tiết",2026-11-14T09:25:34+00:00
+img_16_3,eval,cam_A,day,img_16,1,compression,1,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,"khối và viền giả trên nhà, xe, vạch đường",2026-11-14T09:25:34+00:00
+img_17_0,eval,cam_A,day,img_17,0,none,0,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,"ban ngày, xe và người rõ",2026-11-14T09:25:34+00:00
+img_17_1,eval,cam_A,day,img_17,0,none,0,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,các xe/biển synthetic còn rõ,2026-11-14T09:25:34+00:00
+img_17_2,eval,cam_A,day,img_17,1,glare,2,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,"vùng trắng lớn che nhà, đường và xe",2026-11-14T09:25:34+00:00
+img_17_3,eval,cam_A,day,img_17,1,dark,2,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,"tối mạnh, đối tượng chìm vào nền",2026-11-14T09:25:34+00:00
+img_19_0,eval,cam_A,day,img_19,0,none,0,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,"xe, người và biển synthetic đủ rõ",2026-11-14T09:25:34+00:00
+img_19_1,eval,cam_A,day,img_19,0,none,0,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,cảnh ban ngày có cạnh sắc,2026-11-14T09:25:34+00:00
+img_19_2,eval,cam_A,day,img_19,1,compression,1,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,ô khối và ringing nhẹ ở xe và nhà,2026-11-14T09:25:34+00:00
+img_19_3,eval,cam_A,day,img_19,1,blur,1,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,xe/người mất độ nét đồng đều,2026-11-14T09:25:34+00:00
+img_23_0,eval,cam_A,day,img_23,0,none,0,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,các biển synthetic và người rõ,2026-11-14T09:25:34+00:00
+img_23_1,eval,cam_A,day,img_23,0,none,0,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,ban ngày đủ chi tiết đối tượng,2026-11-14T09:25:34+00:00
+img_23_2,eval,cam_A,day,img_23,1,compression,2,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,ô khối lớn trên nhà và xe,2026-11-14T09:25:34+00:00
+img_23_3,eval,cam_A,day,img_23,1,dark,2,AI:Codex,visual_after_freeze_6c525dc_no_prediction_scores,False,người/xe quá tối so với cảnh ban ngày,2026-11-14T09:25:34+00:00

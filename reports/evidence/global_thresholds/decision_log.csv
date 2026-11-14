@@ -1,0 +1,2 @@
+ts,scope,status,canonical,reason_code,reason,owner,evidence
+2026-11-14T09:26:56+00:00,T004:T02:triage,HOLD,HOLD,HUMAN_REVIEW_REQUIRED,Cần người thật xác nhận toàn bộ queue; AI review không phải chữ ký người dùng.,Vũ Duy Khánh — T004 / reviewer (chờ xác nhận người thật),ranked_review.csv;review_queue.csv;audit_log.jsonl;item_decisions.csv

@@ -1,0 +1,25 @@
+{
+  "tests": "69 passed, 39 skipped in 5.19s",
+  "cpu": "Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz",
+  "preflight": {
+    "fail": 0,
+    "warn": 2,
+    "warnings": [
+      "optional real data absent",
+      "optional pretrained models absent"
+    ]
+  },
+  "manifests": {
+    "total": 14,
+    "failing": 0
+  },
+  "compileall": "pass",
+  "official_evaluation": {
+    "exit_code": 2,
+    "reason": "instructor GT not distributed"
+  },
+  "human_review_completed": false,
+  "browser": "20/20 images loaded; CSV export 20 rows and quote/comma escaping pass. Single-line input strips newlines as expected. All five demo pages visually checked individually.",
+  "clean_output_reproduction": "4 rankings, all evaluator metrics and paired bootstrap exactly match; runtime/timestamps may differ",
+  "make_setup": "make -n setup resolves Python3.12 and requirements-lock.txt"
+}

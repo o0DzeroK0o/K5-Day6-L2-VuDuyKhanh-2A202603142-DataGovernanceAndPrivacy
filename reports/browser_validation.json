@@ -1,0 +1,9 @@
+{
+  "cards": 20,
+  "images": 20,
+  "allLoaded": true,
+  "csv_rows": 20,
+  "csv_quotes_commas": "pass",
+  "newline_behavior": "single-line HTML input strips newline before export; expected browser behavior",
+  "test_identity": "AI:BrowserTest; not human evidence"
+}

@@ -1,0 +1,3 @@
+{"ts": "2026-11-14T09:24:05+00:00", "actor": "pipeline", "action": "manifest_verified", "item_id": "t02", "before": null, "after": 96, "reason": "", "extra": {}}
+{"ts": "2026-11-14T09:24:47+00:00", "actor": "pipeline", "action": "manifest_verified", "item_id": "t02", "before": null, "after": 96, "reason": "", "extra": {}}
+{"ts": "2026-11-14T09:26:42+00:00", "actor": "pipeline", "action": "manifest_verified", "item_id": "t02", "before": null, "after": 96, "reason": "", "extra": {}}

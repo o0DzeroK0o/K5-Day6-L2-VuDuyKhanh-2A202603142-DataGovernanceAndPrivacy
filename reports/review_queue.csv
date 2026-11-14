@@ -1,0 +1,21 @@
+rank,item_id,score,reason,suggested_action,slice,evidence_path,reviewer,reviewer_decision,override_value,review_note,reviewed_at
+1,img_13_3,0.969944,blur;camera=cam_A;light=night,RECAPTURE,night,images/img_13_3.jpg,AI:Codex,approve,,"AI visual review, NOT human sign-off: mờ toàn ảnh, xe/người mất cạnh",2026-11-14T09:26:46+00:00
+2,img_15_2,0.940191,blur;camera=cam_B;light=dusk,RECAPTURE,dusk,images/img_15_2.jpg,AI:Codex,approve,,"AI visual review, NOT human sign-off: mờ toàn ảnh, mất chi tiết xe và biển",2026-11-14T09:26:46+00:00
+3,img_19_3,0.924955,blur;camera=cam_A;light=day,RECAPTURE,day,images/img_19_3.jpg,AI:Codex,approve,,"AI visual review, NOT human sign-off: xe/người mất độ nét đồng đều",2026-11-14T09:26:46+00:00
+4,img_16_2,0.919553,blur;camera=cam_A;light=day,RECAPTURE,day,images/img_16_2.jpg,AI:Codex,approve,,"AI visual review, NOT human sign-off: mờ toàn cục, biển và cạnh xe mất chi tiết",2026-11-14T09:26:46+00:00
+5,img_17_2,0.909091,glare;camera=cam_A;light=day,RECAPTURE,day,images/img_17_2.jpg,AI:Codex,approve,,"AI visual review, NOT human sign-off: vùng trắng lớn che nhà, đường và xe",2026-11-14T09:26:46+00:00
+6,img_15_3,0.905411,dark;camera=cam_B;light=dusk,RECAPTURE,dusk,images/img_15_3.jpg,AI:Codex,approve,,"AI visual review, NOT human sign-off: rất tối, người/xe bị chìm",2026-11-14T09:26:46+00:00
+7,img_23_3,0.901978,dark;camera=cam_A;light=day,RECAPTURE,day,images/img_23_3.jpg,AI:Codex,approve,,"AI visual review, NOT human sign-off: người/xe quá tối so với cảnh ban ngày",2026-11-14T09:26:46+00:00
+8,img_17_3,0.890566,dark;camera=cam_A;light=day,RECAPTURE,day,images/img_17_3.jpg,AI:Codex,approve,,"AI visual review, NOT human sign-off: tối mạnh, đối tượng chìm vào nền",2026-11-14T09:26:46+00:00
+9,img_05_3,0.834143,glare;camera=cam_A;light=day,RECAPTURE,day,images/img_05_3.jpg,AI:Codex,approve,,"AI visual review, NOT human sign-off: đốm trắng che biển synthetic của xe bên trái",2026-11-14T09:26:46+00:00
+10,img_06_2,0.808508,compression;camera=cam_B;light=night,RECAPTURE,night,images/img_06_2.jpg,AI:Codex,approve,,"AI visual review, NOT human sign-off: khối nén ở các cửa sáng và xe phía trước",2026-11-14T09:26:46+00:00
+11,img_05_2,0.749149,compression;camera=cam_A;light=day,RECAPTURE,day,images/img_05_2.jpg,AI:Codex,approve,,"AI visual review, NOT human sign-off: khối lớn trên nhà và xe, ringing rõ",2026-11-14T09:26:46+00:00
+12,img_01_2,0.742344,dark;camera=cam_A;light=night,RECAPTURE,night,images/img_01_2.jpg,AI:Codex,approve,,"AI visual review, NOT human sign-off: tối mạnh, xe và người gần hòa vào nền",2026-11-14T09:26:46+00:00
+13,img_23_2,0.740039,compression;camera=cam_A;light=day,RECAPTURE,day,images/img_23_2.jpg,AI:Codex,approve,,"AI visual review, NOT human sign-off: ô khối lớn trên nhà và xe",2026-11-14T09:26:46+00:00
+14,img_01_3,0.704417,compression;camera=cam_A;light=night,RECAPTURE,night,images/img_01_3.jpg,AI:Codex,approve,,"AI visual review, NOT human sign-off: khối nén/ringing rõ trên đèn và cạnh xe",2026-11-14T09:26:46+00:00
+15,img_13_2,0.656572,compression;camera=cam_A;light=night,RECAPTURE,night,images/img_13_2.jpg,AI:Codex,approve,,"AI visual review, NOT human sign-off: nhiễu khối mạnh ở đèn và xe",2026-11-14T09:26:46+00:00
+16,img_16_3,0.561171,compression;camera=cam_A;light=day,RECAPTURE,day,images/img_16_3.jpg,AI:Codex,approve,,"AI visual review, NOT human sign-off: khối và viền giả trên nhà, xe, vạch đường",2026-11-14T09:26:46+00:00
+17,img_03_3,0.530217,compression;camera=cam_B;light=night,RECAPTURE,night,images/img_03_3.jpg,AI:Codex,approve,,"AI visual review, NOT human sign-off: cạnh xe và chữ xuất hiện ô khối/ringing",2026-11-14T09:26:46+00:00
+18,img_19_2,0.448521,compression;camera=cam_A;light=day,KEEP,day,images/img_19_2.jpg,AI:Codex,edit,RECAPTURE,"AI visual review, NOT human sign-off: ô khối và ringing nhẹ ở xe và nhà",2026-11-14T09:26:46+00:00
+19,img_23_1,0.416171,compression;camera=cam_A;light=day,KEEP,day,images/img_23_1.jpg,AI:Codex,approve,,"AI visual review, NOT human sign-off: ban ngày đủ chi tiết đối tượng",2026-11-14T09:26:46+00:00
+20,img_06_3,0.388292,glare;camera=cam_B;light=night,KEEP,night,images/img_06_3.jpg,AI:Codex,edit,RECAPTURE,"AI visual review, NOT human sign-off: màn sáng vùng giữa che tương phản của người/xe",2026-11-14T09:26:46+00:00

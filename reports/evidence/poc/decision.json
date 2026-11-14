@@ -1,0 +1,26 @@
+{
+  "status": "HOLD",
+  "reason_code": "HUMAN_REVIEW_REQUIRED",
+  "reason": "Cần người thật xác nhận toàn bộ queue; AI review không phải chữ ký người dùng.",
+  "owner": "Vũ Duy Khánh — T004 / reviewer (chờ xác nhận người thật)",
+  "scope": "T004:T02:triage",
+  "evidence": [
+    "ranked_review.csv",
+    "review_queue.csv",
+    "audit_log.jsonl",
+    "item_decisions.csv"
+  ],
+  "metrics": {
+    "n_items": 96,
+    "algorithm": "multifeature_v1",
+    "review_pool": 40,
+    "review_budget": 20,
+    "review_split": "eval",
+    "queue_size": 20,
+    "n_reviewed": 20,
+    "n_human_reviewed": 0,
+    "n_escalated": 0
+  },
+  "ts": "2026-11-14T09:26:49+00:00",
+  "canonical": "HOLD"
+}

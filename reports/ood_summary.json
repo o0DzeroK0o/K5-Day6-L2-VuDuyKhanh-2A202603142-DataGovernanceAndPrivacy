@@ -1,0 +1,10 @@
+{
+  "n": 10,
+  "positive_n": 0,
+  "suggested_recapture": 0,
+  "unknown_camera_n": 10,
+  "decision": "HOLD",
+  "recall": null,
+  "official": false,
+  "limitation": "10 clean synthetic cross-fixture images; no positives and no real-world coverage"
+}

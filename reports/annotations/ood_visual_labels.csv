@@ -1,0 +1,11 @@
+image_id,light,is_defect,defect_type,annotator,human_verified,note
+pool_000,night,0,none,AI:Codex,False,"Đối tượng và cạnh đủ rõ ở ảnh synthetic 256x144; chỉ proxy khác track, không phải dữ liệu thật."
+pool_001,night,0,none,AI:Codex,False,"Đối tượng và cạnh đủ rõ ở ảnh synthetic 256x144; chỉ proxy khác track, không phải dữ liệu thật."
+pool_002,day,0,none,AI:Codex,False,"Đối tượng và cạnh đủ rõ ở ảnh synthetic 256x144; chỉ proxy khác track, không phải dữ liệu thật."
+pool_003,day,0,none,AI:Codex,False,"Đối tượng và cạnh đủ rõ ở ảnh synthetic 256x144; chỉ proxy khác track, không phải dữ liệu thật."
+pool_004,day,0,none,AI:Codex,False,"Đối tượng và cạnh đủ rõ ở ảnh synthetic 256x144; chỉ proxy khác track, không phải dữ liệu thật."
+pool_005,day,0,none,AI:Codex,False,"Đối tượng và cạnh đủ rõ ở ảnh synthetic 256x144; chỉ proxy khác track, không phải dữ liệu thật."
+pool_006,night,0,none,AI:Codex,False,"Đối tượng và cạnh đủ rõ ở ảnh synthetic 256x144; chỉ proxy khác track, không phải dữ liệu thật."
+pool_007,day,0,none,AI:Codex,False,"Đối tượng và cạnh đủ rõ ở ảnh synthetic 256x144; chỉ proxy khác track, không phải dữ liệu thật."
+pool_008,dusk,0,none,AI:Codex,False,"Đối tượng và cạnh đủ rõ ở ảnh synthetic 256x144; chỉ proxy khác track, không phải dữ liệu thật."
+pool_009,day,0,none,AI:Codex,False,"Đối tượng và cạnh đủ rõ ở ảnh synthetic 256x144; chỉ proxy khác track, không phải dữ liệu thật."

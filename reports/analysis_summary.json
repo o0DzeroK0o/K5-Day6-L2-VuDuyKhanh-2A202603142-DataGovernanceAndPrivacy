@@ -1,0 +1,563 @@
+{
+  "label_source": "reports/annotations/internal_eval_labels.csv",
+  "official": false,
+  "human_verified": false,
+  "eval_n": 40,
+  "positive_n": 20,
+  "budget": 20,
+  "runs": {
+    "baseline": {
+      "tp": 17,
+      "fp": 3,
+      "fn": 3,
+      "recall": 0.85,
+      "precision": 0.85,
+      "false_positive_ids": [
+        "img_03_0",
+        "img_06_0",
+        "img_15_0"
+      ],
+      "false_negative_ids": [
+        "img_01_3",
+        "img_05_3",
+        "img_13_2"
+      ]
+    },
+    "poc": {
+      "tp": 19,
+      "fp": 1,
+      "fn": 1,
+      "recall": 0.95,
+      "precision": 0.95,
+      "false_positive_ids": [
+        "img_23_1"
+      ],
+      "false_negative_ids": [
+        "img_03_2"
+      ]
+    },
+    "no_roi": {
+      "tp": 17,
+      "fp": 3,
+      "fn": 3,
+      "recall": 0.85,
+      "precision": 0.85,
+      "false_positive_ids": [
+        "img_05_0",
+        "img_16_0",
+        "img_23_1"
+      ],
+      "false_negative_ids": [
+        "img_03_2",
+        "img_06_3",
+        "img_17_2"
+      ]
+    },
+    "global_thresholds": {
+      "tp": 16,
+      "fp": 4,
+      "fn": 4,
+      "recall": 0.8,
+      "precision": 0.8,
+      "false_positive_ids": [
+        "img_01_0",
+        "img_01_1",
+        "img_06_0",
+        "img_06_1"
+      ],
+      "false_negative_ids": [
+        "img_03_2",
+        "img_03_3",
+        "img_16_3",
+        "img_19_2"
+      ]
+    }
+  },
+  "slices": [
+    {
+      "run": "baseline",
+      "slice": "light=day",
+      "n": 20,
+      "tp": 9,
+      "positive_n": 10,
+      "fp": 0,
+      "negative_n": 10,
+      "recall": 0.9,
+      "false_alarm": 0.0
+    },
+    {
+      "run": "baseline",
+      "slice": "light=dusk",
+      "n": 4,
+      "tp": 2,
+      "positive_n": 2,
+      "fp": 1,
+      "negative_n": 2,
+      "recall": 1.0,
+      "false_alarm": 0.5
+    },
+    {
+      "run": "baseline",
+      "slice": "light=night",
+      "n": 16,
+      "tp": 6,
+      "positive_n": 8,
+      "fp": 2,
+      "negative_n": 8,
+      "recall": 0.75,
+      "false_alarm": 0.25
+    },
+    {
+      "run": "baseline",
+      "slice": "camera_id=cam_A",
+      "n": 28,
+      "tp": 11,
+      "positive_n": 14,
+      "fp": 0,
+      "negative_n": 14,
+      "recall": 0.7857142857142857,
+      "false_alarm": 0.0
+    },
+    {
+      "run": "baseline",
+      "slice": "camera_id=cam_B",
+      "n": 12,
+      "tp": 6,
+      "positive_n": 6,
+      "fp": 3,
+      "negative_n": 6,
+      "recall": 1.0,
+      "false_alarm": 0.5
+    },
+    {
+      "run": "baseline",
+      "slice": "defect_type=blur",
+      "n": 4,
+      "tp": 4,
+      "positive_n": 4,
+      "fp": 0,
+      "negative_n": 0,
+      "recall": 1.0,
+      "false_alarm": null
+    },
+    {
+      "run": "baseline",
+      "slice": "defect_type=compression",
+      "n": 8,
+      "tp": 6,
+      "positive_n": 8,
+      "fp": 0,
+      "negative_n": 0,
+      "recall": 0.75,
+      "false_alarm": null
+    },
+    {
+      "run": "baseline",
+      "slice": "defect_type=dark",
+      "n": 4,
+      "tp": 4,
+      "positive_n": 4,
+      "fp": 0,
+      "negative_n": 0,
+      "recall": 1.0,
+      "false_alarm": null
+    },
+    {
+      "run": "baseline",
+      "slice": "defect_type=glare",
+      "n": 4,
+      "tp": 3,
+      "positive_n": 4,
+      "fp": 0,
+      "negative_n": 0,
+      "recall": 0.75,
+      "false_alarm": null
+    },
+    {
+      "run": "baseline",
+      "slice": "defect_type=none",
+      "n": 20,
+      "tp": 0,
+      "positive_n": 0,
+      "fp": 3,
+      "negative_n": 20,
+      "recall": null,
+      "false_alarm": 0.15
+    },
+    {
+      "run": "poc",
+      "slice": "light=day",
+      "n": 20,
+      "tp": 10,
+      "positive_n": 10,
+      "fp": 1,
+      "negative_n": 10,
+      "recall": 1.0,
+      "false_alarm": 0.1
+    },
+    {
+      "run": "poc",
+      "slice": "light=dusk",
+      "n": 4,
+      "tp": 2,
+      "positive_n": 2,
+      "fp": 0,
+      "negative_n": 2,
+      "recall": 1.0,
+      "false_alarm": 0.0
+    },
+    {
+      "run": "poc",
+      "slice": "light=night",
+      "n": 16,
+      "tp": 7,
+      "positive_n": 8,
+      "fp": 0,
+      "negative_n": 8,
+      "recall": 0.875,
+      "false_alarm": 0.0
+    },
+    {
+      "run": "poc",
+      "slice": "camera_id=cam_A",
+      "n": 28,
+      "tp": 14,
+      "positive_n": 14,
+      "fp": 1,
+      "negative_n": 14,
+      "recall": 1.0,
+      "false_alarm": 0.07142857142857142
+    },
+    {
+      "run": "poc",
+      "slice": "camera_id=cam_B",
+      "n": 12,
+      "tp": 5,
+      "positive_n": 6,
+      "fp": 0,
+      "negative_n": 6,
+      "recall": 0.8333333333333334,
+      "false_alarm": 0.0
+    },
+    {
+      "run": "poc",
+      "slice": "defect_type=blur",
+      "n": 4,
+      "tp": 4,
+      "positive_n": 4,
+      "fp": 0,
+      "negative_n": 0,
+      "recall": 1.0,
+      "false_alarm": null
+    },
+    {
+      "run": "poc",
+      "slice": "defect_type=compression",
+      "n": 8,
+      "tp": 8,
+      "positive_n": 8,
+      "fp": 0,
+      "negative_n": 0,
+      "recall": 1.0,
+      "false_alarm": null
+    },
+    {
+      "run": "poc",
+      "slice": "defect_type=dark",
+      "n": 4,
+      "tp": 4,
+      "positive_n": 4,
+      "fp": 0,
+      "negative_n": 0,
+      "recall": 1.0,
+      "false_alarm": null
+    },
+    {
+      "run": "poc",
+      "slice": "defect_type=glare",
+      "n": 4,
+      "tp": 3,
+      "positive_n": 4,
+      "fp": 0,
+      "negative_n": 0,
+      "recall": 0.75,
+      "false_alarm": null
+    },
+    {
+      "run": "poc",
+      "slice": "defect_type=none",
+      "n": 20,
+      "tp": 0,
+      "positive_n": 0,
+      "fp": 1,
+      "negative_n": 20,
+      "recall": null,
+      "false_alarm": 0.05
+    },
+    {
+      "run": "no_roi",
+      "slice": "light=day",
+      "n": 20,
+      "tp": 9,
+      "positive_n": 10,
+      "fp": 3,
+      "negative_n": 10,
+      "recall": 0.9,
+      "false_alarm": 0.3
+    },
+    {
+      "run": "no_roi",
+      "slice": "light=dusk",
+      "n": 4,
+      "tp": 2,
+      "positive_n": 2,
+      "fp": 0,
+      "negative_n": 2,
+      "recall": 1.0,
+      "false_alarm": 0.0
+    },
+    {
+      "run": "no_roi",
+      "slice": "light=night",
+      "n": 16,
+      "tp": 6,
+      "positive_n": 8,
+      "fp": 0,
+      "negative_n": 8,
+      "recall": 0.75,
+      "false_alarm": 0.0
+    },
+    {
+      "run": "no_roi",
+      "slice": "camera_id=cam_A",
+      "n": 28,
+      "tp": 13,
+      "positive_n": 14,
+      "fp": 3,
+      "negative_n": 14,
+      "recall": 0.9285714285714286,
+      "false_alarm": 0.21428571428571427
+    },
+    {
+      "run": "no_roi",
+      "slice": "camera_id=cam_B",
+      "n": 12,
+      "tp": 4,
+      "positive_n": 6,
+      "fp": 0,
+      "negative_n": 6,
+      "recall": 0.6666666666666666,
+      "false_alarm": 0.0
+    },
+    {
+      "run": "no_roi",
+      "slice": "defect_type=blur",
+      "n": 4,
+      "tp": 4,
+      "positive_n": 4,
+      "fp": 0,
+      "negative_n": 0,
+      "recall": 1.0,
+      "false_alarm": null
+    },
+    {
+      "run": "no_roi",
+      "slice": "defect_type=compression",
+      "n": 8,
+      "tp": 8,
+      "positive_n": 8,
+      "fp": 0,
+      "negative_n": 0,
+      "recall": 1.0,
+      "false_alarm": null
+    },
+    {
+      "run": "no_roi",
+      "slice": "defect_type=dark",
+      "n": 4,
+      "tp": 4,
+      "positive_n": 4,
+      "fp": 0,
+      "negative_n": 0,
+      "recall": 1.0,
+      "false_alarm": null
+    },
+    {
+      "run": "no_roi",
+      "slice": "defect_type=glare",
+      "n": 4,
+      "tp": 1,
+      "positive_n": 4,
+      "fp": 0,
+      "negative_n": 0,
+      "recall": 0.25,
+      "false_alarm": null
+    },
+    {
+      "run": "no_roi",
+      "slice": "defect_type=none",
+      "n": 20,
+      "tp": 0,
+      "positive_n": 0,
+      "fp": 3,
+      "negative_n": 20,
+      "recall": null,
+      "false_alarm": 0.15
+    },
+    {
+      "run": "global_thresholds",
+      "slice": "light=day",
+      "n": 20,
+      "tp": 8,
+      "positive_n": 10,
+      "fp": 0,
+      "negative_n": 10,
+      "recall": 0.8,
+      "false_alarm": 0.0
+    },
+    {
+      "run": "global_thresholds",
+      "slice": "light=dusk",
+      "n": 4,
+      "tp": 2,
+      "positive_n": 2,
+      "fp": 0,
+      "negative_n": 2,
+      "recall": 1.0,
+      "false_alarm": 0.0
+    },
+    {
+      "run": "global_thresholds",
+      "slice": "light=night",
+      "n": 16,
+      "tp": 6,
+      "positive_n": 8,
+      "fp": 4,
+      "negative_n": 8,
+      "recall": 0.75,
+      "false_alarm": 0.5
+    },
+    {
+      "run": "global_thresholds",
+      "slice": "camera_id=cam_A",
+      "n": 28,
+      "tp": 12,
+      "positive_n": 14,
+      "fp": 2,
+      "negative_n": 14,
+      "recall": 0.8571428571428571,
+      "false_alarm": 0.14285714285714285
+    },
+    {
+      "run": "global_thresholds",
+      "slice": "camera_id=cam_B",
+      "n": 12,
+      "tp": 4,
+      "positive_n": 6,
+      "fp": 2,
+      "negative_n": 6,
+      "recall": 0.6666666666666666,
+      "false_alarm": 0.3333333333333333
+    },
+    {
+      "run": "global_thresholds",
+      "slice": "defect_type=blur",
+      "n": 4,
+      "tp": 4,
+      "positive_n": 4,
+      "fp": 0,
+      "negative_n": 0,
+      "recall": 1.0,
+      "false_alarm": null
+    },
+    {
+      "run": "global_thresholds",
+      "slice": "defect_type=compression",
+      "n": 8,
+      "tp": 5,
+      "positive_n": 8,
+      "fp": 0,
+      "negative_n": 0,
+      "recall": 0.625,
+      "false_alarm": null
+    },
+    {
+      "run": "global_thresholds",
+      "slice": "defect_type=dark",
+      "n": 4,
+      "tp": 4,
+      "positive_n": 4,
+      "fp": 0,
+      "negative_n": 0,
+      "recall": 1.0,
+      "false_alarm": null
+    },
+    {
+      "run": "global_thresholds",
+      "slice": "defect_type=glare",
+      "n": 4,
+      "tp": 3,
+      "positive_n": 4,
+      "fp": 0,
+      "negative_n": 0,
+      "recall": 0.75,
+      "false_alarm": null
+    },
+    {
+      "run": "global_thresholds",
+      "slice": "defect_type=none",
+      "n": 20,
+      "tp": 0,
+      "positive_n": 0,
+      "fp": 4,
+      "negative_n": 20,
+      "recall": null,
+      "false_alarm": 0.2
+    }
+  ],
+  "uncertainty": {
+    "method": "paired scene bootstrap of fixed ranking contributions (does not re-rank)",
+    "seed": 42,
+    "repeats": 2000,
+    "n_scenes": 10,
+    "results": {
+      "baseline": {
+        "ci95": [
+          0.7,
+          1.0
+        ],
+        "valid_draws": 2000
+      },
+      "poc": {
+        "ci95": [
+          0.85,
+          1.0
+        ],
+        "valid_draws": 2000
+      },
+      "no_roi": {
+        "ci95": [
+          0.7,
+          1.0
+        ],
+        "valid_draws": 2000
+      },
+      "global_thresholds": {
+        "ci95": [
+          0.6,
+          1.0
+        ],
+        "valid_draws": 2000
+      },
+      "paired_delta": {
+        "ci95": [
+          -0.09999999999999998,
+          0.30000000000000004
+        ]
+      }
+    },
+    "limitations": "AI labels, same synthetic family; CI excludes annotation error and external domain shift"
+  },
+  "protocol_sha256": "af80ef37c2c3a1342a5136cfb26027cda4d32abe90581c60da15febc8d113cb1",
+  "labels_sha256": "fcff2a0728d0048c7063cbb524b354e8a6679955eb3d7889637cb095cfba0a74"
+}

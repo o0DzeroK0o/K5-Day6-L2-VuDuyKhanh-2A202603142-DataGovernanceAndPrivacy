@@ -1,0 +1,11 @@
+rank,item_id,score,reason,suggested_action,slice,evidence_path,reviewer,reviewer_decision,override_value,review_note,reviewed_at
+1,pool_002,0.469333,compression;camera=ood_T13;light=day,KEEP,day,images/pool_002.jpg,,,,,
+2,pool_007,0.391511,compression;camera=ood_T13;light=day,KEEP,day,images/pool_007.jpg,,,,,
+3,pool_008,0.36755,compression;camera=ood_T13;light=dusk,KEEP,dusk,images/pool_008.jpg,,,,,
+4,pool_009,0.364852,compression;camera=ood_T13;light=day,KEEP,day,images/pool_009.jpg,,,,,
+5,pool_003,0.278144,compression;camera=ood_T13;light=day,KEEP,day,images/pool_003.jpg,,,,,
+6,pool_004,0.269815,dark;camera=ood_T13;light=day,KEEP,day,images/pool_004.jpg,,,,,
+7,pool_006,0.267742,compression;camera=ood_T13;light=night,KEEP,night,images/pool_006.jpg,,,,,
+8,pool_005,0.266547,dark;camera=ood_T13;light=day,KEEP,day,images/pool_005.jpg,,,,,
+9,pool_001,0.252069,compression;camera=ood_T13;light=night,KEEP,night,images/pool_001.jpg,,,,,
+10,pool_000,0.218949,dark;camera=ood_T13;light=night,KEEP,night,images/pool_000.jpg,,,,,

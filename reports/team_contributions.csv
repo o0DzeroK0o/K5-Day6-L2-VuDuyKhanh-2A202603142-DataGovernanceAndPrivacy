@@ -1,6 +1,2 @@
 member,git_author_name,git_email,role,modules_files,commit_shas,evidence_note,presenter
-Member 1,,,Lead / Integrator,src/main.py; configs/,,,
-Member 2,,,Data & fixtures,fixtures/; tools/,,,
-Member 3,,,Core algorithm,src/pipeline.py,,,
-Member 4,,,QA / metric,tests/; reports/metrics_*.json,,,
-Member 5,,,Human review + report,reports/group_report.md; demo/,,,
+"Vũ Duy Khánh (tên suy từ thư mục, cần xác nhận)",Duy Khanh,khanhvd.ldm.0299@gmail.com,Toàn bộ vai trò của nhóm 1 người; AI hỗ trợ triển khai,src/pipeline.py;src/t02_baseline.py;tests/test_t02_pipeline.py;tools/t02_submission.py;reports/;demo/,6c525dc,"Commit dưới Git identity sẵn có; Codex hỗ trợ code, test, nhãn AI và draft. Không khẳng định người học đã tự review hoặc trình bày. Không tính author của starter là thành viên T004.",Dự kiến: Vũ Duy Khánh; chưa diễn ra showcase

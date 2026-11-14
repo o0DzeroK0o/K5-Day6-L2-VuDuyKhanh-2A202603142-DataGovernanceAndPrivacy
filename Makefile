@@ -1,5 +1,6 @@
 # Day06 Data Lab — common commands.  Usage: make <target> TRACK=t02
 PY ?= .venv/bin/python
+PYTHON ?= python3.12
 TRACK ?= t02
 OUT ?= out
 PRED = $(shell $(PY) -c "from src.metrics.tracks import get_track;print(get_track('$(TRACK)').pred_file)")
@@ -10,7 +11,7 @@ help:
 	@echo "make setup | preflight | test | verify | baseline TRACK=t11 | run TRACK=t02 | eval-baseline | eval-poc | compare"
 
 setup:
-	python3 -m venv .venv && $(PY) -m pip install -q --upgrade pip && $(PY) -m pip install -q -r requirements.txt
+	$(PYTHON) -m venv .venv && $(PY) -m pip install -q -r requirements-lock.txt
 
 preflight:
 	$(PY) -m tools.preflight
@@ -48,3 +49,11 @@ tag-demo:
 
 tag-final:
 	git tag -a final-24h -m "Final submission"
+
+.PHONY: t02-baseline t02-submission
+
+t02-baseline:        ## required global Laplacian baseline (random is wiring only)
+	$(PY) -m src.main --pipeline src.t02_baseline --output $(OUT)/baseline --run-name baseline --offline --seed 42
+
+t02-submission:      ## safe reproduction, separate from committed report / human review
+	$(PY) -m tools.t02_submission --output $(OUT)/reproduce --reports $(OUT)/reproduce/reports

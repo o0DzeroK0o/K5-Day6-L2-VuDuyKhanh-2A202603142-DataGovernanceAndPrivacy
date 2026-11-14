@@ -1,0 +1,72 @@
+[
+  {
+    "image_id": "img_03_0",
+    "title": "Night hữu ích / cam_B",
+    "root_cause": "Baseline ưu tiên nhầm ảnh sạch vì Laplacian giảm khi camera mềm. PoC dùng ngưỡng cam_B và ngưỡng night, giữ được ảnh. Không mặc định mọi ảnh đêm đều lỗi.",
+    "path": "images/img_03_0.jpg",
+    "light": "night",
+    "camera_id": "cam_B",
+    "baseline_score": 0.5308364408006319,
+    "baseline_rank": 13,
+    "baseline_raw_action": "RECAPTURE",
+    "poc_score": 0.2870273658956317,
+    "poc_rank": 30,
+    "poc_raw_action": "KEEP"
+  },
+  {
+    "image_id": "img_05_3",
+    "title": "Glare cục bộ trên biển synthetic",
+    "root_cause": "Độ nét toàn ảnh còn cao nên baseline bỏ sót. Ô ROI có tỷ lệ pixel cháy sáng lớn giúp PoC đưa ảnh vào queue.",
+    "path": "images/img_05_3.jpg",
+    "light": "day",
+    "camera_id": "cam_A",
+    "baseline_score": 0.23195468898796387,
+    "baseline_rank": 31,
+    "baseline_raw_action": "KEEP",
+    "poc_score": 0.8341431810819566,
+    "poc_rank": 9,
+    "poc_raw_action": "RECAPTURE"
+  },
+  {
+    "image_id": "img_03_2",
+    "title": "PoC bỏ sót glare nhẹ",
+    "root_cause": "Quầng sáng làm giảm tương phản nhưng chưa tạo đủ pixel >245. Tín hiệu saturation ROI thấp; ảnh nằm ngoài top20. Cần nghiên cứu độ tương phản cục bộ trên dev mới, không sửa ngưỡng sau eval này.",
+    "path": "images/img_03_2.jpg",
+    "light": "night",
+    "camera_id": "cam_B",
+    "baseline_score": 0.5465945224616604,
+    "baseline_rank": 11,
+    "baseline_raw_action": "RECAPTURE",
+    "poc_score": 0.3694581280788177,
+    "poc_rank": 21,
+    "poc_raw_action": "KEEP"
+  },
+  {
+    "image_id": "img_23_1",
+    "title": "PoC báo động nhầm trong top20",
+    "root_cause": "Cạnh thật trùng lưới 8 pixel tạo blockiness hơi cao. Score vẫn dưới ngưỡng RECAPTURE nhưng quota top20 bắt buộc chọn đủ 20 nên ảnh sạch vẫn vào queue.",
+    "path": "images/img_23_1.jpg",
+    "light": "day",
+    "camera_id": "cam_A",
+    "baseline_score": 0.2754796618951215,
+    "baseline_rank": 25,
+    "baseline_raw_action": "KEEP",
+    "poc_score": 0.4161709234323544,
+    "poc_rank": 19,
+    "poc_raw_action": "KEEP"
+  },
+  {
+    "image_id": "img_19_2",
+    "title": "Review sửa đề nghị KEEP",
+    "root_cause": "Nén nhẹ dưới ngưỡng tự động nhưng nằm trong top20. AI xem ảnh đề nghị RECAPTURE; raw score và ranking giữ nguyên để không làm đẹp metric sau review.",
+    "path": "images/img_19_2.jpg",
+    "light": "day",
+    "camera_id": "cam_A",
+    "baseline_score": 0.30559133854471265,
+    "baseline_rank": 20,
+    "baseline_raw_action": "KEEP",
+    "poc_score": 0.4485213988535687,
+    "poc_rank": 18,
+    "poc_raw_action": "KEEP"
+  }
+]

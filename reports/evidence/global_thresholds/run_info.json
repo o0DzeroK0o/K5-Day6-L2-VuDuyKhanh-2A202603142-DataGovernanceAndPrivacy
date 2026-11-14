@@ -1,0 +1,34 @@
+{
+  "track": "t02",
+  "run_name": "global_thresholds",
+  "status": 0,
+  "seed": 42,
+  "offline": true,
+  "input": "fixtures/t02_raw_qc",
+  "output": "out/global_thresholds",
+  "pipeline": "src.pipeline",
+  "config_hash": "29db591e7116",
+  "git_sha": "6c525dc",
+  "runtime_seconds": 0.605,
+  "stats": {
+    "n_items": 96,
+    "algorithm": "multifeature_v1",
+    "review_pool": 40,
+    "review_budget": 20,
+    "review_split": "eval",
+    "queue_size": 20,
+    "n_reviewed": 0,
+    "n_human_reviewed": 0,
+    "n_escalated": 0
+  },
+  "machine": {
+    "python": "3.12.16",
+    "platform": "Linux-7.2.15-1-omarchy-x86_64-with-glibc2.44",
+    "processor": "x86_64"
+  },
+  "output_check": {
+    "pred_file": "out/global_thresholds/ranked_review.csv",
+    "exists": true,
+    "missing_columns": []
+  }
+}

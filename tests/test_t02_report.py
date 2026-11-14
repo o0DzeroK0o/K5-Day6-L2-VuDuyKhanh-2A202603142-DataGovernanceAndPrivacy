@@ -1,0 +1,49 @@
+from pathlib import Path
+import re
+
+import pytest
+
+from tools.t02_fill_report import TEMPLATE, build_report, validate_structure
+from tools.t02_artifacts import main as build_artifacts
+
+
+def test_report_only_fills_answers_without_changing_template():
+    original=TEMPLATE.read_text();filled=build_report()
+    validate_structure(original,filled)
+    assert [s for s in original.splitlines() if s.startswith('#')]==[s for s in filled.splitlines() if s.startswith('#')]
+    assert '____' not in filled
+    assert 'chờ bạn review thật' in filled and 'chưa push' in filled
+    assert filled.count('| Member')==6
+
+
+def test_report_structure_rejects_reworded_question_or_removed_member_row():
+    filled=build_report()
+    for bad in [filled.replace('Điểm nghẽn cụ thể:','Bài toán:',1),
+                '\n'.join(s for s in filled.splitlines() if not s.startswith('| Member 2 |'))+'\n']:
+        with pytest.raises(ValueError):validate_structure(TEMPLATE.read_text(),bad)
+
+
+def test_demo_contains_five_offline_pages_and_real_evidence():
+    text=Path('demo/t004_demo.html').read_text()
+    assert len(re.findall(r'<section id="s\d+">',text))==5
+    assert 'data:image/jpeg;base64,' in text
+    assert 'HUMAN_REVIEW_REQUIRED' in text
+    assert 'chưa phải điểm chính thức' in text
+    assert not re.search(r'(?:src|href)="https?://',text)
+
+
+def test_evidence_matches_shared_evaluator_and_frozen_protocol():
+    from tools.t02_verify import verify_evidence
+    assert verify_evidence()==[]
+
+
+def test_evidence_verifier_detects_forged_metric_even_with_unchanged_hashes(monkeypatch):
+    from tools import t02_verify
+    read=t02_verify.read_json
+    def forged(path):
+        value=read(path)
+        if str(path)=='reports/metrics_poc.json':
+            value['metrics'][0]['value']=0.0
+        return value
+    monkeypatch.setattr(t02_verify,'read_json',forged)
+    assert 'poc: metrics differ from shared evaluator' in t02_verify.verify_evidence()
