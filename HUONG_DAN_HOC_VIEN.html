@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Day 06 · Hướng dẫn học viên — Data Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #14212b;
+      --ink-soft: #3a4a56;
+      --paper: #eef3f1;
+      --paper-2: #e2ebe7;
+      --panel: #f7faf8;
+      --line: #c5d4cc;
+      --teal: #0f7a6c;
+      --teal-deep: #0a554b;
+      --coral: #d4533a;
+      --amber: #c9892a;
+      --ok: #1f7a4c;
+      --warn: #9a5b12;
+      --shadow: 0 1px 0 rgba(20, 33, 43, 0.06);
+      --radius: 14px;
+      --max: 720px;
+      --side: 220px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse 80% 50% at 10% -10%, #d8ebe4 0%, transparent 55%),
+        radial-gradient(ellipse 60% 40% at 100% 0%, #f0e6d8 0%, transparent 50%),
+        linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
+      font-family: "Be Vietnam Pro", system-ui, sans-serif;
+      font-size: 1.02rem;
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.35;
+      background-image:
+        linear-gradient(rgba(20, 33, 43, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(20, 33, 43, 0.03) 1px, transparent 1px);
+      background-size: 28px 28px;
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: var(--side) minmax(0, var(--max));
+      gap: 2.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+      justify-content: center;
+    }
+
+    nav.toc {
+      position: sticky;
+      top: 1.25rem;
+      align-self: start;
+      padding: 1rem 0;
+      font-size: 0.82rem;
+    }
+    nav.toc .label {
+      font-family: Fraunces, Georgia, serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 0.75rem;
+    }
+    nav.toc a {
+      display: block;
+      color: var(--ink-soft);
+      text-decoration: none;
+      padding: 0.35rem 0.5rem;
+      border-left: 2px solid transparent;
+      border-radius: 0 6px 6px 0;
+      transition: color 0.15s, border-color 0.15s, background 0.15s;
+    }
+    nav.toc a:hover,
+    nav.toc a:focus-visible {
+      color: var(--teal-deep);
+      border-left-color: var(--teal);
+      background: rgba(15, 122, 108, 0.08);
+      outline: none;
+    }
+
+    main { min-width: 0; }
+
+    .hero {
+      padding: 0.5rem 0 1.75rem;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 2rem;
+      animation: rise 0.7s ease both;
+    }
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--teal-deep);
+      margin-bottom: 0.75rem;
+    }
+    h1 {
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 5vw, 2.75rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.85rem;
+      color: var(--ink);
+    }
+    .lede {
+      font-size: 1.12rem;
+      color: var(--ink-soft);
+      max-width: 38em;
+      margin: 0;
+    }
+
+    section {
+      margin-bottom: 2.75rem;
+      animation: rise 0.6s ease both;
+    }
+    section:nth-of-type(1) { animation-delay: 0.05s; }
+    section:nth-of-type(2) { animation-delay: 0.1s; }
+    section:nth-of-type(3) { animation-delay: 0.15s; }
+    section:nth-of-type(4) { animation-delay: 0.2s; }
+    section:nth-of-type(5) { animation-delay: 0.25s; }
+
+    h2 {
+      font-family: Fraunces, Georgia, serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      margin: 0 0 0.85rem;
+      scroll-margin-top: 1.25rem;
+    }
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 650;
+      margin: 1.4rem 0 0.5rem;
+      color: var(--ink);
+    }
+    p { margin: 0 0 1rem; }
+    p:last-child { margin-bottom: 0; }
+
+    .callout {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--teal);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1rem 1.15rem;
+      margin: 1.1rem 0;
+      box-shadow: var(--shadow);
+    }
+    .callout.warn {
+      border-left-color: var(--coral);
+      background: #fff8f6;
+    }
+    .callout.tip {
+      border-left-color: var(--amber);
+      background: #fffaf0;
+    }
+    .callout strong { color: var(--ink); }
+
+    .map {
+      display: grid;
+      gap: 0.55rem;
+      margin: 1rem 0;
+    }
+    .map-row {
+      display: grid;
+      grid-template-columns: minmax(7.5rem, 32%) 1fr;
+      gap: 0.75rem;
+      align-items: baseline;
+      padding: 0.65rem 0.85rem;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+    .map-row code {
+      font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--teal-deep);
+      word-break: break-all;
+    }
+    .map-row span { color: var(--ink-soft); font-size: 0.95rem; }
+
+    .steps { counter-reset: step; list-style: none; padding: 0; margin: 1rem 0 0; }
+    .steps > li {
+      position: relative;
+      padding: 1.15rem 1.15rem 1.15rem 3.6rem;
+      margin-bottom: 0.85rem;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .steps > li::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 1rem;
+      top: 1.15rem;
+      width: 1.85rem;
+      height: 1.85rem;
+      border-radius: 50%;
+      background: var(--teal);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: grid;
+      place-items: center;
+      font-family: Fraunces, Georgia, serif;
+    }
+    .steps h3 { margin-top: 0; margin-bottom: 0.4rem; }
+    .steps p { color: var(--ink-soft); }
+
+    .pipe {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      align-items: center;
+      margin: 1rem 0;
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+    .pipe span {
+      background: var(--ink);
+      color: #eef3f1;
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+    }
+    .pipe i {
+      font-style: normal;
+      color: var(--teal);
+      font-weight: 700;
+    }
+
+    pre, .cmd {
+      font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+      font-size: 0.88rem;
+      background: #14212b;
+      color: #d7e8e2;
+      padding: 0.95rem 1.1rem;
+      border-radius: 12px;
+      overflow-x: auto;
+      margin: 0.75rem 0 0;
+      line-height: 1.5;
+    }
+    .cmd + .cmd { margin-top: 0.5rem; }
+    .cmd .c { color: #7eb8a8; }
+    .cmd .h { color: #f0c27a; }
+
+    .os-switch {
+      margin: 0.85rem 0 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--panel);
+    }
+    .os-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      border-bottom: 1px solid var(--line);
+      background: #dce8e3;
+    }
+    .os-tabs button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      font: inherit;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--ink-soft);
+      padding: 0.7rem 1rem;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+    }
+    .os-tabs button:hover,
+    .os-tabs button:focus-visible {
+      color: var(--teal-deep);
+      outline: none;
+      background: rgba(15, 122, 108, 0.08);
+    }
+    .os-tabs button[aria-selected="true"] {
+      color: var(--teal-deep);
+      border-bottom-color: var(--teal);
+      background: var(--panel);
+    }
+    .os-panel {
+      display: none;
+      padding: 0.85rem 1rem 1rem;
+    }
+    .os-panel.is-active { display: block; }
+    .os-panel > p:first-child { margin-top: 0; }
+    .os-panel .cmd { margin-top: 0.55rem; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      margin: 0.85rem 0 1rem;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    th, td {
+      text-align: left;
+      padding: 0.65rem 0.85rem;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+    th {
+      background: #dce8e3;
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.02em;
+    }
+    tr:last-child td { border-bottom: none; }
+
+    .tracks {
+      display: grid;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+    }
+    details {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.55rem 0.9rem;
+    }
+    details summary {
+      cursor: pointer;
+      font-weight: 600;
+      list-style: none;
+      display: flex;
+      gap: 0.5rem;
+      align-items: baseline;
+    }
+    details summary::-webkit-details-marker { display: none; }
+    details summary::before {
+      content: "+";
+      color: var(--teal);
+      font-weight: 700;
+      width: 1rem;
+    }
+    details[open] summary::before { content: "–"; }
+    details p {
+      margin: 0.5rem 0 0.25rem;
+      font-size: 0.92rem;
+      color: var(--ink-soft);
+    }
+
+    .checklist {
+      list-style: none;
+      padding: 0;
+      margin: 0.75rem 0 0;
+    }
+    .checklist li {
+      position: relative;
+      padding: 0.55rem 0.55rem 0.55rem 2.4rem;
+      margin-bottom: 0.4rem;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+    .checklist li::before {
+      content: "";
+      position: absolute;
+      left: 0.75rem;
+      top: 0.75rem;
+      width: 1rem;
+      height: 1rem;
+      border: 2px solid var(--teal);
+      border-radius: 4px;
+    }
+
+    .who {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .who div {
+      padding: 1rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--panel);
+    }
+    .who h3 { margin: 0 0 0.4rem; font-size: 1rem; }
+    .who .stu { border-top: 3px solid var(--teal); }
+    .who .tea { border-top: 3px solid var(--coral); }
+    .who ul { margin: 0.4rem 0 0; padding-left: 1.1rem; color: var(--ink-soft); font-size: 0.92rem; }
+
+    footer {
+      margin-top: 2rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 860px) {
+      .wrap {
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding-top: 1rem;
+      }
+      nav.toc {
+        position: relative;
+        top: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.25rem 0.75rem;
+        margin-bottom: 1.25rem;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid var(--line);
+      }
+      nav.toc .label { width: 100%; margin-bottom: 0.25rem; }
+      nav.toc a {
+        border-left: none;
+        padding: 0.25rem 0;
+        white-space: nowrap;
+      }
+      .map-row { grid-template-columns: 1fr; gap: 0.2rem; }
+      .who { grid-template-columns: 1fr; }
+      .steps > li { padding-left: 3.4rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .hero, section { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="toc" aria-label="Mục lục">
+      <div class="label">Mục lục</div>
+      <a href="#lab-la-gi">Lab là gì?</a>
+      <a href="#ban-do">Bản đồ thư mục</a>
+      <a href="#quy-trinh">Quy trình làm</a>
+      <a href="#pipeline">5 bước pipeline</a>
+      <a href="#tracks">14 challenge</a>
+      <a href="#t02">Từng click · T02</a>
+      <a href="#luu-y">Lưu ý quan trọng</a>
+      <a href="#checklist">Checklist nộp</a>
+    </nav>
+
+    <main>
+      <header class="hero">
+        <div class="eyebrow">AI20K · Day 06 · Data Lab</div>
+        <h1>Hướng dẫn học viên</h1>
+        <p class="lede">
+          Đọc trang này như một tờ giấy hướng dẫn trên bàn làm việc.
+          Không cần giỏi code trước — chỉ cần biết mình đang làm gì, mở file nào, và chạy lệnh nào.
+        </p>
+      </header>
+
+      <section id="lab-la-gi">
+        <h2>Lab này là gì vậy?</h2>
+        <p>
+          Tưởng tượng nhóm bạn đang vận hành một <strong>dây chuyền dữ liệu mini</strong> cho AI:
+          nhận dữ liệu → kiểm chất lượng / privacy → đưa vài mẫu “đáng nghi” cho người xem → quyết định
+          <strong>GO</strong> (xuất), <strong>HOLD</strong> (dừng), hoặc <strong>REWORK</strong> (làm lại).
+        </p>
+        <p>
+          Trong 4 giờ (+ 24 giờ hoàn thiện), nhóm chọn <strong>một</strong> trong 14 challenge (T01–T14),
+          viết phần “não” của dây chuyền, rồi chứng minh PoC của mình tốt hơn một baseline đơn giản.
+        </p>
+        <div class="callout tip">
+          <strong>Tin vui:</strong> Repo đã chuẩn bị sẵn dữ liệu giả, thước đo điểm, và nút chạy.
+          Việc của nhóm chủ yếu nằm ở một file: <code>src/pipeline.py</code>.
+        </div>
+      </section>
+
+      <section id="ban-do">
+        <h2>Bản đồ thư mục (tiếng người)</h2>
+        <p>Mọi thứ bạn cần đều nằm trong repo này. Chỉ cần biết mở đúng chỗ:</p>
+        <div class="map">
+          <div class="map-row"><code>docs/tracks/TXX.md</code><span>Đề bài chi tiết — đọc cái này trước khi code</span></div>
+          <div class="map-row"><code>fixtures/…</code><span>Dữ liệu đề (ảnh/CSV) để pipeline đọc</span></div>
+          <div class="map-row"><code>configs/lab.yaml</code><span>Chọn track, tên nhóm, người ký duyệt</span></div>
+          <div class="map-row"><code>src/pipeline.py</code><span>File chính nhóm viết — não của PoC</span></div>
+          <div class="map-row"><code>src/main.py</code><span>Máy chạy 5 bước — đừng sửa</span></div>
+          <div class="map-row"><code>src/examples/…</code><span>Ví dụ nối dây (random baseline) để hiểu luồng</span></div>
+          <div class="map-row"><code>reports/</code><span>Báo cáo, bảng số, đóng góp thành viên</span></div>
+          <div class="map-row"><code>Makefile</code><span>Lệnh tắt trên macOS/Linux: setup, run, test… (Windows dùng lệnh Python)</span></div>
+        </div>
+      </section>
+
+      <section id="quy-trinh">
+        <h2>Quy trình làm bài — làm lần lượt</h2>
+        <ol class="steps">
+          <li>
+            <h3>Bật máy (≈ 5 phút)</h3>
+            <p>Mở terminal trong thư mục gốc của repo. Chọn đúng hệ điều hành:</p>
+            <div class="os-switch" data-os-switch>
+              <div class="os-tabs" role="tablist" aria-label="Hệ điều hành">
+                <button type="button" role="tab" aria-selected="true" data-os="windows">Windows</button>
+                <button type="button" role="tab" aria-selected="false" data-os="mac">macOS</button>
+                <button type="button" role="tab" aria-selected="false" data-os="linux">Linux</button>
+              </div>
+              <div class="os-panel is-active" role="tabpanel" data-os-panel="windows">
+                <p>PowerShell thường <strong>không có</strong> <code>make</code> — dùng Python trực tiếp (cần lệnh <code>python</code> chạy được):</p>
+                <pre class="cmd"><span class="c"># tạo môi trường + cài thư viện</span>
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+
+<span class="c"># kiểm tra máy sẵn sàng</span>
+.\.venv\Scripts\python.exe -m tools.preflight
+
+<span class="c"># test sẵn phải 0 failed</span>
+.\.venv\Scripts\python.exe -m pytest -q</pre>
+              </div>
+              <div class="os-panel" role="tabpanel" data-os-panel="mac" hidden>
+                <p>Terminal · cần <code>make</code> (thường đi kèm Xcode CLT: <code>xcode-select --install</code>) và Python 3:</p>
+                <pre class="cmd"><span class="c"># tạo môi trường + cài thư viện</span>
+make setup
+
+<span class="c"># kiểm tra máy sẵn sàng</span>
+make preflight
+
+<span class="c"># test sẵn phải 0 failed</span>
+make test</pre>
+              </div>
+              <div class="os-panel" role="tabpanel" data-os-panel="linux" hidden>
+                <p>Terminal · cần <code>make</code> + Python 3 (ví dụ Ubuntu: <code>sudo apt install make python3 python3-venv python3-pip</code>):</p>
+                <pre class="cmd"><span class="c"># tạo môi trường + cài thư viện</span>
+make setup
+
+<span class="c"># kiểm tra máy sẵn sàng</span>
+make preflight
+
+<span class="c"># test sẵn phải 0 failed</span>
+make test</pre>
+              </div>
+            </div>
+            <p>Lỗi ở bước này → hỏi TA trước, chưa vội viết thuật toán.</p>
+          </li>
+          <li>
+            <h3>Chọn challenge + sửa config</h3>
+            <p>Nhóm thống nhất một track (ví dụ T02). Mở đề <code>docs/tracks/T02.md</code>, rồi sửa <code>configs/lab.yaml</code>:</p>
+            <pre class="cmd">group_id: G07
+owner: "Nguyen Van A - reviewer"
+track: t02
+track_config: tracks/t02.yaml
+input: fixtures/t02_raw_qc</pre>
+            <p>Trong đề, chỉ cần nắm: input là gì → output file/cột gì → metric chấm thế nào → quyết định GO/HOLD nghĩa là gì.</p>
+          </li>
+          <li>
+            <h3>Xem dữ liệu bằng mắt</h3>
+            <p>Mở <code>fixtures/&lt;track&gt;/</code>. Có <code>manifest.csv</code> (danh sách file + hash) và dữ liệu input để làm bài.</p>
+          </li>
+          <li>
+            <h3>Chạy thử baseline để “bật đèn”</h3>
+            <div class="os-switch" data-os-switch>
+              <div class="os-tabs" role="tablist" aria-label="Hệ điều hành — baseline">
+                <button type="button" role="tab" aria-selected="true" data-os="windows">Windows</button>
+                <button type="button" role="tab" aria-selected="false" data-os="mac">macOS</button>
+                <button type="button" role="tab" aria-selected="false" data-os="linux">Linux</button>
+              </div>
+              <div class="os-panel is-active" role="tabpanel" data-os-panel="windows">
+                <pre class="cmd">.\.venv\Scripts\python.exe -m src.main --track t02 --pipeline src.examples.random_baseline --output out/baseline --run-name baseline --offline --seed 42</pre>
+              </div>
+              <div class="os-panel" role="tabpanel" data-os-panel="mac" hidden>
+                <pre class="cmd">make baseline TRACK=t02</pre>
+              </div>
+              <div class="os-panel" role="tabpanel" data-os-panel="linux" hidden>
+                <pre class="cmd">make baseline TRACK=t02</pre>
+              </div>
+            </div>
+            <p>Lệnh này chạy ví dụ nối dây (không phải lời giải thật). Mục tiêu: thấy output trong <code>out/baseline/</code> và hiểu luồng chạy.</p>
+            <div class="callout tip">
+              <strong>Cách tự kiểm khi làm bài:</strong> mở CSV / contact sheet bằng mắt, hoặc tự gắn nhãn vài mẫu rồi so với output của nhóm.
+              Điểm chính thức sẽ được chấm sau — lúc làm bài cứ tập trung chạy được pipeline và giải thích trong report.
+            </div>
+          </li>
+          <li>
+            <h3>Viết PoC trong <code>pipeline.py</code></h3>
+            <p>Đây là phần chính. Viết thuật toán ở <code>process()</code>, chính sách quyết định ở <code>decide()</code>, rồi:</p>
+            <div class="os-switch" data-os-switch>
+              <div class="os-tabs" role="tablist" aria-label="Hệ điều hành — run">
+                <button type="button" role="tab" aria-selected="true" data-os="windows">Windows</button>
+                <button type="button" role="tab" aria-selected="false" data-os="mac">macOS</button>
+                <button type="button" role="tab" aria-selected="false" data-os="linux">Linux</button>
+              </div>
+              <div class="os-panel is-active" role="tabpanel" data-os-panel="windows">
+                <pre class="cmd">.\.venv\Scripts\python.exe -m src.main --config configs/lab.yaml --track t02 --output out/poc --run-name poc --offline --seed 42</pre>
+              </div>
+              <div class="os-panel" role="tabpanel" data-os-panel="mac" hidden>
+                <pre class="cmd">make run TRACK=t02</pre>
+              </div>
+              <div class="os-panel" role="tabpanel" data-os-panel="linux" hidden>
+                <pre class="cmd">make run TRACK=t02</pre>
+              </div>
+            </div>
+            <p>Exit <strong>0</strong> = chạy xong · <strong>3</strong> = chưa implement <code>process()</code> · các mã lỗi khác xem thông báo trên terminal.</p>
+            <p>Kết quả nằm ở <code>out/poc/</code>.</p>
+          </li>
+          <li>
+            <h3>Cho người review vài mẫu “đáng nghi”</h3>
+            <p>Sau khi chạy PoC sẽ có <code>review_queue.csv</code> (top-B). Reviewer điền quyết định (approve / reject / edit…), lưu thành <code>review_queue_reviewed.csv</code>, chạy lại lệnh PoC. Hệ thống ghi audit log.</p>
+            <p>Ý tưởng đơn giản: AI đề xuất, người kiểm chỗ rủi ro cao.</p>
+          </li>
+          <li>
+            <h3>So sánh baseline vs PoC + viết report</h3>
+            <p>Chạy hai lần trong cùng điều kiện (cùng data, budget, seed 42). Điền <code>reports/group_report.md</code> và <code>reports/team_contributions.csv</code>. Mỗi người nên có ít nhất một commit thật.</p>
+            <div class="os-switch" data-os-switch>
+              <div class="os-tabs" role="tablist" aria-label="Hệ điều hành — tag">
+                <button type="button" role="tab" aria-selected="true" data-os="windows">Windows</button>
+                <button type="button" role="tab" aria-selected="false" data-os="mac">macOS</button>
+                <button type="button" role="tab" aria-selected="false" data-os="linux">Linux</button>
+              </div>
+              <div class="os-panel is-active" role="tabpanel" data-os-panel="windows">
+                <pre class="cmd"><span class="c"># phút 180 — đóng băng demo</span>
+git tag -a demo-180m -m "Demo freeze at minute 180"
+
+<span class="c"># +24h — nộp cuối</span>
+git tag -a final-24h -m "Final submission"</pre>
+              </div>
+              <div class="os-panel" role="tabpanel" data-os-panel="mac" hidden>
+                <pre class="cmd"><span class="c"># phút 180 — đóng băng demo</span>
+make tag-demo
+
+<span class="c"># +24h — nộp cuối</span>
+make tag-final</pre>
+              </div>
+              <div class="os-panel" role="tabpanel" data-os-panel="linux" hidden>
+                <pre class="cmd"><span class="c"># phút 180 — đóng băng demo</span>
+make tag-demo
+
+<span class="c"># +24h — nộp cuối</span>
+make tag-final</pre>
+              </div>
+            </div>
+          </li>
+        </ol>
+
+        <h3>Timeline gợi ý (240 phút)</h3>
+        <table>
+          <thead>
+            <tr><th>Phút</th><th>Việc nên làm</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>0–10</td><td>Chọn track, sửa lab.yaml, commit đầu</td></tr>
+            <tr><td>10–30</td><td>Đọc đề, chốt metric trong report</td></tr>
+            <tr><td>30–50</td><td>Baseline chạy được + vài case lỗi</td></tr>
+            <tr><td>50–145</td><td>Viết process + review + decide</td></tr>
+            <tr><td>145–170</td><td>Sửa bug, phân tích failure mode</td></tr>
+            <tr><td>170–180</td><td>Freeze demo (tag)</td></tr>
+            <tr><td>180–240</td><td>Showcase + debate</td></tr>
+            <tr><td>+24h</td><td>Repo sạch + report hoàn chỉnh</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="pipeline">
+        <h2>Năm bước pipeline — nhớ như bài hát</h2>
+        <div class="pipe" aria-label="Luồng pipeline">
+          <span>load</span><i>→</i>
+          <span>process</span><i>→</i>
+          <span>rank</span><i>→</i>
+          <span>review</span><i>→</i>
+          <span>decide</span>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Bước</th><th>Làm gì?</th><th>Ai viết?</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>load</td><td>Đọc dữ liệu, kiểm file có bị đổi không</td><td>Khung sẵn, nhóm bổ sung</td></tr>
+            <tr><td>process</td><td>Thuật toán thật sự (tính điểm, phát hiện lỗi…)</td><td><strong>Nhóm — phần quan trọng nhất</strong></td></tr>
+            <tr><td>rank</td><td>Lấy top-B mẫu đáng xem nhất theo cột score</td><td>Có mặc định</td></tr>
+            <tr><td>review</td><td>Áp quyết định của người review + ghi nhật ký</td><td>Khung sẵn, nhóm tinh chỉnh</td></tr>
+            <tr><td>decide</td><td>GO / HOLD / REWORK + lý do + người ký</td><td><strong>Nhóm viết policy</strong></td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="tracks">
+        <h2>14 challenge — chọn một cái vừa sức</h2>
+        <p>Bấm vào để xem tóm tắt một dòng. Chi tiết đầy đủ nằm trong <code>docs/tracks/</code>.</p>
+        <div class="tracks">
+          <details><summary>T01 · Coverage Planner</summary><p>Chọn clip để phủ đủ các ô coverage mục tiêu.</p></details>
+          <details><summary>T02 · Raw QC Triage</summary><p>Xếp hạng ảnh nghi lỗi (mờ, lóa, tối…) để người review tìm được nhiều lỗi nhất.</p></details>
+          <details><summary>T03 · Synthetic-vs-Real</summary><p>Kiểm transform dữ liệu synthetic so với thật.</p></details>
+          <details><summary>T04 · Sensor Sync Guard</summary><p>Ghép cặp sensor đúng thời gian (trong ngưỡng ms).</p></details>
+          <details><summary>T05 · Leakage &amp; Near-Dup</summary><p>Tìm ảnh gần trùng / rò rỉ giữa các split.</p></details>
+          <details><summary>T06 · Integrity &amp; Provenance Gate</summary><p>Cổng xuất bản: phát hiện lỗi “âm thầm” trước khi release.</p></details>
+          <details><summary>T07 · Face/Plate Redaction</summary><p>Che mặt / biển số; đừng che quá tay.</p></details>
+          <details><summary>T08 · Delete Request Simulator</summary><p>Mô phỏng yêu cầu xóa dữ liệu — xóa đủ, không xóa nhầm.</p></details>
+          <details><summary>T09 · Privacy Decision Gate</summary><p>Quyết định privacy GO/HOLD cho từng case nhạy cảm.</p></details>
+          <details><summary>T10 · Domain Shift Radar</summary><p>Đo mức “dữ liệu lệch domain” có liên quan tới tụt hiệu năng không.</p></details>
+          <details><summary>T11 · Label Error Prioritizer</summary><p>Ưu tiên mẫu nghi nhãn sai để người review sửa.</p></details>
+          <details><summary>T12 · Vendor Batch Acceptance</summary><p>Nhận / từ chối batch từ vendor theo chất lượng.</p></details>
+          <details><summary>T13 · Rare Case Miner</summary><p>Đào các case hiếm để tăng coverage rủi ro.</p></details>
+          <details><summary>T14 · Auto-Annotation + QC</summary><p>Tự gắn nhãn + kiểm chất lượng detection.</p></details>
+        </div>
+      </section>
+
+      <section id="t02">
+        <h2>Từng click với T02 (Raw QC Triage)</h2>
+        <p>
+          Bài này đơn giản để hiểu luồng: có 96 ảnh → máy tính điểm “nghi lỗi” → đưa 20 ảnh nghi nhất cho người xem → quyết định KEEP / RECAPTURE.
+          Làm đúng các bước dưới là chạy được end-to-end.
+        </p>
+
+        <div class="callout tip">
+          <strong>Một câu nhớ:</strong> Repo = đề + data + máy chạy.
+          Nhóm chọn T02, viết não ở <code>src/pipeline.py</code>, chứng minh tốt hơn baseline, có người review, nộp report.
+        </div>
+
+        <ol class="steps">
+          <li>
+            <h3>Mở đề bài</h3>
+            <p>Trong Cursor / Explorer, mở file:</p>
+            <pre class="cmd">docs/tracks/T02.md</pre>
+            <p>Đọc 4 ý: input <code>images.csv</code> + ảnh · output <code>ranked_review.csv</code> (cột <code>image_id, score</code>) · metric Defect Recall@20 · quyết định KEEP / RECAPTURE.</p>
+          </li>
+          <li>
+            <h3>Sửa config nhóm</h3>
+            <p>Mở <code>configs/lab.yaml</code>, sửa thành (đổi tên nhóm / owner cho đúng):</p>
+            <pre class="cmd">group_id: G07
+owner: "Nguyen Van A - reviewer"
+track_config: tracks/t02.yaml
+track: t02
+input: fixtures/t02_raw_qc
+output: out/
+seed: 42
+offline: true
+strict_provenance: true
+params: {}</pre>
+            <p>File <code>configs/tracks/t02.yaml</code> đã có sẵn <code>budget: 20</code> — chưa cần sửa.</p>
+          </li>
+          <li>
+            <h3>Xem dữ liệu bằng mắt</h3>
+            <p>Mở lần lượt:</p>
+            <pre class="cmd">fixtures/t02_raw_qc/images.csv
+fixtures/t02_raw_qc/images/img_00_0.jpg
+fixtures/t02_raw_qc/manifest.csv</pre>
+            <p>Trong CSV sẽ thấy cột <code>image_id, path, camera_id, light, split</code> (dev / eval).</p>
+          </li>
+          <li>
+            <h3>Setup máy + chạy baseline ngẫu nhiên</h3>
+            <p>Terminal đặt ở thư mục gốc của repo. Chọn đúng hệ điều hành:</p>
+            <div class="os-switch" data-os-switch>
+              <div class="os-tabs" role="tablist" aria-label="Hệ điều hành — setup T02">
+                <button type="button" role="tab" aria-selected="true" data-os="windows">Windows</button>
+                <button type="button" role="tab" aria-selected="false" data-os="mac">macOS</button>
+                <button type="button" role="tab" aria-selected="false" data-os="linux">Linux</button>
+              </div>
+              <div class="os-panel is-active" role="tabpanel" data-os-panel="windows">
+                <pre class="cmd">python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m tools.preflight
+.\.venv\Scripts\python.exe -m pytest -q
+.\.venv\Scripts\python.exe -m src.main --track t02 --pipeline src.examples.random_baseline --output out/baseline --run-name baseline --offline --seed 42</pre>
+              </div>
+              <div class="os-panel" role="tabpanel" data-os-panel="mac" hidden>
+                <pre class="cmd">make setup
+make preflight
+make test
+make baseline TRACK=t02</pre>
+              </div>
+              <div class="os-panel" role="tabpanel" data-os-panel="linux" hidden>
+                <pre class="cmd">make setup
+make preflight
+make test
+make baseline TRACK=t02</pre>
+              </div>
+            </div>
+            <p>Xong thì mở thư mục <code>out/baseline/</code>. Sẽ có:</p>
+            <ul>
+              <li><code>ranked_review.csv</code> — danh sách ảnh + score ngẫu nhiên</li>
+              <li><code>review_queue.csv</code> — top 20</li>
+              <li><code>contact_sheet.html</code> — mở bằng trình duyệt để xem ảnh</li>
+              <li><code>decision.json</code></li>
+            </ul>
+          </li>
+          <li>
+            <h3>Viết PoC trong <code>src/pipeline.py</code></h3>
+            <p>Mở file này — đây là chỗ nhóm “sống”. Gợi ý tối thiểu cho T02:</p>
+            <p><strong>Trong <code>load()</code></strong> — sau phần kiểm manifest, thêm đọc bảng ảnh:</p>
+            <pre class="cmd">data["images"] = pd.read_csv(ctx.input_dir / "images.csv")
+return data</pre>
+            <p><strong>Trong <code>process()</code></strong> — thay <code>raise NotImplementedError</code> bằng vòng lặp tính điểm. Baseline đề bài gợi ý: dùng <code>laplacian_variance</code> (ảnh nét → số cao; ảnh mờ → số thấp). Score nghi lỗi = càng mờ càng cao, ví dụ:</p>
+            <pre class="cmd"><span class="c"># ý tưởng — nhóm tự chỉnh / làm tốt hơn</span>
+from .common.image_ops import load_rgb, laplacian_variance, brightness_stats
+
+rows = []
+for r in data["images"].itertuples(index=False):
+    img = load_rgb(ctx.input_dir / r.path)
+    sharp = laplacian_variance(img)      <span class="c"># cao = nét</span>
+    bri = brightness_stats(img)
+    score = 1.0 / (sharp + 1e-6)         <span class="c"># mờ → score cao</span>
+    <span class="c"># PoC: cộng thêm tín hiệu tối / cháy sáng…</span>
+    rows.append({"image_id": r.image_id, "score": score, "reason": "low_sharpness"})
+return pd.DataFrame(rows)</pre>
+            <p><strong><code>rank()</code></strong> mặc định đã lấy top-B theo <code>score</code> — thường giữ nguyên.</p>
+            <p><strong>Trong <code>decide()</code></strong> — ví dụ policy đơn giản: nếu trong top-20 có quá nhiều ảnh nghi lỗi thì HOLD / RECAPTURE, không thì GO/KEEP. Nhớ ghi <code>reason_code</code> + <code>owner</code>.</p>
+            <p>Chạy PoC:</p>
+            <div class="os-switch" data-os-switch>
+              <div class="os-tabs" role="tablist" aria-label="Hệ điều hành — run PoC">
+                <button type="button" role="tab" aria-selected="true" data-os="windows">Windows</button>
+                <button type="button" role="tab" aria-selected="false" data-os="mac">macOS</button>
+                <button type="button" role="tab" aria-selected="false" data-os="linux">Linux</button>
+              </div>
+              <div class="os-panel is-active" role="tabpanel" data-os-panel="windows">
+                <pre class="cmd">.\.venv\Scripts\python.exe -m src.main --config configs/lab.yaml --track t02 --output out/poc --run-name poc --offline --seed 42</pre>
+              </div>
+              <div class="os-panel" role="tabpanel" data-os-panel="mac" hidden>
+                <pre class="cmd">make run TRACK=t02</pre>
+              </div>
+              <div class="os-panel" role="tabpanel" data-os-panel="linux" hidden>
+                <pre class="cmd">make run TRACK=t02</pre>
+              </div>
+            </div>
+            <p>Kiểm <code>out/poc/ranked_review.csv</code> có đủ 2 cột <code>image_id, score</code>.</p>
+          </li>
+          <li>
+            <h3>Vòng người review (human-in-the-loop)</h3>
+            <p>1) Sau khi chạy PoC, mở <code>out/poc/review_queue.csv</code> (hoặc contact sheet nếu bạn render giống baseline).</p>
+            <p>2) Reviewer điền cột quyết định (approve / reject / edit…), lưu file thành:</p>
+            <pre class="cmd">out/poc/review_queue_reviewed.csv</pre>
+            <p>3) Chạy lại lệnh PoC (cùng lệnh ở bước trên).</p>
+            <p>4) Kiểm <code>out/poc/audit_log.jsonl</code> và <code>decision.json</code>.</p>
+          </li>
+          <li>
+            <h3>Report + so sánh</h3>
+            <p>Điền <code>reports/group_report.md</code>: baseline dùng gì, PoC dùng gì, failure mode (đêm bị loại hết? glare cục bộ? cam_B mềm?). Điền <code>reports/team_contributions.csv</code>.</p>
+            <p>So sánh baseline vs PoC bằng cùng data, cùng budget, cùng seed 42. Trong report ghi rõ cách nhóm tự kiểm (mắt thường / tự gắn nhãn vài mẫu / metric phụ).</p>
+          </li>
+          <li>
+            <h3>Đóng mốc thời gian</h3>
+            <div class="os-switch" data-os-switch>
+              <div class="os-tabs" role="tablist" aria-label="Hệ điều hành — tag T02">
+                <button type="button" role="tab" aria-selected="true" data-os="windows">Windows</button>
+                <button type="button" role="tab" aria-selected="false" data-os="mac">macOS</button>
+                <button type="button" role="tab" aria-selected="false" data-os="linux">Linux</button>
+              </div>
+              <div class="os-panel is-active" role="tabpanel" data-os-panel="windows">
+                <pre class="cmd">git tag -a demo-180m -m "Demo freeze at minute 180"   <span class="c"># phút 180</span>
+git tag -a final-24h -m "Final submission"             <span class="c"># +24h nộp</span></pre>
+              </div>
+              <div class="os-panel" role="tabpanel" data-os-panel="mac" hidden>
+                <pre class="cmd">make tag-demo    <span class="c"># phút 180</span>
+make tag-final   <span class="c"># +24h nộp</span></pre>
+              </div>
+              <div class="os-panel" role="tabpanel" data-os-panel="linux" hidden>
+                <pre class="cmd">make tag-demo    <span class="c"># phút 180</span>
+make tag-final   <span class="c"># +24h nộp</span></pre>
+              </div>
+            </div>
+          </li>
+        </ol>
+
+        <h3>Checklist nhanh riêng T02</h3>
+        <ul class="checklist">
+          <li>Đã đọc <code>docs/tracks/T02.md</code></li>
+          <li><code>lab.yaml</code> trỏ <code>track: t02</code> + <code>fixtures/t02_raw_qc</code></li>
+          <li>Baseline T02 chạy được</li>
+          <li><code>process()</code> trả DataFrame có <code>image_id, score</code></li>
+          <li>PoC chạy xong → có <code>out/poc/ranked_review.csv</code></li>
+          <li>Có ít nhất một vòng review người thật</li>
+          <li>Report nêu failure mode (night / glare / cam_B)</li>
+        </ul>
+      </section>
+
+      <section id="luu-y">
+        <h2>Mấy điều đừng phá luật</h2>
+        <div class="callout warn">
+          <strong>Làm thật, đừng “gian lận protocol”.</strong>
+          Chỉ dùng dữ liệu input trong <code>fixtures/</code>. Không tune trên split eval / heldout.
+          Chốt threshold trước, rồi mới xem kết quả.
+        </div>
+        <ul>
+          <li>Chạy offline khi demo (<code>--offline</code>). Thiếu model thì báo lỗi rõ, đừng tự tải mạng.</li>
+          <li>Chốt threshold / trọng số <strong>trước</strong> khi nhìn kết quả đánh giá.</li>
+          <li>Không đưa ảnh người / biển số thật chưa có quyền lên repo công khai.</li>
+          <li>Không tuyên bố “đạt GDPR / luật VN” chỉ vì checklist tự động.</li>
+          <li>Mỗi thành viên có commit thực chất (đổi khoảng trắng không tính).</li>
+        </ul>
+      </section>
+
+      <section id="checklist">
+        <h2>Checklist trước khi nộp</h2>
+        <ul class="checklist">
+          <li>Đã chọn 1 track và đọc hết đề <code>docs/tracks/TXX.md</code></li>
+          <li>Đã sửa <code>configs/lab.yaml</code> (group_id, owner, track)</li>
+          <li>Setup + test chạy ổn (theo tab hệ điều hành ở bước “Bật máy”)</li>
+          <li>PoC chạy ra file đúng contract trong <code>out/poc/</code></li>
+          <li>Có baseline + PoC + giải thích trong report</li>
+          <li>Có vòng review người thật (queue / audit)</li>
+          <li>Có <code>group_report.md</code> + <code>team_contributions.csv</code></li>
+          <li>Đã tag demo / final theo mốc thời gian</li>
+        </ul>
+
+        <div class="callout" style="margin-top: 1.25rem;">
+          <strong>Một câu để nhớ:</strong>
+          Repo cho bạn đề + dữ liệu + máy chạy.
+          Bạn chọn một challenge, viết não ở <code>src/pipeline.py</code>,
+          chứng minh tốt hơn baseline, có người review, rồi nộp report.
+        </div>
+      </section>
+
+      <footer>
+        Day 06 · Data Pipeline, Privacy &amp; Production PoC · Tài liệu học tập cho học viên ·
+        Mở file này bằng trình duyệt (double-click hoặc kéo vào Chrome/Edge).
+      </footer>
+    </main>
+  </div>
+  <script>
+    (function () {
+      var KEY = "day06-os";
+      var valid = { windows: 1, mac: 1, linux: 1 };
+
+      function detectOs() {
+        var ua = (navigator.userAgent || "").toLowerCase();
+        var plat = (navigator.platform || "").toLowerCase();
+        if (/win/.test(plat) || /windows/.test(ua)) return "windows";
+        if (/mac|iphone|ipad|ipod/.test(plat) || /mac os/.test(ua)) return "mac";
+        return "linux";
+      }
+
+      function applyOs(os) {
+        if (!valid[os]) os = "windows";
+        try { localStorage.setItem(KEY, os); } catch (e) {}
+        document.querySelectorAll("[data-os-switch]").forEach(function (box) {
+          box.querySelectorAll(".os-tabs [data-os]").forEach(function (btn) {
+            var on = btn.getAttribute("data-os") === os;
+            btn.setAttribute("aria-selected", on ? "true" : "false");
+          });
+          box.querySelectorAll("[data-os-panel]").forEach(function (panel) {
+            var on = panel.getAttribute("data-os-panel") === os;
+            panel.classList.toggle("is-active", on);
+            if (on) panel.removeAttribute("hidden");
+            else panel.setAttribute("hidden", "");
+          });
+        });
+      }
+
+      var saved = null;
+      try { saved = localStorage.getItem(KEY); } catch (e) {}
+      applyOs(valid[saved] ? saved : detectOs());
+
+      document.addEventListener("click", function (e) {
+        var btn = e.target.closest(".os-tabs [data-os]");
+        if (!btn) return;
+        applyOs(btn.getAttribute("data-os"));
+      });
+    })();
+  </script>
+</body>
+</html>

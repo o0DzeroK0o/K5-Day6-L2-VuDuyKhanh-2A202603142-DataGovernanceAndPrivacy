@@ -32,3 +32,16 @@ __pycache__/
 .DS_Store
 .idea/
 .vscode/
+
+# Local credentials, caches and packaging
+.env.*
+!.env.example
+*.pem
+*.key
+.codex/
+.agents/
+.aws/
+.ruff_cache/
+.mypy_cache/
+build/
+dist/
