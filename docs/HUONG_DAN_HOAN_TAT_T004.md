@@ -15,7 +15,7 @@ Vũ Duy Khanh đã xác nhận trực tiếp xem đủ 20 frame và đồng ý 1
 - [x] Có report đúng cấu trúc và bảng đóng góp một thành viên; Git author khớp lịch sử.
 - [ ] Tag demo/final đúng mốc lớp và nộp remote: `demo-180m` → `1d2d4a6`, `final-24h` → `83ca5cc`; cả hai thiếu CVAT, review đã xác nhận và web hiện tại. Bản hiện hành dùng nhánh `main`; đúng giờ lớp và việc gửi link qua cổng nộp chưa được xác nhận.
 
-Hạn do học viên điền: **11:00 15/11/2026**, giờ Việt Nam. Nhóm thực tế một người; các hàng thành viên còn lại giữ theo template và ghi không áp dụng.
+Hạn do học viên điền: **11:40 15/11/2026**, giờ Việt Nam. Nhóm thực tế một người; các hàng thành viên còn lại giữ theo template và ghi không áp dụng.
 
 ## Bằng chứng hiện hành
 

@@ -21,3 +21,4 @@
 - [Ứng dụng web chạy thật năm bước pipeline](2026-11-15-104451-web-pipeline-tuong-tac.md)
 - [Kiểm tra repo sạch và report hoàn chỉnh](2026-11-15-111055-kiem-tra-repo-va-report.md)
 - [Làm sạch repo và push GitHub](2026-11-15-111835-lam-sach-repo-va-push-github.md)
+- [Cập nhật header report theo sửa đổi của học viên](2026-11-15-112735-cap-nhat-header-report.md)

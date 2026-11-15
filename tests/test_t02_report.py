@@ -21,15 +21,35 @@ def test_report_only_fills_answers_without_changing_template():
     assert all(f'`{commit}`' in filled for commit in audit['tag_commits'].values())
     assert 'xác nhận đã trực tiếp review đủ 20 frame' in filled
     header=filled.split('## 01')[0]
-    assert 'bản hiện hành dùng nhánh `main`' in header and 'chưa push' not in header
+    assert '11:40 15/11/2026' in header and '11:00 15/11/2026' not in header
+    assert 'chưa push' not in header
     decision = next(line for line in filled.splitlines() if line.startswith('- Decision policy'))
     assert 'REWORK / QUALITY_RECAPTURE_REQUIRED' in decision
     assert 'n_human_reviewed=20' in decision and 'human_review_confirmed=true' in decision
     assert filled.count('| Member')==6
 
 
+def report_content(text):
+    """Ignore Markdown table padding; retain every cell value and other line."""
+    lines=[]
+    for line in text.splitlines():
+        if line.startswith('|'):
+            cells=[cell.strip() for cell in line.split('|')]
+            if all(re.fullmatch(r':?-+:?',cell) for cell in cells[1:-1]):
+                cells=[re.sub(r'-+', '---',cell) for cell in cells]
+            lines.append(tuple(cells))
+        else:
+            lines.append(line)
+    return lines
+
+
 def test_saved_report_matches_generator():
-    assert Path('reports/group_report.md').read_text()==build_report()
+    saved=Path('reports/group_report.md').read_text()
+    expected=report_content(build_report())
+    assert report_content(saved)==expected
+    # Formatting may differ, but changing an answer must still fail comparison.
+    assert report_content(saved.replace('11:40 15/11/2026','11:41 15/11/2026'))!=expected
+    assert report_content(saved.replace('0.95 (19/20)','0.96 (19/20)'))!=expected
 
 
 def test_report_reproduction_runs_offline_without_overwriting_saved_metrics(tmp_path):

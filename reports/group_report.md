@@ -6,15 +6,15 @@
 
 ## 00 · Header
 
-| Mục | Giá trị |
-|---|---|
-| Group ID | T004 |
-| Challenge | T02 · Raw QC Triage: ảnh mờ, lóa, tối và nén JPEG |
+| Mục                        | Giá trị                                                                                                                                                                                                                                                                                                                     |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Group ID                   | T004                                                                                                                                                                                                                                                                                                                        |
+| Challenge                  | T02 · Raw QC Triage: ảnh mờ, lóa, tối và nén JPEG                                                                                                                                                                                                                                                                           |
 | Thành viên (5–6) + vai trò | 1. Vũ Duy Khanh, kiêm toàn bộ vai trò (Lead/Integrator) · 2. Không áp dụng (Data & fixtures) · 3. Không áp dụng (Core algorithm) · 4. Không áp dụng (QA/metric) · 5. Không áp dụng (Review + report) · 6. Không áp dụng; nhóm thực tế **1 người**. Vũ Duy Khanh xác nhận đã trực tiếp review đủ 20 frame và đồng ý kết quả. |
-| Git URL | https://github.com/o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy — bản hiện hành dùng nhánh `main`; [nhật ký repo sạch và push GitHub](../docs/2026-11-15-111835-lam-sach-repo-va-push-github.md). Việc gửi link qua cổng nộp của lớp chưa được xác nhận. |
-| Tag `demo-180m` (commit) | `1d2d4a6bd0587ed2b2531c42572cda72a43d1e5b` — mốc demo cũ, chưa chứa CVAT và web demo hiện tại; giữ làm lịch sử, chưa xác minh đúng phút 180 của lớp. |
-| Tag `final-24h` (commit) | `83ca5ccc9868bfee89a8f285c3564784c174056b` — mốc final cũ, chưa chứa xác nhận review trực tiếp và ứng dụng web; bản hiện hành dùng nhánh `main`. [Kết quả kiểm tra](../docs/2026-11-15-111055-kiem-tra-repo-va-report.md); chưa xác minh deadline +24h. |
-| Deadline (giờ VN) | 11:00 15/11/2026 (Asia/Ho_Chi_Minh; theo thông tin học viên điền). |
+| Git URL                    | https://github.com/o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy                                                                                                                                                                                                                                    |
+| Tag `demo-180m` (commit)   | `1d2d4a6bd0587ed2b2531c42572cda72a43d1e5b`                                                                                                                                                                                                                                                                                  |
+| Tag `final-24h` (commit)   | `83ca5ccc9868bfee89a8f285c3564784c174056b`                                                                                                                                                                                                                                                                                  |
+| Deadline (giờ VN)          | 11:40 15/11/2026                                                                                                                                                                                                                                                                                                            |
 
 ## 01 · Problem statement
 
