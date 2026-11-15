@@ -43,3 +43,24 @@ Chỉ nhật ký này và `docs/README.md`. Output kiểm tra ở `out/` đượ
 ## Kết luận / phần còn lại
 
 Đã triển khai và nối đủ cả năm bước, bao gồm `process`, `review`, `decide`. Điều còn chờ là xác nhận review trực tiếp của người học, không phải thiếu code bước review/decide. Giữ `human_review_confirmed=false`, reviewer/operator thực tế và HOLD đúng với bằng chứng; không tự ký thay.
+
+## Tiếp nối: cách chạy trên máy hiện tại
+
+Theo câu hỏi tiếp theo của người dùng, đã đối chiếu `Makefile`, `run.sh` và hướng dẫn demo. Máy đã có `.venv/bin/python` và `xdg-open`. `make -n run` xác nhận lệnh gọi `src.main` cho T02, output `out/poc`, offline, seed 42. CSV review hiện có ở `out/poc/review_queue_reviewed.csv` khớp từng byte với 20 quyết định CVAT đã lưu trong `reports/evidence/poc/`.
+
+Mở Terminal ở gốc repository và chạy:
+
+```bash
+make run
+xdg-open out/poc/contact_sheet.html
+```
+
+`make run` tự chạy đủ năm bước; bước review đọc CSV đã có. Không cần activate `.venv` vì Makefile dùng `.venv/bin/python`. Contact sheet là giao diện HTML xem 20 ảnh và nhập review. Kết quả của lần chạy nằm trong `out/poc/`; xem quyết định bằng:
+
+```bash
+cat out/poc/decision.json
+```
+
+`status=0` trong Terminal là chương trình thành công; HOLD trong JSON là quyết định nghiệp vụ chờ xác nhận người học. Muốn mở slides đã lưu, chạy `xdg-open demo/t004_demo.html`; job CVAT thật ở `http://localhost:8080/tasks/17/jobs/17` khi server local đang chạy.
+
+Phần tiếp nối chỉ bổ sung hướng dẫn, không chạy lại pipeline hoặc test đã kiểm ngay trước đó. Kiểm `make -n`, CSV đầu vào, đường dẫn HTML và `git diff --check`; giữ nguyên ba tệp reports đang được người dùng sửa và `.obsidian/`.
