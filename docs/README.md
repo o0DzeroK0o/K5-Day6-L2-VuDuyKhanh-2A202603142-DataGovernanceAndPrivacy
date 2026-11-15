@@ -13,3 +13,4 @@
 - [Hướng dẫn và bằng chứng CVAT local 20/20 frame](HUONG_DAN_DEMO_CVAT_LOCAL.md)
 - [Đồng bộ kết quả sau review CVAT](2026-11-15-091959-dong-bo-ket-qua-review-cvat.md)
 - [Hoàn tất checklist bằng chứng baseline/PoC và review](2026-11-15-093808-hoan-tat-checklist-bang-chung.md)
+- [Cấu trúc bài nộp T004 theo tài liệu](2026-11-15-094653-cau-truc-bai-nop-t004.md)
