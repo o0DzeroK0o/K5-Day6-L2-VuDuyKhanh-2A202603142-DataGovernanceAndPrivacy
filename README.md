@@ -4,7 +4,7 @@
 > [Report đã điền](reports/group_report.md) · [Metric contract](reports/metric_contract.md) · [Kết quả do script sinh](reports/table1_baseline_vs_poc.md) · [Demo 5 trang offline](demo/t004_demo.html) · [Checklist và thao tác còn lại](docs/HUONG_DAN_HOAN_TAT_T004.md).
 >
 > Repo: [o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy](https://github.com/o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy).
-> Tag cục bộ: `demo-180m`, `final-24h` (tạo theo thời điểm làm bài thực tế, không xác nhận mốc lớp). [Demo trên remote sau khi push](https://github.com/o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy/tree/demo-180m) · [Final trên remote sau khi push](https://github.com/o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy/tree/final-24h). Chưa push.
+> Tag cục bộ: `demo-180m` → `1d2d4a6`, `final-24h` → `83ca5cc`. Đây là các mốc cũ, **chưa chứa CVAT, xác nhận review trực tiếp và ứng dụng web hiện tại**; chưa phải bản nộp cuối hiện hành, chưa xác minh mốc lớp. [Demo trên remote sau khi push](https://github.com/o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy/tree/demo-180m) · [Final trên remote sau khi push](https://github.com/o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy/tree/final-24h). Chưa push. [Kết quả kiểm tra repo/report](docs/2026-11-15-111055-kiem-tra-repo-va-report.md).
 >
 > **Đã xác nhận review trực tiếp:** Vũ Duy Khanh đã xem đủ 20 frame, đồng ý **19 RECAPTURE / 1 KEEP** (`img_23_1`) và hai override `img_19_2`, `img_06_3`. Pipeline: **REWORK / QUALITY_RECAPTURE_REQUIRED**, `n_human_reviewed=20`. [Xác nhận](reports/human_review_confirmation.json) · [Decision hiện tại](reports/evidence/human_review/decision.json).
 >

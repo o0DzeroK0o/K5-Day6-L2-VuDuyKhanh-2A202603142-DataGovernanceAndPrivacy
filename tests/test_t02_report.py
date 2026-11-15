@@ -1,5 +1,8 @@
 from pathlib import Path
+import json
 import re
+import shutil
+import subprocess
 
 import pytest
 
@@ -13,11 +16,42 @@ def test_report_only_fills_answers_without_changing_template():
     assert [s for s in original.splitlines() if s.startswith('#')]==[s for s in filled.splitlines() if s.startswith('#')]
     assert '____' not in filled
     assert '- [x] Có baseline/PoC metrics, ≥1 failure case, reviewer evidence, decision log.' in filled
+    assert '- [ ] Link repo và tag cuối cùng trong README; input mẫu không chứa PII thật.' in filled
+    audit=json.loads(Path('reports/verification.json').read_text())['submission_audit']
+    assert all(f'`{commit}`' in filled for commit in audit['tag_commits'].values())
     assert 'xác nhận đã trực tiếp review đủ 20 frame' in filled and 'chưa push' in filled
     decision = next(line for line in filled.splitlines() if line.startswith('- Decision policy'))
     assert 'REWORK / QUALITY_RECAPTURE_REQUIRED' in decision
     assert 'n_human_reviewed=20' in decision and 'human_review_confirmed=true' in decision
     assert filled.count('| Member')==6
+
+
+def test_saved_report_matches_generator():
+    assert Path('reports/group_report.md').read_text()==build_report()
+
+
+def test_report_reproduction_runs_offline_without_overwriting_saved_metrics(tmp_path):
+    """Execute the documented commands in isolation, including venv activation."""
+    root=Path.cwd()
+    for name in ('.venv', 'src', 'configs', 'fixtures'):
+        (tmp_path/name).symlink_to(root/name, target_is_directory=True)
+    (tmp_path/'reports').mkdir()
+    shutil.copytree(root/'reports/annotations', tmp_path/'reports/annotations')
+    saved=(root/'reports/metrics_poc.json').read_bytes()
+    (tmp_path/'reports/metrics_poc.json').write_bytes(saved)
+    commands=re.search(r'```bash\n(.*?)\n```', build_report(), re.DOTALL).group(1).splitlines()
+    # Dependencies are already installed; do not install or nest pytest in a test.
+    result=subprocess.run(['bash', '-e', '-c', '\n'.join(commands[1:-1])],
+                          cwd=tmp_path, capture_output=True, text=True, timeout=30)
+    assert result.returncode==0, result.stdout+result.stderr
+    assert (tmp_path/'reports/metrics_poc.json').read_bytes()==saved
+    output=tmp_path/'out/report-reproduce'
+    metrics=json.loads((output/'metrics_poc_internal.json').read_text())
+    assert metrics['metrics']==json.loads(saved)['metrics']
+    decision=json.loads((output/'poc/decision.json').read_text())
+    assert decision['status']=='HOLD'
+    assert decision['reason_code']=='HUMAN_REVIEW_REQUIRED'
+    assert (output/'poc/raw_predictions.csv').read_bytes()==(root/'reports/evidence/poc/raw_predictions.csv').read_bytes()
 
 
 def test_report_structure_rejects_reworded_question_or_removed_member_row():

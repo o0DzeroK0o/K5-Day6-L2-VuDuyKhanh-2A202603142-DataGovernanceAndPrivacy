@@ -52,6 +52,7 @@ def validate_structure(original: str, filled: str):
 def build_report(root=Path('reports')):
     b=json.loads((root/'metrics_baseline.json').read_text());p=json.loads((root/'metrics_poc.json').read_text())
     summary=json.loads((root/'analysis_summary.json').read_text());verification=json.loads((root/'verification.json').read_text())
+    audit=verification['submission_audit']
     cvat=json.loads((root/'cvat_review_import.json').read_text())
     signed=json.loads((root/'human_review_confirmation.json').read_text())
     bs,ps=summary['runs']['baseline'],summary['runs']['poc'];ci=summary['uncertainty']['results']
@@ -70,8 +71,8 @@ def build_report(root=Path('reports')):
     cell('Challenge','T02 · Raw QC Triage: ảnh mờ, lóa, tối và nén JPEG')
     cell('Thành viên (5–6) + vai trò',f'1. {SOURCE}, kiêm toàn bộ vai trò (Lead/Integrator) · 2. Không áp dụng (Data & fixtures) · 3. Không áp dụng (Core algorithm) · 4. Không áp dụng (QA/metric) · 5. Không áp dụng (Review + report) · 6. Không áp dụng; nhóm thực tế **1 người**. Vũ Duy Khanh xác nhận đã trực tiếp review đủ 20 frame và đồng ý kết quả.')
     cell('Git URL','https://github.com/o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy (commit/tag hiện cục bộ, chưa push)')
-    cell('Tag `demo-180m` (commit)','`demo-180m^{commit}` — xem `git rev-parse demo-180m^{commit}`; tạo thực tế khi hoàn tất demo, không khẳng định đúng phút 180 của lớp.')
-    cell('Tag `final-24h` (commit)','`final-24h^{commit}` — xem `git rev-parse final-24h^{commit}`; hash bàn giao sau commit, không khẳng định đúng deadline +24h.')
+    cell('Tag `demo-180m` (commit)',f'`{audit["tag_commits"]["demo-180m"]}` — mốc demo cũ, chưa chứa CVAT và web demo hiện tại; chưa push, chưa xác minh đúng phút 180 của lớp.')
+    cell('Tag `final-24h` (commit)',f'`{audit["tag_commits"]["final-24h"]}` — mốc final cũ, chưa chứa xác nhận review trực tiếp và ứng dụng web; chưa phải bản nộp hiện tại. [Kết quả kiểm tra](../docs/2026-11-15-111055-kiem-tra-repo-va-report.md); chưa push, chưa xác minh deadline +24h.')
     cell('Deadline (giờ VN)','11:00 15/11/2026 (Asia/Ho_Chi_Minh; theo thông tin học viên điền).')
     answer('- Ai bị ảnh hưởng','Đội thu thập, người gán nhãn và chủ mô hình: bỏ sót ảnh hỏng gây dữ liệu kém; loại nhầm night/cam_B làm mất coverage và tốn thu lại.')
     answer('- Điểm nghẽn cụ thể','Chỉ review được B=20 trong 40 ảnh eval; một ngưỡng nét toàn ảnh bỏ sót glare cục bộ và nhầm camera mềm.')
@@ -114,11 +115,11 @@ def build_report(root=Path('reports')):
     answer('- Cách override',f'Đã áp {len(cvat["override_ids"])} override KEEP→RECAPTURE cho {" và ".join(cvat["override_ids"])} từ export CVAT, chạy lại pipeline offline và thêm audit mới với ghi chú nguyên văn. Giữ toàn bộ audit cũ, raw_predictions, score và ranking. Verifier đối chiếu đủ 20 quyết định CSV, hành động cuối và audit với XML/API.')
     answer('- Decision policy',f'{signed["status"]} / {signed["reason_code"]}; owner {SOURCE}. n_reviewed=20, n_human_reviewed=20; human_review_confirmed=true. Đã ghi lần ký duyệt mới sau xác nhận trực tiếp của học viên; giữ nguyên lịch sử nhập CVAT.')
     answer('- Khi nào HOLD/REWORK','HOLD khi thiếu review/escalate/domain mới; REWORK khi còn RECAPTURE; không ép GO để đẹp bài. [Hướng dẫn review, xác nhận và quyết định](../docs/HUONG_DAN_HOAN_TAT_T004.md).')
-    replace('fixtures/<track>','fixtures/t02_raw_qc')
-    replace('python -m src.evaluate --track t__ --pred out/<file> --out reports/metrics_poc.json','python -m src.evaluate --track t02 --pred out/ranked_review.csv --gt reports/annotations/internal_eval_labels.csv --out reports/metrics_poc.json')
-    answer('- Output của `pytest -q`',verification['tests']+'; các skip yêu cầu GT giảng viên, không tắt test. Preflight 0 FAIL/2 WARN tùy chọn; verify 14 manifests; compileall và kiểm contract pass. Chạy trong .venv (source .venv/bin/activate).')
+    replace('python -m src.main --input fixtures/<track> --config configs/lab.yaml --output out/ --offline --seed 42','source .venv/bin/activate && python -m src.main --input fixtures/t02_raw_qc --config configs/lab.yaml --output out/report-reproduce/poc --offline --seed 42')
+    replace('python -m src.evaluate --track t__ --pred out/<file> --out reports/metrics_poc.json','python -m src.evaluate --track t02 --pred out/report-reproduce/poc/ranked_review.csv --gt reports/annotations/internal_eval_labels.csv --out out/report-reproduce/metrics_poc_internal.json')
+    answer('- Output của `pytest -q`',verification['tests']+'; các skip yêu cầu GT giảng viên, không tắt test. Preflight 0 FAIL/2 WARN tùy chọn; verify 14 manifests; compileall và kiểm contract pass. Dùng make setup với requirements-lock.txt, rồi các lệnh bash trên kích hoạt .venv. Lượt CLI mới chưa nạp review sẽ HOLD; tái lập cả 20 quyết định đã xác nhận bằng `make t02-submission OUT=out/check-final` vào thư mục mới sẽ REWORK. Output tái lập ở out/, không ghi đè metrics bài nộp. [Nhật ký kiểm tra](../docs/2026-11-15-111055-kiem-tra-repo-va-report.md).')
     old=next(x for x in s.splitlines() if x.startswith('- Máy / CPU / OS / Python:'))
-    replace(old,old.replace('____',f'{verification["cpu"]}; {p["machine"]["platform"]}; Python {p["machine"]["python"]}',1).replace('____',p['git_sha'],1))
+    replace(old,old.replace('____',f'{verification["cpu"]}; {p["machine"]["platform"]}; Python {p["machine"]["python"]}',1).replace('____',p['git_sha']+' (commit của snapshot đo runtime baseline/PoC; không phải HEAD hiện tại)',1))
     answer('- Rủi ro pháp lý','Chỉ fixture synthetic CC0; không thu thập PII thật. Model pretrained không dùng. Nguồn/license mỗi file trong manifest. Khi dùng ảnh thật phải xác minh quyền, lưu trữ và xử lý yêu cầu xóa.')
     answer('- Điều chưa biết','Nhãn nội bộ có sai lệch; glare nhẹ, JPEG nhẹ và cảnh tương phản thấp còn khó. Dev night ít, camera mới cần HOLD. Scale 10× chưa đo: xử lý ảnh tuyến tính, sort N log N; nên cache feature, chia batch và đo RAM/latency trước triển khai.')
     answer('- Không tuyên bố','DPO/legal/domain owner phải xác nhận cơ sở xử lý, consent nếu cần, retention, truy cập, license và ngưỡng QC cho dữ liệu thực. PoC chỉ hỗ trợ triage.')
@@ -127,7 +128,7 @@ def build_report(root=Path('reports')):
     for member,role in [('Member 2','Data + GT'),('Member 3','Core algorithm'),('Member 4','Metric + tests'),('Member 5','Review queue + report'),('Member 6 (nếu có)','Research / ablation / debate')]:
         replace(f'| {member} | | {role} | | |',f'| {member} | Không áp dụng: nhóm 1 người | {role} — do Member 1 đảm nhiệm  | Không giả thành viên/commit | Không áp dụng |')
     replace('| | | |','| https://github.com/opencv/opencv/blob/4.x/doc/tutorials/imgproc/imgtrans/laplace_operator/laplace_operator.markdown <br> https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.convolve.html | 2026-11-14 | OpenCV: cơ sở toán học đạo hàm bậc hai/cạnh, chọn baseline rẻ trên CPU. SciPy: convolution và reflect để tái lập primitive. Không sao chép nguyên văn hoặc coi đây là bằng chứng cho threshold riêng của nhóm. |')
-    for text in ['Link repo và tag cuối cùng trong README; input mẫu không chứa PII thật.','Đúng 1 lệnh run, 1 lệnh evaluate, 1 lệnh tests; không cần download khi chạy.','Có license/source provenance, data splits, seed, offline environment, GT/eval N.','Mỗi thành viên có ≥1 commit thực chất và được nêu minh bạch trong bảng trên.']:
+    for text in ['Đúng 1 lệnh run, 1 lệnh evaluate, 1 lệnh tests; không cần download khi chạy.','Có license/source provenance, data splits, seed, offline environment, GT/eval N.','Mỗi thành viên có ≥1 commit thực chất và được nêu minh bạch trong bảng trên.']:
         replace('- [ ] '+text,'- [x] '+text)
     replace('- [ ] Có baseline/PoC metrics, ≥1 failure case, reviewer evidence, decision log.','- [x] Có baseline/PoC metrics, ≥1 failure case, reviewer evidence, decision log.')
     validate_structure(TEMPLATE.read_text(),s)

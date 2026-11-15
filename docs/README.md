@@ -19,3 +19,4 @@
 
 - [Xây dựng UI và xác nhận review trực tiếp](2026-11-15-102502-xay-dung-ui-va-xac-nhan-review.md)
 - [Ứng dụng web chạy thật năm bước pipeline](2026-11-15-104451-web-pipeline-tuong-tac.md)
+- [Kiểm tra repo sạch và report hoàn chỉnh](2026-11-15-111055-kiem-tra-repo-va-report.md)

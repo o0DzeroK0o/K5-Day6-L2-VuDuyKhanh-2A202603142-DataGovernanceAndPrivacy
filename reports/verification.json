@@ -1,7 +1,7 @@
 {
-  "tests": "147 passed, 39 skipped in 54.72s",
+  "tests": "149 passed, 39 skipped in 56.28s",
   "tests_command": ".venv/bin/python -m pytest -o addopts= -q",
-  "verification_scope": "Live HTTP application executing all five frozen pipeline stages, persistent review, updated demo and unchanged scoring evidence.",
+  "verification_scope": "Repository/report audit: full tests, isolated execution of report commands, fresh offline reproduction of frozen metrics and confirmed review, tag and remote inspection. Saved browser evidence verified without recapture.",
   "cpu": "Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz",
   "preflight": {
     "fail": 0,
@@ -22,8 +22,8 @@
   },
   "human_review_completed": true,
   "browser": "Chromium 155: live Load/Process/Rank/Review/Decide, all 20 frames, server save/reload, CSV/JSON download, validation, stale revisions, connection failures and 390px layouts; five slides rendered and inspected. See demo/web/verification.json and reports/demo_verification.json.",
-  "clean_output_reproduction": "Exit 0; four raw prediction tables, all evaluator metric arrays, full analysis/bootstrap equal original evidence. 20 confirmed decisions reproduce REWORK; no score or label changes.",
-  "clean_output_reproduction_command": ".venv/bin/python -m tools.t02_submission --output out/final-ui-reproduce --reports out/final-ui-reproduce/reports",
+  "clean_output_reproduction": "Exit 0; all four raw prediction tables and evaluator metric arrays, summary/bootstrap, 20 signed reviews and final ranked predictions match committed evidence. REWORK with 20 human reviews.",
+  "clean_output_reproduction_command": "make t02-submission OUT=out/audit-20261115-111055",
   "cvat_review_import": {
     "result": "pass",
     "receipt": "reports/cvat_review_import.json",
@@ -61,7 +61,7 @@
     "browser": "Chromium 155: 20 enlarged frames, search/filter, validation, draft reload, CSV round-trip, desktop/mobile; 5 slides, buttons/keyboard, local links. See ui_verification.json and demo_verification.json.",
     "scope": "Completed review UI and human-confirmation task before the HTTP application."
   },
-  "clean_output_reproduction_scope": "Verified before adding the HTTP app. The current web run also reproduces the frozen raw_predictions.csv byte-for-byte.",
+  "clean_output_reproduction_scope": "Fresh output during repository/report audit on 2026-11-15. Original metrics, labels, protocol, signed evidence and demo captures unchanged.",
   "web_pipeline": {
     "command": "make web",
     "url": "http://127.0.0.1:8765",
@@ -78,5 +78,40 @@
     "hosting_scope": "HTTP on this machine only; no public deployment",
     "test_run_id": "60b4865d2f7b44a7a06e54139c8b8e21",
     "evidence_scope": "Clean five-stage run with only the imported, already confirmed CVAT review. Validation tests use a separate run."
+  },
+  "submission_audit": {
+    "checked_at": "2026-11-15T04:13:24+00:00",
+    "starting_commit": "bd0aa67aa6a38f1b429a5d2e46ca3a3f9bc4ea8f",
+    "tag_commits": {
+      "demo-180m": "1d2d4a6bd0587ed2b2531c42572cda72a43d1e5b",
+      "final-24h": "83ca5ccc9868bfee89a8f285c3564784c174056b"
+    },
+    "commits_after_final_at_start": 11,
+    "tracked_clean_at_start": true,
+    "untracked_at_start": [
+      ".obsidian/app.json",
+      ".obsidian/appearance.json",
+      ".obsidian/core-plugins.json",
+      ".obsidian/workspace.json"
+    ],
+    "remote_heads_and_tags": {
+      "refs/heads/main": "b0ce8bfd972315448aace86185c1a3e075754b93"
+    },
+    "remote_check_command": "GIT_TERMINAL_PROMPT=0 timeout 25 git ls-remote --heads --tags origin",
+    "report_content": "Sections 00-11 filled; submission tag checklist pending because historical tags omit current evidence and web application.",
+    "log": "docs/2026-11-15-111055-kiem-tra-repo-va-report.md",
+    "tests": "149 passed, 39 skipped in 56.28s",
+    "report_command_test": "Executed report run/evaluate commands in isolated directory: venv activation works, fresh review is HOLD, metrics match and saved submission metrics remain unchanged.",
+    "reproduction_directory": "out/audit-20261115-111055/reproduce",
+    "review_verification": "20/20 confirmed; REWORK / QUALITY_RECAPTURE_REQUIRED",
+    "report_checklist_completed": 4,
+    "report_checklist_total": 5,
+    "pending_report_checklist": "Link repo và tag cuối cùng trong README; input mẫu không chứa PII thật.",
+    "pending_reason": "Both historical tags omit CVAT, confirmed human review and the live web application; remote has neither tag nor current work.",
+    "personal_workspace": "Four pre-existing .obsidian files remain untracked and untouched; no ignore rule added."
+  },
+  "previous_web_verification": {
+    "tests": "147 passed, 39 skipped in 54.72s",
+    "verification_scope": "Live HTTP application executing all five frozen pipeline stages, persistent review, updated demo and unchanged scoring evidence."
   }
 }

@@ -12,8 +12,8 @@
 | Challenge | T02 · Raw QC Triage: ảnh mờ, lóa, tối và nén JPEG |
 | Thành viên (5–6) + vai trò | 1. Vũ Duy Khanh, kiêm toàn bộ vai trò (Lead/Integrator) · 2. Không áp dụng (Data & fixtures) · 3. Không áp dụng (Core algorithm) · 4. Không áp dụng (QA/metric) · 5. Không áp dụng (Review + report) · 6. Không áp dụng; nhóm thực tế **1 người**. Vũ Duy Khanh xác nhận đã trực tiếp review đủ 20 frame và đồng ý kết quả. |
 | Git URL | https://github.com/o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy (commit/tag hiện cục bộ, chưa push) |
-| Tag `demo-180m` (commit) | `demo-180m^{commit}` — xem `git rev-parse demo-180m^{commit}`; tạo thực tế khi hoàn tất demo, không khẳng định đúng phút 180 của lớp. |
-| Tag `final-24h` (commit) | `final-24h^{commit}` — xem `git rev-parse final-24h^{commit}`; hash bàn giao sau commit, không khẳng định đúng deadline +24h. |
+| Tag `demo-180m` (commit) | `1d2d4a6bd0587ed2b2531c42572cda72a43d1e5b` — mốc demo cũ, chưa chứa CVAT và web demo hiện tại; chưa push, chưa xác minh đúng phút 180 của lớp. |
+| Tag `final-24h` (commit) | `83ca5ccc9868bfee89a8f285c3564784c174056b` — mốc final cũ, chưa chứa xác nhận review trực tiếp và ứng dụng web; chưa phải bản nộp hiện tại. [Kết quả kiểm tra](../docs/2026-11-15-111055-kiem-tra-repo-va-report.md); chưa push, chưa xác minh deadline +24h. |
 | Deadline (giờ VN) | 11:00 15/11/2026 (Asia/Ho_Chi_Minh; theo thông tin học viên điền). |
 
 ## 01 · Problem statement
@@ -88,13 +88,13 @@
 
 ```bash
 make setup          # hoặc: python -m venv .venv && pip install -r requirements.txt
-python -m src.main --input fixtures/t02_raw_qc --config configs/lab.yaml --output out/ --offline --seed 42
-python -m src.evaluate --track t02 --pred out/ranked_review.csv --gt reports/annotations/internal_eval_labels.csv --out reports/metrics_poc.json
+source .venv/bin/activate && python -m src.main --input fixtures/t02_raw_qc --config configs/lab.yaml --output out/report-reproduce/poc --offline --seed 42
+python -m src.evaluate --track t02 --pred out/report-reproduce/poc/ranked_review.csv --gt reports/annotations/internal_eval_labels.csv --out out/report-reproduce/metrics_poc_internal.json
 pytest -q
 ```
 
-- Output của `pytest -q`: 147 passed, 39 skipped in 54.72s; các skip yêu cầu GT giảng viên, không tắt test. Preflight 0 FAIL/2 WARN tùy chọn; verify 14 manifests; compileall và kiểm contract pass. Chạy trong .venv (source .venv/bin/activate).
-- Máy / CPU / OS / Python: Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz; Linux-7.2.15-1-omarchy-x86_64-with-glibc2.44; Python 3.12.16 · git sha: 6c525dc
+- Output của `pytest -q`: 149 passed, 39 skipped in 56.28s; các skip yêu cầu GT giảng viên, không tắt test. Preflight 0 FAIL/2 WARN tùy chọn; verify 14 manifests; compileall và kiểm contract pass. Dùng make setup với requirements-lock.txt, rồi các lệnh bash trên kích hoạt .venv. Lượt CLI mới chưa nạp review sẽ HOLD; tái lập cả 20 quyết định đã xác nhận bằng `make t02-submission OUT=out/check-final` vào thư mục mới sẽ REWORK. Output tái lập ở out/, không ghi đè metrics bài nộp. [Nhật ký kiểm tra](../docs/2026-11-15-111055-kiem-tra-repo-va-report.md).
+- Máy / CPU / OS / Python: Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz; Linux-7.2.15-1-omarchy-x86_64-with-glibc2.44; Python 3.12.16 · git sha: 6c525dc (commit của snapshot đo runtime baseline/PoC; không phải HEAD hiện tại)
 
 ## 09 · Limitations & ethics
 
@@ -126,7 +126,7 @@ pytest -q
 
 **Bảng 3 · Checklist chốt khi nộp**
 
-- [x] Link repo và tag cuối cùng trong README; input mẫu không chứa PII thật.
+- [ ] Link repo và tag cuối cùng trong README; input mẫu không chứa PII thật.
 - [x] Đúng 1 lệnh run, 1 lệnh evaluate, 1 lệnh tests; không cần download khi chạy.
 - [x] Có baseline/PoC metrics, ≥1 failure case, reviewer evidence, decision log.
 - [x] Có license/source provenance, data splits, seed, offline environment, GT/eval N.

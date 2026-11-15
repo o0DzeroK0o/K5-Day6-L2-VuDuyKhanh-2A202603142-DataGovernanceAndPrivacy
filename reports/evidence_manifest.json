@@ -64,7 +64,7 @@
     "demo/web/run_info.json": "844a5fa24e7ec66a23306bce6361e093ebb98a56e0d13f89dc364f3286cc2b4a",
     "demo/web/verification.json": "2851b583b40f680624d7985171d0c0412a04e4164aac89690361a98505e365be",
     "demo/web/workflow.json": "88ef41e7286b6348baedac46d8ce9e802b8b3d6a7193ae3231b4f6a2e2ba5f53",
-    "reports/README.md": "9210d85ca5432685c24690e10a8d75ca0c784e2f90401368a4e1ff18cf4747ca",
+    "reports/README.md": "a0adb34e86b3f39aef9cd7fb330ab3f30761d6d8159b66759d8edd24c65e1ac0",
     "reports/analysis_summary.json": "c02ef054653ce04fdbd0b1ba6c9d70f415b9453a42e4fc29d3af709a55c34bf8",
     "reports/annotations/README.md": "9b0cfa607912d467c7c06f99326bc2452b55b6581f0a3a7970cd918effc1df61",
     "reports/annotations/internal_eval_labels.csv": "fcff2a0728d0048c7063cbb524b354e8a6679955eb3d7889637cb095cfba0a74",
@@ -135,7 +135,7 @@
     "reports/evidence/poc/run_info.json": "7836998d5293eccc4120d347db5f30828d28a655d67bcb26fc6fb46d12cb8b14",
     "reports/failure_cases.json": "b5c3a277c6faeb6eccb8b95b53b44af43d56a5301f0eeeded3e40c3ab65f1998",
     "reports/failure_gallery.html": "8236c02be0633633700006d30dd913918abe3174c8e299d4754124af42bff7aa",
-    "reports/group_report.md": "66bf17d3778fc48eee892a0cbb9bf1db82ea27f1ac51d12afc3c50d99e241a36",
+    "reports/group_report.md": "234b8a52fd8d953d5f334fca18fd31f74719c16ef02c7c78cc4a5e5c858daa42",
     "reports/human_review_confirmation.json": "e2d36f181eb57dcb0db1ebf533a3592e048e6a6b2378715e79124b81ebb2a81d",
     "reports/metric_contract.md": "b2104640105470cbb0dc9e2fc5c541112cf2a524b7f3a789a5cd3b69c594c50a",
     "reports/metrics_baseline.json": "875e0fbc201f4f1fdb95b844bcbe6a30665ce86c2f792cdd49367d696bc17eb2",
@@ -155,6 +155,6 @@
     "reports/table1_baseline_vs_poc.md": "7a31729b05d8274be8b46d7c54569584f4dd3053cbcce02b6daea0377ffb39c4",
     "reports/team_contributions.csv": "19462175b086dc3f43c0fc43cdb37e273f3f588c516c42562f17fd517ee8e5b4",
     "reports/ui_verification.json": "4c339c4fdee3064451de324bc8d06356e1feed13516d6686254c381748beb792",
-    "reports/verification.json": "1f68c8a983559fb0cad04948f939176ca1f12be7b5f9197cdfc382a7942d9573"
+    "reports/verification.json": "ed5a0de57a9b21d52748ffe11b12d87027f09b6ac7db327265cbcdc796e20a7b"
   }
 }
