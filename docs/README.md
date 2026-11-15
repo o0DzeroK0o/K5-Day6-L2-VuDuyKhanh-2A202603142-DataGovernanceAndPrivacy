@@ -15,3 +15,4 @@
 - [Hoàn tất checklist bằng chứng baseline/PoC và review](2026-11-15-093808-hoan-tat-checklist-bang-chung.md)
 - [Cấu trúc bài nộp T004 theo tài liệu](2026-11-15-094653-cau-truc-bai-nop-t004.md)
 - [Đối chiếu triển khai năm bước pipeline T02](2026-11-15-100708-doi-chieu-nam-buoc-pipeline.md)
+- [Kiểm tra log Chromium và mở contact sheet trên Omarchy](2026-11-15-101326-kiem-tra-loi-mo-chromium.md)

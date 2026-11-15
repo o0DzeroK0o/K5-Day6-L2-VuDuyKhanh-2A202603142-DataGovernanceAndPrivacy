@@ -2,6 +2,8 @@
 
 Mở Terminal tại thư mục gốc dự án. Máy hiện tại đã có `.venv` và dependency; các lệnh dưới đây chạy offline.
 
+Trên Omarchy, nếu `xdg-open` in lỗi Chromium `zygote` / `Ống dẫn bị hỏng (32)`, xem cách mở bằng launcher ở mục 6.
+
 **Phạm vi hiện có:** bản trình chiếu có ảnh thao tác thật trên **CVAT local**, task/job #17 đã hoàn tất đủ 20 frame, cùng kết quả pipeline/contact sheet. [Gallery 20 frame](../demo/cvat/index.html) và [hướng dẫn CVAT](HUONG_DAN_DEMO_CVAT_LOCAL.md) lưu bằng chứng Save/export. `demo/t004_demo_preview.png` là preview trang đầu; ảnh CVAT gốc nằm trong `demo/cvat/`.
 
 ## 1. Mở bản trình chiếu 5 trang
@@ -68,3 +70,21 @@ Lệnh tạo baseline Laplacian, PoC, nhập review CVAT đã lưu, chạy ablat
 Lệnh đầu đối chiếu XML, snapshot API, đủ 20 frame, mapping/ảnh gốc và thuộc tính. Lệnh thứ hai kiểm kết quả nhập CVAT với CSV, hành động cuối, audit và biên nhận. Lệnh thứ ba sinh lại đúng 5 slides từ bằng chứng và số liệu đã lưu. Lệnh cuối kiểm cả protocol, metric, cấu trúc report và manifest; mọi thay đổi ngoài nhiệm vụ trong `reports/` có thể khiến hash không khớp và cần được xử lý riêng. Không dùng `--write-manifest` để che một sai khác chưa xem xét.
 
 Để đóng gói một lần export mới, xem lệnh `--export` trong [hướng dẫn CVAT](HUONG_DAN_DEMO_CVAT_LOCAL.md). Đủ 20 quyết định CVAT đã được chuyển sang CSV review, chạy lại pipeline và đồng bộ audit theo các lệnh trong hướng dẫn CVAT. Xác nhận người học vẫn là bước riêng.
+
+## 6. Mở HTML trên Omarchy khi Chromium in lỗi zygote
+
+Thông báo `Failed sending zygote boot message` / `Ống dẫn bị hỏng (32)` đến từ Chromium. Kiểm riêng `out/poc/run_info.json`: `status: 0` và không thiếu cột output nghĩa là pipeline chạy thành công. Trong lần kiểm tra trên máy ngày 2026-11-15, trang review đã mở dù Terminal có các dòng log này.
+
+Từ gốc dự án, dùng launcher Omarchy để chuyển URL tới trình duyệt đang chạy và đưa cửa sổ lên trước:
+
+```bash
+omarchy launch browser "file://$PWD/out/poc/contact_sheet.html"
+```
+
+Nếu đã chạy `make run OUT=out/demo-live`, dùng đường dẫn tương ứng `file://$PWD/out/demo-live/poc/contact_sheet.html`. Mở bản trình chiếu bằng:
+
+```bash
+omarchy launch browser "file://$PWD/demo/t004_demo.html"
+```
+
+Đã kiểm lệnh mở contact sheet: exit 0, cửa sổ Chromium hoạt động có tiêu đề `T004 / T02 — poc — eval — review`; HTML chứa đủ 20 ảnh nhúng. [Nhật ký kiểm tra](2026-11-15-101326-kiem-tra-loi-mo-chromium.md).
