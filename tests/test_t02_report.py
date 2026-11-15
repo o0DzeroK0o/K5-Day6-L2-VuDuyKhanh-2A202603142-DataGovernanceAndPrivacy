@@ -19,7 +19,9 @@ def test_report_only_fills_answers_without_changing_template():
     assert '- [ ] Link repo và tag cuối cùng trong README; input mẫu không chứa PII thật.' in filled
     audit=json.loads(Path('reports/verification.json').read_text())['submission_audit']
     assert all(f'`{commit}`' in filled for commit in audit['tag_commits'].values())
-    assert 'xác nhận đã trực tiếp review đủ 20 frame' in filled and 'chưa push' in filled
+    assert 'xác nhận đã trực tiếp review đủ 20 frame' in filled
+    header=filled.split('## 01')[0]
+    assert 'bản hiện hành dùng nhánh `main`' in header and 'chưa push' not in header
     decision = next(line for line in filled.splitlines() if line.startswith('- Decision policy'))
     assert 'REWORK / QUALITY_RECAPTURE_REQUIRED' in decision
     assert 'n_human_reviewed=20' in decision and 'human_review_confirmed=true' in decision

@@ -4,7 +4,7 @@ Vũ Duy Khanh đã xác nhận trực tiếp xem đủ 20 frame và đồng ý 1
 
 ## Checklist theo hướng dẫn
 
-**Đã đạt 7/8 mục kỹ thuật và tài liệu.** Tag hiện tại chưa bao gồm bản mới; mốc tag theo giờ lớp và việc nộp remote chưa hoàn tất. [Nhật ký kiểm tra repo/report](2026-11-15-111055-kiem-tra-repo-va-report.md) ghi kết quả xác minh mới nhất.
+**Đã đạt 7/8 mục kỹ thuật và tài liệu.** Bản hiện hành dùng nhánh `main`; hai tag giữ mốc cũ. Mốc tag theo giờ lớp và việc gửi link qua cổng nộp chưa được xác nhận. [Nhật ký repo sạch và push GitHub](2026-11-15-111835-lam-sach-repo-va-push-github.md) ghi trạng thái đồng bộ; [kiểm tra report](2026-11-15-111055-kiem-tra-repo-va-report.md) ghi kết quả đối chiếu nội dung.
 
 - [x] Đã chọn T02, đọc đề và lập metric contract.
 - [x] `configs/lab.yaml`: T004, owner Vũ Duy Khanh, seed 42, xác nhận review hiện tại.
@@ -13,7 +13,7 @@ Vũ Duy Khanh đã xác nhận trực tiếp xem đủ 20 frame và đồng ý 1
 - [x] Có baseline/PoC metrics, ≥1 failure case, reviewer evidence, decision log. Các chỉ số tự kiểm chưa phải điểm chính thức.
 - [x] Có review trực tiếp 20/20 frame, người review Vũ Duy Khanh; audit mới có `human_confirmed: true`.
 - [x] Có report đúng cấu trúc và bảng đóng góp một thành viên; Git author khớp lịch sử.
-- [ ] Tag demo/final đúng mốc lớp và nộp remote: `demo-180m` → `1d2d4a6`, `final-24h` → `83ca5cc`; cả hai thiếu CVAT, review đã xác nhận và web hiện tại. Chưa xác minh đúng giờ lớp; chưa push/nộp.
+- [ ] Tag demo/final đúng mốc lớp và nộp remote: `demo-180m` → `1d2d4a6`, `final-24h` → `83ca5cc`; cả hai thiếu CVAT, review đã xác nhận và web hiện tại. Bản hiện hành dùng nhánh `main`; đúng giờ lớp và việc gửi link qua cổng nộp chưa được xác nhận.
 
 Hạn do học viên điền: **11:00 15/11/2026**, giờ Việt Nam. Nhóm thực tế một người; các hàng thành viên còn lại giữ theo template và ghi không áp dụng.
 
@@ -48,7 +48,7 @@ Nếu đổi quyết định sau này, dùng Review trên web để lưu phiên 
 ## Phần còn lại trước khi nộp
 
 1. Chốt phiên bản cần nộp và cách xử lý tag theo yêu cầu lớp: tag cục bộ hiện tại là mốc lịch sử, chưa bao gồm thay đổi mới. Không tự di chuyển tag hay sửa lịch sử.
-2. Push commit/tag theo yêu cầu lớp và gửi link qua cổng nộp. Chưa thực hiện thao tác này.
+2. Gửi link nhánh `main` và phiên bản được lớp chấp nhận qua cổng nộp. Push lên GitHub và gửi bài qua cổng lớp là hai bước riêng; [nhật ký đồng bộ GitHub](2026-11-15-111835-lam-sach-repo-va-push-github.md) ghi kết quả push.
 3. Trình bày theo [kịch bản showcase](../demo/SHOWCASE_SCRIPT.md); chưa khai báo buổi trình bày/debate đã diễn ra.
 
 Không có GT giảng viên trong repo. Nhãn eval nội bộ chưa được kiểm định độc lập toàn bộ. OOD gồm 10 ảnh synthetic T13, 0 positive, không đo recall OOD và không thay dữ liệu thực.
