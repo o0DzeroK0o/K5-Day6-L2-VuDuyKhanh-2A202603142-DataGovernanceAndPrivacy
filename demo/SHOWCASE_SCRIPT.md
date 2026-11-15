@@ -1,21 +1,22 @@
 # Kịch bản showcase 5 phút và debate
 
-Mở `t004_demo.html` offline. Phím mũi tên hoặc PageDown chuyển trang; có thể in từ trình duyệt. Mọi con số trên demo do script lấy từ metrics, không sửa tay.
+Mở `t004_demo.html` offline. Phím mũi tên hoặc PageDown chuyển trang. Bấm ảnh trên slide để mở screenshot gốc. Số liệu do script lấy từ evidence đã lưu.
 
-1. Trang 1 (30 giây): giới thiệu T004/T02, nhóm 1 người, pipeline ưu tiên 20 ảnh. Nêu ngay nhãn nội bộ do AI, chờ người học xác nhận.
-2. Trang 2 (60 giây): trình bày 5 bước load/process/rank/review/decide. Show manifest SHA256, split theo scene, protocol freeze trước eval. Baseline là Laplacian toàn ảnh; random chỉ demo wiring.
-3. Trang 3 (60 giây): giải thích TP/denominator và so baseline/PoC cùng budget. Bỏ ROI / dùng threshold chung làm giảm recall nội bộ. Bootstrap chứa 0 nên chưa suy rộng độ hơn kém.
-4. Trang 4 (60 giây): mở gallery, chỉ rõ glare nhẹ chưa cháy trắng nên bỏ sót. Cam_B/night là hard negatives. PoC cũng chọn một ảnh sạch do quota top20.
-5. Trang 5 (90 giây): chạy lệnh PoC thực tế, mở contact sheet; sửa một hành động hợp lý, export CSV, chạy lại và mở audit. Nếu chưa tự review thật, nói rõ đây là AI simulation; không dùng tên mình để giả đã xem. Kết thúc bằng HOLD/REWORK đúng policy, không ép GO.
+1. Trang 1 (50 giây): giới thiệu T004/T02 và Vũ Duy Khanh, 96 ảnh synthetic. Đi qua 5 bước pipeline. Chỉ task/job #17, 20 frame, completed trên ảnh CVAT. Giải thích split theo scene và freeze trước eval.
+2. Trang 2 (80 giây): chỉ ảnh mở lại frame 17 sau Save, `review_source=Vũ Duy Khanh` và nhận xét lỗi nén trong `review_note`. So gợi ý KEEP với tag RECAPTURE. Mở gallery để xem đủ 20 frame, gồm frame 18 KEEP và frame 19 override do quầng lóa. Score/ranking giữ nguyên.
+3. Trang 3 (50 giây): chỉ định dạng CVAT for images 1.1 và Requests Finished. Mở XML và mapping, đối chiếu 20 image/20 tag với 19 RECAPTURE + 1 KEEP. Nêu export đã kiểm khớp API sau lưu.
+4. Trang 4 (60 giây): giải thích Recall@20, TP/denominator, so baseline/PoC cùng budget. CI chênh lệch chứa 0. Chỉ glare nhẹ `img_03_2` còn bị bỏ sót; mở gallery failure cases khi cần giải thích night và cam_B. Các nhãn tự kiểm do AI quan sát, chưa là điểm chính thức.
+5. Trang 5 (60 giây): chỉ tổng 20 tag trong CVAT Info và các đường dẫn evidence. Nêu rõ trợ lý AI đã thao tác demo, tên thuộc tính theo yêu cầu học viên; review người thật còn chờ. Pipeline HOLD / HUMAN_REVIEW_REQUIRED, annotation CVAT chưa tự nhập vào pipeline. Mở hướng dẫn chạy nếu muốn trình diễn `make run OUT=out/demo-live` và contact sheet.
 
 ## Câu hỏi phản biện và cách trả lời
 
 - Vì sao không lấy random làm baseline chính? Đề T02 yêu cầu global Laplacian; random chỉ kiểm nối dây.
-- Có dùng GT để rank không? Pipeline chỉ đọc input và config; annotations chỉ vào evaluator/công cụ review sau inference. GT guard và test đảm bảo đường đọc tách biệt.
-- Vì sao score nhỏ hơn 0.5 vẫn vào queue? Budget là top20 tương đối; ngưỡng chỉ quyết định hành động gợi ý. Đây là hai khái niệm khác nhau.
-- Tại sao chưa nói người thật đã review? Agent không phải học viên. Cần học viên tự xem, export và xác nhận để audit mang tên thật.
-- PoC có chắc tốt hơn? Chỉ cải thiện quan sát trên 40 nhãn AI nội bộ; CI chênh lệch chứa 0, còn sai nhãn, cùng generator và domain shift.
-- 10 ảnh OOD có đủ không? Chỉ smoke test synthetic từ T13 256x144, tất cả clean theo AI; không có lỗi để đo recall và chưa thay cho dữ liệu thực.
-- Nếu gian lận score/ID review thì sao? Test hiện có từ chối stale score, ID lạ/trùng, reviewer trống, override không hợp lệ. Đầu vào thay hash và đường dẫn vượt root cũng bị từ chối.
+- Có dùng GT để rank không? Pipeline chỉ đọc input và config; annotations chỉ vào evaluator/công cụ review sau inference. GT guard và test kiểm soát đường đọc.
+- Vì sao score nhỏ hơn 0.5 vẫn vào queue? Budget là top20 tương đối; ngưỡng quyết định hành động gợi ý.
+- CVAT completed có nghĩa người học đã review? Đây là trạng thái job gán nhãn. Trong demo, trợ lý AI thao tác; `human_review_confirmed` vẫn false. Tên Vũ Duy Khanh trong thuộc tính được điền theo chỉ định, provenance được ghi riêng.
+- Có phải 19 RECAPTURE là metric chính thức? Đó là số quyết định trong demo CVAT. Metric dùng dữ liệu tự kiểm và evaluator đã freeze, không thay theo tag vừa nhập.
+- PoC có chắc tốt hơn? Chỉ cải thiện quan sát trên 40 nhãn nội bộ; CI chứa 0, còn sai nhãn và domain shift.
+- 10 ảnh OOD có đủ không? Chỉ smoke test synthetic từ T13 256×144, tất cả clean theo quan sát nội bộ; không có lỗi để đo recall và chưa thay cho dữ liệu thực.
+- Nếu sai ID/score review hoặc thiếu frame thì sao? Test pipeline từ chối ID lạ/trùng và stale score. Verifier CVAT kiểm đủ 20 frame, mapping, ảnh gốc, tag, thuộc tính, snapshot API và screenshot.
 
-Chưa diễn ra showcase/debate với người khác; đây là kịch bản luyện tập, không khai báo điểm bonus hay phản biện thực tế đã hoàn thành.
+Chưa diễn ra showcase/debate với người khác; đây là kịch bản luyện tập. Không khai báo bonus hoặc phản biện thực tế đã hoàn thành.

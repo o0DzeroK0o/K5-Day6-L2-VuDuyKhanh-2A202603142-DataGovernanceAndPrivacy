@@ -1,0 +1,523 @@
+{
+  "server_version": "2.82.1",
+  "task": {
+    "id": 17,
+    "name": "T004_T02_AI_DEMO",
+    "size": 20,
+    "status": "annotation"
+  },
+  "job": {
+    "id": 17,
+    "state": "completed",
+    "stage": "annotation",
+    "start_frame": 0,
+    "stop_frame": 19
+  },
+  "frames": [
+    {
+      "name": "01_img_13_3.jpg",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "name": "02_img_15_2.jpg",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "name": "03_img_19_3.jpg",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "name": "04_img_16_2.jpg",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "name": "05_img_17_2.jpg",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "name": "06_img_15_3.jpg",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "name": "07_img_23_3.jpg",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "name": "08_img_17_3.jpg",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "name": "09_img_05_3.jpg",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "name": "10_img_06_2.jpg",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "name": "11_img_05_2.jpg",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "name": "12_img_01_2.jpg",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "name": "13_img_23_2.jpg",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "name": "14_img_01_3.jpg",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "name": "15_img_13_2.jpg",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "name": "16_img_16_3.jpg",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "name": "17_img_03_3.jpg",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "name": "18_img_19_2.jpg",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "name": "19_img_23_1.jpg",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "name": "20_img_06_3.jpg",
+      "width": 320,
+      "height": 180
+    }
+  ],
+  "annotations": {
+    "version": 0,
+    "tags": [
+      {
+        "id": 1,
+        "label_id": 95,
+        "frame": 0,
+        "group": 0,
+        "source": "manual",
+        "attributes": [
+          {
+            "spec_id": 3,
+            "value": "Vũ Duy Khanh"
+          },
+          {
+            "spec_id": 4,
+            "value": "Mờ toàn ảnh, xe mất cạnh."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "label_id": 95,
+        "frame": 1,
+        "group": 0,
+        "source": "manual",
+        "attributes": [
+          {
+            "spec_id": 3,
+            "value": "Vũ Duy Khanh"
+          },
+          {
+            "spec_id": 4,
+            "value": "Mờ mạnh, xe và người mất chi tiết."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "label_id": 95,
+        "frame": 2,
+        "group": 0,
+        "source": "manual",
+        "attributes": [
+          {
+            "spec_id": 3,
+            "value": "Vũ Duy Khanh"
+          },
+          {
+            "spec_id": 4,
+            "value": "Cạnh xe và người bị nhòe trên toàn ảnh."
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "label_id": 95,
+        "frame": 3,
+        "group": 0,
+        "source": "manual",
+        "attributes": [
+          {
+            "spec_id": 3,
+            "value": "Vũ Duy Khanh"
+          },
+          {
+            "spec_id": 4,
+            "value": "Mờ toàn cục, chi tiết biển và cạnh xe khó đọc."
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "label_id": 95,
+        "frame": 4,
+        "group": 0,
+        "source": "manual",
+        "attributes": [
+          {
+            "spec_id": 3,
+            "value": "Vũ Duy Khanh"
+          },
+          {
+            "spec_id": 4,
+            "value": "Lóa trắng lớn che vùng giữa, mất chi tiết xe và cảnh."
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "label_id": 95,
+        "frame": 5,
+        "group": 0,
+        "source": "manual",
+        "attributes": [
+          {
+            "spec_id": 3,
+            "value": "Vũ Duy Khanh"
+          },
+          {
+            "spec_id": 4,
+            "value": "Thiếu sáng nặng, xe và người chìm trong vùng tối."
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "label_id": 95,
+        "frame": 6,
+        "group": 0,
+        "source": "manual",
+        "attributes": [
+          {
+            "spec_id": 3,
+            "value": "Vũ Duy Khanh"
+          },
+          {
+            "spec_id": 4,
+            "value": "Thiếu sáng nặng, mất chi tiết xe và vùng đường."
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "label_id": 95,
+        "frame": 7,
+        "group": 0,
+        "source": "manual",
+        "attributes": [
+          {
+            "spec_id": 3,
+            "value": "Vũ Duy Khanh"
+          },
+          {
+            "spec_id": 4,
+            "value": "Ảnh quá tối, người và xe khó phân biệt."
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "label_id": 95,
+        "frame": 8,
+        "group": 0,
+        "source": "manual",
+        "attributes": [
+          {
+            "spec_id": 3,
+            "value": "Vũ Duy Khanh"
+          },
+          {
+            "spec_id": 4,
+            "value": "Lóa cục bộ trên xe, vùng biển mất tương phản."
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "label_id": 95,
+        "frame": 9,
+        "group": 0,
+        "source": "manual",
+        "attributes": [
+          {
+            "spec_id": 3,
+            "value": "Vũ Duy Khanh"
+          },
+          {
+            "spec_id": 4,
+            "value": "Nén khối mạnh, cạnh xe và đèn bị vỡ."
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "label_id": 95,
+        "frame": 10,
+        "group": 0,
+        "source": "manual",
+        "attributes": [
+          {
+            "spec_id": 3,
+            "value": "Vũ Duy Khanh"
+          },
+          {
+            "spec_id": 4,
+            "value": "Nén tạo khối và viền giả, mất chi tiết biển."
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "label_id": 95,
+        "frame": 11,
+        "group": 0,
+        "source": "manual",
+        "attributes": [
+          {
+            "spec_id": 3,
+            "value": "Vũ Duy Khanh"
+          },
+          {
+            "spec_id": 4,
+            "value": "Thiếu sáng, xe và người bị mất chi tiết trong bóng tối."
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "label_id": 95,
+        "frame": 12,
+        "group": 0,
+        "source": "manual",
+        "attributes": [
+          {
+            "spec_id": 3,
+            "value": "Vũ Duy Khanh"
+          },
+          {
+            "spec_id": 4,
+            "value": "Nén tạo ô và viền răng cưa quanh xe, người."
+          }
+        ]
+      },
+      {
+        "id": 16,
+        "label_id": 95,
+        "frame": 13,
+        "group": 0,
+        "source": "manual",
+        "attributes": [
+          {
+            "spec_id": 3,
+            "value": "Vũ Duy Khanh"
+          },
+          {
+            "spec_id": 4,
+            "value": "Nén tạo khối, cạnh xe và các điểm sáng bị vỡ."
+          }
+        ]
+      },
+      {
+        "id": 17,
+        "label_id": 95,
+        "frame": 14,
+        "group": 0,
+        "source": "manual",
+        "attributes": [
+          {
+            "spec_id": 3,
+            "value": "Vũ Duy Khanh"
+          },
+          {
+            "spec_id": 4,
+            "value": "Nén khối, biển và cạnh xe có viền giả."
+          }
+        ]
+      },
+      {
+        "id": 18,
+        "label_id": 95,
+        "frame": 15,
+        "group": 0,
+        "source": "manual",
+        "attributes": [
+          {
+            "spec_id": 3,
+            "value": "Vũ Duy Khanh"
+          },
+          {
+            "spec_id": 4,
+            "value": "Nén nhẹ nhưng làm nhòe và răng cưa ở cạnh xe, biển."
+          }
+        ]
+      },
+      {
+        "id": 19,
+        "label_id": 95,
+        "frame": 16,
+        "group": 0,
+        "source": "manual",
+        "attributes": [
+          {
+            "spec_id": 3,
+            "value": "Vũ Duy Khanh"
+          },
+          {
+            "spec_id": 4,
+            "value": "Nén gây viền răng cưa và mất chi tiết vùng biển."
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "label_id": 95,
+        "frame": 17,
+        "group": 0,
+        "source": "manual",
+        "attributes": [
+          {
+            "spec_id": 3,
+            "value": "Vũ Duy Khanh"
+          },
+          {
+            "spec_id": 4,
+            "value": "Override KEEP: nén, mất chi tiết biển."
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "label_id": 94,
+        "frame": 18,
+        "group": 0,
+        "source": "manual",
+        "attributes": [
+          {
+            "spec_id": 1,
+            "value": "Vũ Duy Khanh"
+          },
+          {
+            "spec_id": 2,
+            "value": "Cạnh xe và người rõ. KEEP."
+          }
+        ]
+      },
+      {
+        "id": 20,
+        "label_id": 95,
+        "frame": 19,
+        "group": 0,
+        "source": "manual",
+        "attributes": [
+          {
+            "spec_id": 3,
+            "value": "Vũ Duy Khanh"
+          },
+          {
+            "spec_id": 4,
+            "value": "Override KEEP: quầng lóa giữa ảnh giảm tương phản xe và đường."
+          }
+        ]
+      }
+    ],
+    "shapes": [],
+    "tracks": [],
+    "intervals": []
+  },
+  "labels": [
+    {
+      "id": 94,
+      "name": "KEEP",
+      "type": "tag",
+      "attributes": [
+        {
+          "id": 1,
+          "name": "review_source",
+          "mutable": false,
+          "input_type": "text",
+          "default_value": "Vũ Duy Khanh",
+          "values": [
+            "Vũ Duy Khanh"
+          ]
+        },
+        {
+          "id": 2,
+          "name": "review_note",
+          "mutable": false,
+          "input_type": "text",
+          "default_value": "",
+          "values": [
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "id": 95,
+      "name": "RECAPTURE",
+      "type": "tag",
+      "attributes": [
+        {
+          "id": 3,
+          "name": "review_source",
+          "mutable": false,
+          "input_type": "text",
+          "default_value": "Vũ Duy Khanh",
+          "values": [
+            "Vũ Duy Khanh"
+          ]
+        },
+        {
+          "id": 4,
+          "name": "review_note",
+          "mutable": false,
+          "input_type": "text",
+          "default_value": "",
+          "values": [
+            ""
+          ]
+        }
+      ]
+    }
+  ],
+  "captured_at": "2026-11-15T02:07:06.636Z"
+}

@@ -9,3 +9,5 @@
 - [Đánh dấu checklist đã đạt](2026-11-14-165400-danh-dau-checklist.md)
 - [Hướng dẫn chạy demo T004](HUONG_DAN_CHAY_DEMO_T004.md)
 - [Nhật ký kiểm tra cách chạy demo](2026-11-14-173843-huong-dan-chay-demo.md)
+- [Nhật ký hoàn tất demo CVAT local 20 frame](2026-11-15-081000-bo-sung-demo-cvat-local.md)
+- [Hướng dẫn và bằng chứng CVAT local 20/20 frame](HUONG_DAN_DEMO_CVAT_LOCAL.md)

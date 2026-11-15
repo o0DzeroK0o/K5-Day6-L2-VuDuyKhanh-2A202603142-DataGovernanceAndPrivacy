@@ -14,6 +14,7 @@ from src.common.io import read_json, sha256_file, write_json
 from src.common.manifest import verify_manifest
 from src.metrics.tracks import eval_t02
 from tools.t02_fill_report import TEMPLATE, validate_structure
+from tools.t02_cvat_demo import verify as verify_cvat_demo
 
 
 def evidence_files():
@@ -67,6 +68,8 @@ def verify_evidence():
     contribution=pd.read_csv('reports/team_contributions.csv')
     if len(contribution)!=1 or contribution.git_author_name.isna().any() or contribution.commit_shas.isna().any():
         problems.append('one-member contribution evidence incomplete')
+    try:verify_cvat_demo()
+    except (ValueError, KeyError, OSError) as e:problems.append(f'CVAT demo: {e}')
     manifest=Path('reports/evidence_manifest.json')
     if manifest.exists():
         expected=read_json(manifest)['files']
@@ -82,7 +85,7 @@ def main(argv=None):
     if a.write_manifest:write_evidence_manifest()
     problems=verify_evidence()
     for p in problems:print('FAIL',p)
-    if not problems:print('PASS: frozen protocol, evaluator metrics, immutable scores, report template, links, contributions and evidence hashes')
+    if not problems:print('PASS: frozen protocol, evaluator metrics, immutable scores, report template, links, contributions, 20 CVAT frames and evidence hashes')
     print('Human review, official GT, classroom timing and remote submission remain unverified; see docs/HUONG_DAN_HOAN_TAT_T004.md')
     return int(bool(problems))
 

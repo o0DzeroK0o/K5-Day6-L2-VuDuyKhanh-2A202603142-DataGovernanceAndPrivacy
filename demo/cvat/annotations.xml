@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='utf-8'?>
+<annotations>
+  <version>1.1</version>
+  <meta>
+    <job>
+      <id>17</id>
+      <size>20</size>
+      <mode>annotation</mode>
+      <overlap>0</overlap>
+      <bugtracker />
+      <created>2026-11-15 01:14:11.849464+00:00</created>
+      <updated>2026-11-15 02:02:43.867595+00:00</updated>
+      <subset>default</subset>
+      <start_frame>0</start_frame>
+      <stop_frame>19</stop_frame>
+      <frame_filter />
+      <segments>
+        <segment>
+          <id>17</id>
+          <start>0</start>
+          <stop>19</stop>
+          <url>http://localhost:8080/api/jobs/17/dataset/export/api/jobs/17</url>
+        </segment>
+      </segments>
+      <labels>
+        <label>
+          <name>KEEP</name>
+          <color>#f31472</color>
+          <type>tag</type>
+          <attributes>
+            <attribute>
+              <name>review_source</name>
+              <mutable>False</mutable>
+              <input_type>text</input_type>
+              <default_value>Vũ Duy Khanh</default_value>
+              <values>Vũ Duy Khanh</values>
+            </attribute>
+            <attribute>
+              <name>review_note</name>
+              <mutable>False</mutable>
+              <input_type>text</input_type>
+              <default_value />
+              <values />
+            </attribute>
+          </attributes>
+        </label>
+        <label>
+          <name>RECAPTURE</name>
+          <color>#cdd8cc</color>
+          <type>tag</type>
+          <attributes>
+            <attribute>
+              <name>review_source</name>
+              <mutable>False</mutable>
+              <input_type>text</input_type>
+              <default_value>Vũ Duy Khanh</default_value>
+              <values>Vũ Duy Khanh</values>
+            </attribute>
+            <attribute>
+              <name>review_note</name>
+              <mutable>False</mutable>
+              <input_type>text</input_type>
+              <default_value />
+              <values />
+            </attribute>
+          </attributes>
+        </label>
+      </labels>
+    </job>
+    <dumped>2026-11-15 02:06:52.155802+00:00</dumped>
+  </meta>
+  <image id="0" name="01_img_13_3.jpg" width="320" height="180">
+    <tag label="RECAPTURE" source="manual">
+      <attribute name="review_source">Vũ Duy Khanh</attribute>
+      <attribute name="review_note">Mờ toàn ảnh, xe mất cạnh.</attribute>
+    </tag>
+  </image>
+  <image id="1" name="02_img_15_2.jpg" width="320" height="180">
+    <tag label="RECAPTURE" source="manual">
+      <attribute name="review_source">Vũ Duy Khanh</attribute>
+      <attribute name="review_note">Mờ mạnh, xe và người mất chi tiết.</attribute>
+    </tag>
+  </image>
+  <image id="2" name="03_img_19_3.jpg" width="320" height="180">
+    <tag label="RECAPTURE" source="manual">
+      <attribute name="review_source">Vũ Duy Khanh</attribute>
+      <attribute name="review_note">Cạnh xe và người bị nhòe trên toàn ảnh.</attribute>
+    </tag>
+  </image>
+  <image id="3" name="04_img_16_2.jpg" width="320" height="180">
+    <tag label="RECAPTURE" source="manual">
+      <attribute name="review_source">Vũ Duy Khanh</attribute>
+      <attribute name="review_note">Mờ toàn cục, chi tiết biển và cạnh xe khó đọc.</attribute>
+    </tag>
+  </image>
+  <image id="4" name="05_img_17_2.jpg" width="320" height="180">
+    <tag label="RECAPTURE" source="manual">
+      <attribute name="review_source">Vũ Duy Khanh</attribute>
+      <attribute name="review_note">Lóa trắng lớn che vùng giữa, mất chi tiết xe và cảnh.</attribute>
+    </tag>
+  </image>
+  <image id="5" name="06_img_15_3.jpg" width="320" height="180">
+    <tag label="RECAPTURE" source="manual">
+      <attribute name="review_source">Vũ Duy Khanh</attribute>
+      <attribute name="review_note">Thiếu sáng nặng, xe và người chìm trong vùng tối.</attribute>
+    </tag>
+  </image>
+  <image id="6" name="07_img_23_3.jpg" width="320" height="180">
+    <tag label="RECAPTURE" source="manual">
+      <attribute name="review_source">Vũ Duy Khanh</attribute>
+      <attribute name="review_note">Thiếu sáng nặng, mất chi tiết xe và vùng đường.</attribute>
+    </tag>
+  </image>
+  <image id="7" name="08_img_17_3.jpg" width="320" height="180">
+    <tag label="RECAPTURE" source="manual">
+      <attribute name="review_source">Vũ Duy Khanh</attribute>
+      <attribute name="review_note">Ảnh quá tối, người và xe khó phân biệt.</attribute>
+    </tag>
+  </image>
+  <image id="8" name="09_img_05_3.jpg" width="320" height="180">
+    <tag label="RECAPTURE" source="manual">
+      <attribute name="review_source">Vũ Duy Khanh</attribute>
+      <attribute name="review_note">Lóa cục bộ trên xe, vùng biển mất tương phản.</attribute>
+    </tag>
+  </image>
+  <image id="9" name="10_img_06_2.jpg" width="320" height="180">
+    <tag label="RECAPTURE" source="manual">
+      <attribute name="review_source">Vũ Duy Khanh</attribute>
+      <attribute name="review_note">Nén khối mạnh, cạnh xe và đèn bị vỡ.</attribute>
+    </tag>
+  </image>
+  <image id="10" name="11_img_05_2.jpg" width="320" height="180">
+    <tag label="RECAPTURE" source="manual">
+      <attribute name="review_source">Vũ Duy Khanh</attribute>
+      <attribute name="review_note">Nén tạo khối và viền giả, mất chi tiết biển.</attribute>
+    </tag>
+  </image>
+  <image id="11" name="12_img_01_2.jpg" width="320" height="180">
+    <tag label="RECAPTURE" source="manual">
+      <attribute name="review_source">Vũ Duy Khanh</attribute>
+      <attribute name="review_note">Thiếu sáng, xe và người bị mất chi tiết trong bóng tối.</attribute>
+    </tag>
+  </image>
+  <image id="12" name="13_img_23_2.jpg" width="320" height="180">
+    <tag label="RECAPTURE" source="manual">
+      <attribute name="review_source">Vũ Duy Khanh</attribute>
+      <attribute name="review_note">Nén tạo ô và viền răng cưa quanh xe, người.</attribute>
+    </tag>
+  </image>
+  <image id="13" name="14_img_01_3.jpg" width="320" height="180">
+    <tag label="RECAPTURE" source="manual">
+      <attribute name="review_source">Vũ Duy Khanh</attribute>
+      <attribute name="review_note">Nén tạo khối, cạnh xe và các điểm sáng bị vỡ.</attribute>
+    </tag>
+  </image>
+  <image id="14" name="15_img_13_2.jpg" width="320" height="180">
+    <tag label="RECAPTURE" source="manual">
+      <attribute name="review_source">Vũ Duy Khanh</attribute>
+      <attribute name="review_note">Nén khối, biển và cạnh xe có viền giả.</attribute>
+    </tag>
+  </image>
+  <image id="15" name="16_img_16_3.jpg" width="320" height="180">
+    <tag label="RECAPTURE" source="manual">
+      <attribute name="review_source">Vũ Duy Khanh</attribute>
+      <attribute name="review_note">Nén nhẹ nhưng làm nhòe và răng cưa ở cạnh xe, biển.</attribute>
+    </tag>
+  </image>
+  <image id="16" name="17_img_03_3.jpg" width="320" height="180">
+    <tag label="RECAPTURE" source="manual">
+      <attribute name="review_source">Vũ Duy Khanh</attribute>
+      <attribute name="review_note">Nén gây viền răng cưa và mất chi tiết vùng biển.</attribute>
+    </tag>
+  </image>
+  <image id="17" name="18_img_19_2.jpg" width="320" height="180">
+    <tag label="RECAPTURE" source="manual">
+      <attribute name="review_source">Vũ Duy Khanh</attribute>
+      <attribute name="review_note">Override KEEP: nén, mất chi tiết biển.</attribute>
+    </tag>
+  </image>
+  <image id="18" name="19_img_23_1.jpg" width="320" height="180">
+    <tag label="KEEP" source="manual">
+      <attribute name="review_source">Vũ Duy Khanh</attribute>
+      <attribute name="review_note">Cạnh xe và người rõ. KEEP.</attribute>
+    </tag>
+  </image>
+  <image id="19" name="20_img_06_3.jpg" width="320" height="180">
+    <tag label="RECAPTURE" source="manual">
+      <attribute name="review_source">Vũ Duy Khanh</attribute>
+      <attribute name="review_note">Override KEEP: quầng lóa giữa ảnh giảm tương phản xe và đường.</attribute>
+    </tag>
+  </image>
+</annotations>

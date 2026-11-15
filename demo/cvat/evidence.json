@@ -1,0 +1,170 @@
+{
+  "cvat_url": "http://localhost:8080",
+  "server_version": "2.82.1",
+  "task_id": 17,
+  "task_name": "T004_T02_AI_DEMO",
+  "job_id": 17,
+  "job_state": "completed",
+  "captured_at": "2026-11-15T02:07:06.636Z",
+  "frame_count": 20,
+  "review_source": "Vũ Duy Khanh",
+  "operator": "AI:Codex",
+  "human_review_confirmed": false,
+  "review_source_note": "Name entered at the user's explicit request; not human sign-off.",
+  "export_format": "CVAT for images 1.1",
+  "pipeline_imported": false,
+  "export_zip_sha256": "5b635d5f9df4ef622947fe2b92d0619e03509b432043047a310b93556b708cd5",
+  "original_xml_sha256": "a0a86344985275d94a46b48796a71a2504fbf676917f4f55eae836dbada5ab97",
+  "annotation_sha256": "45d767672403de1b5842a121c01361c324ea2fb13050ea5d56f4138404235008",
+  "queue_sha256": "8973fdb6e27bebd86c4fcee46d7145b97bed24d0361b9d49ace450032adb719c",
+  "sanitized_metadata": [
+    "meta/job/owner",
+    "meta/job/assignee"
+  ],
+  "action_counts": {
+    "RECAPTURE": 19,
+    "KEEP": 1
+  },
+  "frames": [
+    {
+      "frame": 0,
+      "filename": "01_img_13_3.jpg",
+      "action": "RECAPTURE",
+      "review_source": "Vũ Duy Khanh",
+      "review_note": "Mờ toàn ảnh, xe mất cạnh."
+    },
+    {
+      "frame": 1,
+      "filename": "02_img_15_2.jpg",
+      "action": "RECAPTURE",
+      "review_source": "Vũ Duy Khanh",
+      "review_note": "Mờ mạnh, xe và người mất chi tiết."
+    },
+    {
+      "frame": 2,
+      "filename": "03_img_19_3.jpg",
+      "action": "RECAPTURE",
+      "review_source": "Vũ Duy Khanh",
+      "review_note": "Cạnh xe và người bị nhòe trên toàn ảnh."
+    },
+    {
+      "frame": 3,
+      "filename": "04_img_16_2.jpg",
+      "action": "RECAPTURE",
+      "review_source": "Vũ Duy Khanh",
+      "review_note": "Mờ toàn cục, chi tiết biển và cạnh xe khó đọc."
+    },
+    {
+      "frame": 4,
+      "filename": "05_img_17_2.jpg",
+      "action": "RECAPTURE",
+      "review_source": "Vũ Duy Khanh",
+      "review_note": "Lóa trắng lớn che vùng giữa, mất chi tiết xe và cảnh."
+    },
+    {
+      "frame": 5,
+      "filename": "06_img_15_3.jpg",
+      "action": "RECAPTURE",
+      "review_source": "Vũ Duy Khanh",
+      "review_note": "Thiếu sáng nặng, xe và người chìm trong vùng tối."
+    },
+    {
+      "frame": 6,
+      "filename": "07_img_23_3.jpg",
+      "action": "RECAPTURE",
+      "review_source": "Vũ Duy Khanh",
+      "review_note": "Thiếu sáng nặng, mất chi tiết xe và vùng đường."
+    },
+    {
+      "frame": 7,
+      "filename": "08_img_17_3.jpg",
+      "action": "RECAPTURE",
+      "review_source": "Vũ Duy Khanh",
+      "review_note": "Ảnh quá tối, người và xe khó phân biệt."
+    },
+    {
+      "frame": 8,
+      "filename": "09_img_05_3.jpg",
+      "action": "RECAPTURE",
+      "review_source": "Vũ Duy Khanh",
+      "review_note": "Lóa cục bộ trên xe, vùng biển mất tương phản."
+    },
+    {
+      "frame": 9,
+      "filename": "10_img_06_2.jpg",
+      "action": "RECAPTURE",
+      "review_source": "Vũ Duy Khanh",
+      "review_note": "Nén khối mạnh, cạnh xe và đèn bị vỡ."
+    },
+    {
+      "frame": 10,
+      "filename": "11_img_05_2.jpg",
+      "action": "RECAPTURE",
+      "review_source": "Vũ Duy Khanh",
+      "review_note": "Nén tạo khối và viền giả, mất chi tiết biển."
+    },
+    {
+      "frame": 11,
+      "filename": "12_img_01_2.jpg",
+      "action": "RECAPTURE",
+      "review_source": "Vũ Duy Khanh",
+      "review_note": "Thiếu sáng, xe và người bị mất chi tiết trong bóng tối."
+    },
+    {
+      "frame": 12,
+      "filename": "13_img_23_2.jpg",
+      "action": "RECAPTURE",
+      "review_source": "Vũ Duy Khanh",
+      "review_note": "Nén tạo ô và viền răng cưa quanh xe, người."
+    },
+    {
+      "frame": 13,
+      "filename": "14_img_01_3.jpg",
+      "action": "RECAPTURE",
+      "review_source": "Vũ Duy Khanh",
+      "review_note": "Nén tạo khối, cạnh xe và các điểm sáng bị vỡ."
+    },
+    {
+      "frame": 14,
+      "filename": "15_img_13_2.jpg",
+      "action": "RECAPTURE",
+      "review_source": "Vũ Duy Khanh",
+      "review_note": "Nén khối, biển và cạnh xe có viền giả."
+    },
+    {
+      "frame": 15,
+      "filename": "16_img_16_3.jpg",
+      "action": "RECAPTURE",
+      "review_source": "Vũ Duy Khanh",
+      "review_note": "Nén nhẹ nhưng làm nhòe và răng cưa ở cạnh xe, biển."
+    },
+    {
+      "frame": 16,
+      "filename": "17_img_03_3.jpg",
+      "action": "RECAPTURE",
+      "review_source": "Vũ Duy Khanh",
+      "review_note": "Nén gây viền răng cưa và mất chi tiết vùng biển."
+    },
+    {
+      "frame": 17,
+      "filename": "18_img_19_2.jpg",
+      "action": "RECAPTURE",
+      "review_source": "Vũ Duy Khanh",
+      "review_note": "Override KEEP: nén, mất chi tiết biển."
+    },
+    {
+      "frame": 18,
+      "filename": "19_img_23_1.jpg",
+      "action": "KEEP",
+      "review_source": "Vũ Duy Khanh",
+      "review_note": "Cạnh xe và người rõ. KEEP."
+    },
+    {
+      "frame": 19,
+      "filename": "20_img_06_3.jpg",
+      "action": "RECAPTURE",
+      "review_source": "Vũ Duy Khanh",
+      "review_note": "Override KEEP: quầng lóa giữa ảnh giảm tương phản xe và đường."
+    }
+  ]
+}

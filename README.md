@@ -1,12 +1,14 @@
 # Day 06 · Data Lab · Field-to-Release PoC (AI20K · Data Track)
 
-> **Bài làm T004 · T02 · 1 thành viên:** Vũ Duy Khánh (suy từ tên dự án, cần xác nhận).
+> **Bài làm T004 · T02 · 1 thành viên:** Vũ Duy Khanh (tên do học viên xác nhận).
 > [Report đã điền](reports/group_report.md) · [Metric contract](reports/metric_contract.md) · [Kết quả do script sinh](reports/table1_baseline_vs_poc.md) · [Demo 5 trang offline](demo/t004_demo.html) · [Checklist và thao tác còn lại](docs/HUONG_DAN_HOAN_TAT_T004.md).
 >
 > Repo: [o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy](https://github.com/o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy).
 > Tag cục bộ: `demo-180m`, `final-24h` (tạo theo thời điểm làm bài thực tế, không xác nhận mốc lớp). [Demo trên remote sau khi push](https://github.com/o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy/tree/demo-180m) · [Final trên remote sau khi push](https://github.com/o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy/tree/final-24h). Agent chưa push.
 >
 > **Trạng thái trung thực:** pipeline và tự kiểm đã chạy; số liệu dùng nhãn quan sát AI nội bộ, không phải GT giảng viên. Có review AI và audit, còn chờ review người thật. Batch **HOLD**. Chi tiết/bằng chứng: `reports/analysis_summary.json` và `reports/evidence/`.
+>
+> **Demo CVAT local đã hoàn tất 20/20 frame:** task/job #17, 19 RECAPTURE và 1 KEEP, đã Save, mở lại kiểm tra và export XML. `review_source=Vũ Duy Khanh`; `review_note` chỉ ghi nhận xét chất lượng. [5 slides có ảnh CVAT thật](demo/t004_demo.html) · [Ảnh chụp đủ 20 frame](demo/cvat/index.html) · [XML export](demo/cvat/annotations.xml) · [Hướng dẫn và nguồn bằng chứng](docs/HUONG_DAN_DEMO_CVAT_LOCAL.md). Demo do trợ lý AI thao tác, xác nhận review của người học còn chờ; pipeline giữ HOLD.
 
 ```bash
 # Python 3.12, đã cài .venv; activate để dùng đúng python của bài:
