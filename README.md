@@ -4,18 +4,30 @@
 > [Report đã điền](reports/group_report.md) · [Metric contract](reports/metric_contract.md) · [Kết quả do script sinh](reports/table1_baseline_vs_poc.md) · [Demo 5 trang offline](demo/t004_demo.html) · [Checklist và thao tác còn lại](docs/HUONG_DAN_HOAN_TAT_T004.md).
 >
 > Repo: [o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy](https://github.com/o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy).
-> Tag cục bộ: `demo-180m`, `final-24h` (tạo theo thời điểm làm bài thực tế, không xác nhận mốc lớp). [Demo trên remote sau khi push](https://github.com/o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy/tree/demo-180m) · [Final trên remote sau khi push](https://github.com/o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy/tree/final-24h). Agent chưa push.
+> Tag cục bộ: `demo-180m`, `final-24h` (tạo theo thời điểm làm bài thực tế, không xác nhận mốc lớp). [Demo trên remote sau khi push](https://github.com/o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy/tree/demo-180m) · [Final trên remote sau khi push](https://github.com/o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy/tree/final-24h). Chưa push.
 >
-> **Trạng thái trung thực:** pipeline và tự kiểm đã chạy; số liệu dùng nhãn quan sát AI nội bộ, không phải GT giảng viên. Có review AI và audit, còn chờ review người thật. Batch **HOLD**. Chi tiết/bằng chứng: `reports/analysis_summary.json` và `reports/evidence/`.
+> **Đã xác nhận review trực tiếp:** Vũ Duy Khanh đã xem đủ 20 frame, đồng ý **19 RECAPTURE / 1 KEEP** (`img_23_1`) và hai override `img_19_2`, `img_06_3`. Pipeline: **REWORK / QUALITY_RECAPTURE_REQUIRED**, `n_human_reviewed=20`. [Xác nhận](reports/human_review_confirmation.json) · [Decision hiện tại](reports/evidence/human_review/decision.json).
 >
-> **Demo CVAT local đã hoàn tất 20/20 frame:** task/job #17, 19 RECAPTURE và 1 KEEP, đã Save, mở lại kiểm tra và export XML. `review_source=Vũ Duy Khanh`; `review_note` chỉ ghi nhận xét chất lượng. [5 slides có ảnh CVAT thật](demo/t004_demo.html) · [Ảnh chụp đủ 20 frame](demo/cvat/index.html) · [XML export](demo/cvat/annotations.xml) · [Hướng dẫn và nguồn bằng chứng](docs/HUONG_DAN_DEMO_CVAT_LOCAL.md). Đã nhập đủ 20 quyết định vào pipeline và cập nhật audit; [biên nhận nhập CVAT](reports/cvat_review_import.json). Demo do trợ lý AI thao tác, xác nhận review của người học còn chờ; pipeline giữ HOLD.
+> **Demo mới:** [5 slides offline](demo/t004_demo.html) · [Ảnh 5 slide](demo/slides/) · [Công cụ review](reports/contact_sheet.html) · [Ảnh thao tác UI](demo/ui/) · [20 frame CVAT local](demo/cvat/index.html) · [XML export](demo/cvat/annotations.xml). Bản trình chiếu cũ và preview cũ đã được thay thế. Ảnh CVAT gốc được giữ để đối chiếu.
+>
+> Số liệu dùng nhãn quan sát nội bộ, chưa phải GT giảng viên. Xác nhận 20 frame không thay thế kiểm định toàn bộ 40 nhãn eval. [Nguồn nhãn](reports/annotations/README.md) · [Hướng dẫn chạy](docs/HUONG_DAN_CHAY_DEMO_T004.md).
+
+Mở ngay giao diện và slides trên máy này:
+
+```bash
+make demo
+omarchy launch browser "file://$PWD/reports/contact_sheet.html"
+omarchy launch browser "file://$PWD/demo/t004_demo.html"
+```
+
+Máy không có Omarchy dùng `xdg-open reports/contact_sheet.html` và `xdg-open demo/t004_demo.html`.
 
 ```bash
 # Python 3.12, đã cài .venv; activate để dùng đúng python của bài:
 source .venv/bin/activate
 # 1 lệnh run (không tải model hay dữ liệu)
 python -m src.main --input fixtures/t02_raw_qc --config configs/lab.yaml --output out/poc --offline --seed 42
-# 1 lệnh evaluate nội bộ; nhãn AI đã ghi rõ nguồn, chưa được người thật xác nhận
+# 1 lệnh evaluate nội bộ; nguồn nhãn trong reports/annotations/README.md
 python -m src.evaluate --track t02 --gt reports/annotations/internal_eval_labels.csv --pred out/poc/ranked_review.csv --out out/metrics_poc_internal.json
 # 1 lệnh tests
 python -m pytest -q

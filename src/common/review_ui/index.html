@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>__TITLE__</title><style>__CSS__</style></head><body>
+<aside class="sidebar"><a class="brand" href="#workspace"><span class="brand-icon">Q</span>Quality Review</a>
+<p class="side-kicker">KHÔNG GIAN KIỂM DUYỆT</p><a class="nav active" href="#workspace">Danh sách review <span>__N__</span></a>
+<div class="pipeline"><p>Quy trình dữ liệu</p><ol><li>Load <small>Ảnh &amp; metadata</small></li><li>Process <small>Tín hiệu chất lượng</small></li><li>Rank <small>Ưu tiên theo điểm</small></li><li class="current">Review <small>Quan sát &amp; quyết định</small></li><li>Decide <small>Chạy lại pipeline từ CSV</small></li></ol></div>
+<div class="side-bottom"><span class="dot"></span> Hoạt động offline<p>Ảnh và bản nháp ở trên máy.<br>Xuất CSV để lưu kết quả review.</p></div></aside>
+<main id="workspace"><header><div><p class="eyebrow">DATA QUALITY / REVIEW WORKSPACE</p><h1>Kiểm duyệt chất lượng ảnh</h1><p class="subtitle">__TITLE__</p></div><span class="offline">● Offline</span></header>
+<section class="stats" aria-label="Tiến độ review"><div><span>Tổng frame</span><strong>__N__</strong></div><div><span>Đã quyết định</span><strong id="done-count">0</strong></div><div><span>Đã sửa đề nghị</span><strong id="edit-count">0</strong></div><div><span>Cần xem tiếp</span><strong id="pending-count">__N__</strong></div></section>
+<section class="review-bar" aria-label="Người review và xuất dữ liệu"><div class="owner"><label for="reviewer">Người review</label><input id="reviewer" placeholder="Nhập họ và tên" autocomplete="name"></div><div class="review-progress"><span id="progress-text">0 / __N__ đã quyết định</span><progress id="progress" max="__N__" value="0"></progress><small id="draft-status">Nháp tự lưu trên trình duyệt</small></div><div class="actions"><button id="import" class="secondary" type="button">Nhập CSV</button><input id="csv-file" type="file" accept=".csv,text/csv" hidden><button id="export" class="primary" type="button">Xuất CSV <span aria-hidden="true">↗</span></button></div></section>
+<p id="message" role="status" aria-live="polite"></p>
+<div class="toolbar"><div><h2>Danh sách ảnh</h2><span id="visible-count">__N__ frame</span></div><label class="search"><span class="sr-only">Tìm ảnh, lý do hoặc nhóm</span><input id="search" type="search" placeholder="Tìm mã ảnh, lý do, nhóm…"></label><label><span class="sr-only">Lọc trạng thái review</span><select id="filter"><option value="all">Tất cả trạng thái</option><option value="pending">Cần xem tiếp</option><option value="done">Đã quyết định</option><option value="edit">Đã sửa đề nghị</option><option value="escalate">Cần xác minh</option></select></label><button type="button" id="next" class="secondary">Đến ảnh chưa xong ↓</button></div>
+<p class="help">Bấm ảnh để phóng to. Đồng ý giữ hành động đề nghị; sửa hoặc từ chối cần giá trị thay thế và lý do.</p>
+<div class="grid">__CARDS__</div><p id="empty" hidden>Không có frame phù hợp. Thử đổi bộ lọc hoặc từ khóa.</p>
+<footer><span>CSV giữ nguyên điểm, thứ tự và thông tin gốc của queue.</span><button type="button" id="reset" class="text-button">Bỏ bản nháp, về dữ liệu gốc</button></footer>
+</main><dialog id="image-dialog"><button type="button" id="close-image" class="secondary">Đóng · Esc</button><img id="large-image" alt=""><p id="image-caption"></p></dialog>
+<script id="queue-data" type="application/json">__ROWS__</script><script>const DRAFT_KEY = "review-v2-__KEY__";
+__JS__</script></body></html>

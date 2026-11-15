@@ -36,8 +36,14 @@ def verify_evidence():
     problems=[]
     freeze=read_json('reports/protocol_freeze.json')
     for name,digest in freeze['hashes'].items():
-        target='reports/protocol_config.yaml' if name=='configs/lab.yaml' else name
+        target={'configs/lab.yaml':'reports/protocol_config.yaml', 'reports/metric_contract.md':'reports/protocol_metric_contract.md'}.get(name,name)
         if sha256_file(target)!=digest:problems.append(f'frozen file changed: {name}')
+    def contract_rows(path):
+        return [[c.strip() for c in line.split('|')] for line in Path(path).read_text().splitlines()
+                if line.startswith('|') and 'Ngày giờ chốt + người chốt' not in line
+                and not set(line.replace('|','').replace(' ','')) <= {'-'}]
+    if contract_rows('reports/metric_contract.md') != contract_rows('reports/protocol_metric_contract.md'):
+        problems.append('current metric contract changed technical declarations')
     cfg=yaml.safe_load(Path('configs/lab.yaml').read_text())
     frozen=yaml.safe_load(Path('reports/protocol_config.yaml').read_text())
     if cfg['params']!=frozen['params']:problems.append('frozen scoring params changed')
@@ -89,7 +95,7 @@ def main(argv=None):
     problems=verify_evidence()
     for p in problems:print('FAIL',p)
     if not problems:print('PASS: frozen protocol, evaluator metrics, immutable scores, report template, links, contributions, 20 CVAT frames and evidence hashes')
-    print('Human review, official GT, classroom timing and remote submission remain unverified; see docs/HUONG_DAN_HOAN_TAT_T004.md')
+    print('Human review confirmed for 20 queue frames. Official GT, classroom tag timing and remote submission remain unverified.')
     return int(bool(problems))
 
 

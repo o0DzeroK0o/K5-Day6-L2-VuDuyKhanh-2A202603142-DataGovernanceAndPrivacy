@@ -1,6 +1,6 @@
 # T004: one member. Name confirmed by the user; human review sign-off is separate.
 group_id: T004
-owner: "Vũ Duy Khanh — T004 / reviewer (chờ xác nhận người thật)"
+owner: "Vũ Duy Khanh — T004 / reviewer"
 track_config: tracks/t02.yaml
 track: t02
 input: fixtures/t02_raw_qc
@@ -9,7 +9,7 @@ seed: 42
 offline: true
 strict_provenance: true
 # Set true ONLY after a real person reviews and signs review_queue_reviewed.csv.
-human_review_confirmed: false
+human_review_confirmed: true
 # Frozen from visual inspection of 56 dev images; no eval images/labels used.
 params:
   budget: 20

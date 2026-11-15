@@ -4,19 +4,21 @@
 
 Ngày 2026-11-15, **đã xem, gán tag và lưu đủ 20/20 frame**, từ frame 0 đến 19, trên CVAT local **2.82.1** tại `http://localhost:8080`.
 
-- Task **#17**: `T004_T02_AI_DEMO`, job **#17**, trạng thái **completed**.
+- Task **#17**, job **#17**, trạng thái **completed**.
 - **19 RECAPTURE / 1 KEEP**. Frame 18, rank 19, `img_23_1` là KEEP.
 - Hai thay đổi so với gợi ý KEEP của queue: `img_19_2` và `img_06_3` thành RECAPTURE.
-- Cả 20 tag có `review_source = Vũ Duy Khanh`; `review_note` là nhận xét chất lượng ảnh, không chứa “AI”. Default của cả hai label cũng dùng đúng tên đã xác nhận.
+- Cả 20 tag có `review_source = Vũ Duy Khanh`; `review_note` chỉ ghi nhận xét chất lượng ảnh. Default của cả hai label cũng dùng đúng tên đã xác nhận.
 - Đã tải export **CVAT for images 1.1**, kiểm 20 ảnh/20 tag, tên ảnh và toàn bộ thuộc tính khớp dữ liệu API sau Save. Job đã được Finish khi đủ 20 frame.
 
 [Mở 5 slides offline](../demo/t004_demo.html) · [Xem đủ 20 ảnh chụp](../demo/cvat/index.html) · [XML export](../demo/cvat/annotations.xml) · [Metadata kiểm chứng](../demo/cvat/evidence.json) · [Mở job local](http://localhost:8080/tasks/17/jobs/17).
 
 ## Nguồn và ý nghĩa của thuộc tính
 
-Tên **Vũ Duy Khanh** được điền theo chỉ định rõ của người dùng. Người thao tác thực tế là trợ lý AI qua Playwright/Chromium, được người dùng cho phép sau khi công cụ Computer Use mất kết nối. Provenance này nằm riêng trong `evidence.json` (`operator: AI:Codex`, `human_review_confirmed: false`) và tài liệu này. Tên trong `review_source` không tự xác nhận học viên đã trực tiếp review.
+**Vũ Duy Khanh xác nhận đã trực tiếp xem đủ 20 frame**, đồng ý 19 RECAPTURE / 1 KEEP và hai override. [Bản xác nhận hiện tại](../reports/human_review_confirmation.json) ghi nguyên văn câu hỏi/câu trả lời, thời điểm và checksum.
 
-`completed` là trạng thái gán nhãn trong CVAT. Cột “Manually” của Info đếm tag tạo qua giao diện, không phải chứng nhận reviewer là người thật. Pipeline vẫn **HOLD / HUMAN_REVIEW_REQUIRED**. Đã nhập đủ **20 quyết định CVAT vào pipeline**, cập nhật `reports/review_queue.csv` và audit. `review_note` giữ nguyên nhận xét CVAT; `reviewer=AI:Codex` ghi người thao tác thực tế riêng với tên hiển thị `review_source`. [Biên nhận nhập](../reports/cvat_review_import.json) ghi hai override, checksum XML/CSV và kết quả HOLD. Nhãn chấm điểm, score, ranking, threshold và metric đã freeze giữ nguyên.
+Pipeline sau xác nhận: **REWORK / QUALITY_RECAPTURE_REQUIRED**, `n_reviewed=20`, `n_human_reviewed=20`, `human_review_confirmed=true`. [Bằng chứng hiện tại](../reports/evidence/human_review/). `review_source` và `reviewer` hiện hành là Vũ Duy Khanh; ghi chú giữ nguyên nhận xét chất lượng.
+
+`evidence.json`, [biên nhận nhập CVAT](../reports/cvat_review_import.json) và `reports/evidence/poc/` mô tả lần nhập trước khi có xác nhận mới. Chúng được giữ làm lịch sử, có liên kết checksum từ bản xác nhận mới. Nhãn chấm điểm, score, ranking, threshold và metric giữ nguyên.
 
 ## Bằng chứng đã lưu
 
@@ -49,16 +51,15 @@ Tên **Vũ Duy Khanh** được điền theo chỉ định rõ của người d�
 
 ## Đồng bộ vào pipeline sau review
 
-Các lệnh dưới đây dùng `out/poc/` đang giữ đầy đủ audit/decision log trước lần đồng bộ. Trên bản clone mới hoặc khi đã xóa output cũ, dùng `make t02-submission OUT=out/cvat-reproduction` để tái lập vào thư mục riêng; bước sync sẽ từ chối thay bằng chứng nếu thiếu lịch sử audit cũ.
+Dùng `make t02-submission OUT=out/cvat-reproduction` để tái lập vào thư mục riêng. Công cụ lấy đủ 20 quyết định đã được Vũ Duy Khanh xác nhận. Bước nhập cũ được giữ để kiểm lịch sử và không được ghi đè lần ký duyệt mới.
 
 ```bash
-.venv/bin/python -m tools.t02_cvat_review --output out/poc/review_queue_reviewed.csv
-.venv/bin/python -m src.main --input fixtures/t02_raw_qc --config configs/lab.yaml --output out/poc --run-name poc --offline --seed 42
-.venv/bin/python -m tools.t02_cvat_review --sync-output out/poc
 .venv/bin/python -m tools.t02_cvat_review
+.venv/bin/python -m tools.t02_human_review
+make t02-submission OUT=out/cvat-reproduction
 ```
 
-Bước chuyển đổi lấy image_id và các trường queue đã freeze, giữ nguyên ghi chú từ XML, tạo `approve` hoặc `edit` đúng theo tag. Review cũ được sao lưu vào `out/poc/review_history/`; công cụ từ chối ghi đè CSV có reviewer người thật. Bước đồng bộ chỉ nhận output đã chạy thành công, đủ 20 quyết định khớp CVAT, raw predictions không đổi và audit còn nguyên lịch sử. Sau đó cập nhật biên nhận nhập và `pipeline_imported: true`. Công cụ không xác nhận review của người học.
+CSV, ghi chú, hành động cuối và audit phải khớp bản xác nhận; raw predictions không thay đổi. Hai override chỉ sửa hành động cuối. Audit mới nối sau toàn bộ lịch sử cũ.
 
 ## Tái kiểm tra offline
 

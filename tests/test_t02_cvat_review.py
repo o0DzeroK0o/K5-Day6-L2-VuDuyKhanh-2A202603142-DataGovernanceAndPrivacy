@@ -118,4 +118,4 @@ def test_report_keeps_template_and_reflects_cvat_import():
     assert '20/20 quyết định từ CVAT' in generated
     assert '19 RECAPTURE / 1 KEEP' in generated
     assert 'cvat_review_import.json' in generated
-    assert 'n_human_reviewed=0' in generated
+    assert 'n_human_reviewed=20' in generated and 'human_review_confirmation.json' in generated

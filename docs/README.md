@@ -16,3 +16,5 @@
 - [Cấu trúc bài nộp T004 theo tài liệu](2026-11-15-094653-cau-truc-bai-nop-t004.md)
 - [Đối chiếu triển khai năm bước pipeline T02](2026-11-15-100708-doi-chieu-nam-buoc-pipeline.md)
 - [Kiểm tra log Chromium và mở contact sheet trên Omarchy](2026-11-15-101326-kiem-tra-loi-mo-chromium.md)
+
+- [Xây dựng UI và xác nhận review trực tiếp](2026-11-15-102502-xay-dung-ui-va-xac-nhan-review.md)

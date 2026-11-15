@@ -1,90 +1,66 @@
-# Chạy demo T004 / T02
+# Chạy công cụ review và demo T004
 
-Mở Terminal tại thư mục gốc dự án. Máy hiện tại đã có `.venv` và dependency; các lệnh dưới đây chạy offline.
+## Mở giao diện và slides mới
 
-Trên Omarchy, nếu `xdg-open` in lỗi Chromium `zygote` / `Ống dẫn bị hỏng (32)`, xem cách mở bằng launcher ở mục 6.
-
-**Phạm vi hiện có:** bản trình chiếu có ảnh thao tác thật trên **CVAT local**, task/job #17 đã hoàn tất đủ 20 frame, cùng kết quả pipeline/contact sheet. [Gallery 20 frame](../demo/cvat/index.html) và [hướng dẫn CVAT](HUONG_DAN_DEMO_CVAT_LOCAL.md) lưu bằng chứng Save/export. `demo/t004_demo_preview.png` là preview trang đầu; ảnh CVAT gốc nằm trong `demo/cvat/`.
-
-## 1. Mở bản trình chiếu 5 trang
+Tại gốc repository:
 
 ```bash
-xdg-open demo/t004_demo.html
-```
-
-Dùng phím **→ / ←** hoặc **PageDown / PageUp** để chuyển trang, **F11** để bật toàn màn hình trình duyệt. Có thể mở file bằng trình quản lý tệp rồi chọn Chrome/Chromium. Không cần chạy web server.
-
-Mở `demo/cvat/index.html` để xem 20 ảnh riêng và bấm từng ảnh để đọc rõ thuộc tính. Mở [job CVAT #17](http://localhost:8080/tasks/17/jobs/17) khi server local đang chạy. Gallery/slides vẫn đọc được offline khi CVAT tắt.
-
-Lời thuyết trình có trong [SHOWCASE_SCRIPT.md](../demo/SHOWCASE_SCRIPT.md). Các trang và liên kết trong bản trình chiếu là bằng chứng đã lưu; để xem lần chạy mới, mở contact sheet ở bước 2.
-
-## 2. Chạy pipeline thật và xem ảnh
-
-```bash
-make run OUT=out/demo-live
-xdg-open out/demo-live/poc/contact_sheet.html
-```
-
-`make` dùng `.venv/bin/python`, không cần activate môi trường. Kết quả nằm trong `out/demo-live/poc/`:
-
-- `ranked_review.csv`: xếp hạng ảnh theo điểm nghi lỗi.
-- `contact_sheet.html`: giao diện xem 20 ảnh ưu tiên và nhập review.
-- `review_queue.csv`: danh sách 20 ảnh.
-- `decision.json`: quyết định HOLD/REWORK/GO cùng lý do.
-- `audit_log.jsonl`: nhật ký thao tác.
-- `run_info.json`: trạng thái chạy, seed, runtime và kiểm tra output.
-
-Lần chạy sạch hiện tại xử lý 96 ảnh, lấy pool eval 40 ảnh và chọn 20 ảnh review. Terminal báo `status=0` nghĩa là chương trình chạy thành công. `HOLD / HUMAN_REVIEW_REQUIRED` trong quyết định là trạng thái chờ người thật review.
-
-## 3. Trình diễn thao tác review
-
-Trong contact sheet, điền Reviewer, tự xem ảnh rồi chọn quyết định. `approve` đồng ý gợi ý; `edit`/`reject` cần override `KEEP` hoặc `RECAPTURE` và ghi lý do. Bấm **Export decisions CSV**.
-
-Chép file tải về vào `out/demo-live/poc/review_queue_reviewed.csv`, rồi chạy lại:
-
-```bash
-make run OUT=out/demo-live
-cat out/demo-live/poc/decision.json
-tail -n 5 out/demo-live/poc/audit_log.jsonl
-```
-
-Audit ghi quyết định; ranking/score giữ nguyên. Nếu đang luyện thao tác mà chưa thực sự review toàn bộ queue, giữ `human_review_confirmed: false` và kết quả HOLD. Để hoàn tất mục review người thật của bài nộp, làm đầy đủ [hướng dẫn hoàn tất, mục 1](HUONG_DAN_HOAN_TAT_T004.md#1-làm-vòng-review-người-thật-khoảng-1015-phút), sử dụng thư mục bài nộp `out/poc/`.
-
-## 4. Tái chạy toàn bộ so sánh (tùy chọn)
-
-```bash
-make t02-submission OUT=out/demo-comparison
-```
-
-Lệnh tạo baseline Laplacian, PoC, nhập review CVAT đã lưu, chạy ablation và sinh số liệu tự kiểm trong `out/demo-comparison/reproduce/`; báo cáo nằm ở thư mục con `reports/`. Nếu thư mục đích đã có CSV review, công cụ giữ nguyên file đó. Số liệu dùng nhãn AI nội bộ, chưa phải điểm GT giảng viên. Bản trình chiếu không tự cập nhật theo lần chạy mới.
-
-## 5. Xác minh và sinh lại demo đã lưu
-
-```bash
-.venv/bin/python -m tools.t02_cvat_demo
-.venv/bin/python -m tools.t02_cvat_review
-.venv/bin/python -m tools.t02_artifacts
-.venv/bin/python -m tools.t02_verify
-```
-
-Lệnh đầu đối chiếu XML, snapshot API, đủ 20 frame, mapping/ảnh gốc và thuộc tính. Lệnh thứ hai kiểm kết quả nhập CVAT với CSV, hành động cuối, audit và biên nhận. Lệnh thứ ba sinh lại đúng 5 slides từ bằng chứng và số liệu đã lưu. Lệnh cuối kiểm cả protocol, metric, cấu trúc report và manifest; mọi thay đổi ngoài nhiệm vụ trong `reports/` có thể khiến hash không khớp và cần được xử lý riêng. Không dùng `--write-manifest` để che một sai khác chưa xem xét.
-
-Để đóng gói một lần export mới, xem lệnh `--export` trong [hướng dẫn CVAT](HUONG_DAN_DEMO_CVAT_LOCAL.md). Đủ 20 quyết định CVAT đã được chuyển sang CSV review, chạy lại pipeline và đồng bộ audit theo các lệnh trong hướng dẫn CVAT. Xác nhận người học vẫn là bước riêng.
-
-## 6. Mở HTML trên Omarchy khi Chromium in lỗi zygote
-
-Thông báo `Failed sending zygote boot message` / `Ống dẫn bị hỏng (32)` đến từ Chromium. Kiểm riêng `out/poc/run_info.json`: `status: 0` và không thiếu cột output nghĩa là pipeline chạy thành công. Trong lần kiểm tra trên máy ngày 2026-11-15, trang review đã mở dù Terminal có các dòng log này.
-
-Từ gốc dự án, dùng launcher Omarchy để chuyển URL tới trình duyệt đang chạy và đưa cửa sổ lên trước:
-
-```bash
-omarchy launch browser "file://$PWD/out/poc/contact_sheet.html"
-```
-
-Nếu đã chạy `make run OUT=out/demo-live`, dùng đường dẫn tương ứng `file://$PWD/out/demo-live/poc/contact_sheet.html`. Mở bản trình chiếu bằng:
-
-```bash
+make demo
+omarchy launch browser "file://$PWD/reports/contact_sheet.html"
 omarchy launch browser "file://$PWD/demo/t004_demo.html"
 ```
 
-Đã kiểm lệnh mở contact sheet: exit 0, cửa sổ Chromium hoạt động có tiêu đề `T004 / T02 — poc — eval — review`; HTML chứa đủ 20 ảnh nhúng. [Nhật ký kiểm tra](2026-11-15-101326-kiem-tra-loi-mo-chromium.md).
+`make demo` dựng lại giao diện và 5 slide từ bằng chứng đã lưu, không cần web server hoặc mạng. Trên Linux khác dùng `xdg-open` với hai đường dẫn trên. Cách mở qua launcher Omarchy tránh khởi động thêm một Chromium không cần thiết; [lần kiểm tra lỗi zygote trước đó](2026-11-15-101326-kiem-tra-loi-mo-chromium.md) không xác định nguyên nhân gốc của log broken pipe.
+
+Slides dùng phím **→ / ←**, **PageDown / PageUp**, **Home / End**, hoặc hai nút ở cuối màn hình. Bấm ảnh để mở ảnh gốc. [Ảnh 5 slide mới](../demo/slides/) và [ảnh thao tác UI](../demo/ui/) được chụp bằng Chromium. Bản preview cũ đã xóa.
+
+## Thao tác công cụ review
+
+1. Giao diện mở đủ **20 frame**, người review **Vũ Duy Khanh**, **2 override**, **0 frame cần xem tiếp**.
+2. Tìm mã ảnh, nhận xét hoặc nhóm; lọc “Đã sửa đề nghị” để thấy `img_19_2` và `img_06_3`.
+3. Bấm ảnh để phóng to; Esc hoặc Đóng để quay lại. Xem thông tin điểm/lý do trong “Thông tin và tín hiệu”.
+4. `Đồng ý đề nghị` giữ hành động gợi ý. `Sửa hành động` / `Từ chối đề nghị` cần KEEP hoặc RECAPTURE và nhận xét. `Cần xác minh` / `Bỏ qua` chưa được tính hoàn tất.
+5. Nháp tự lưu trên trình duyệt. Dùng “Bỏ bản nháp” để trở lại dữ liệu gốc. Nếu trình duyệt chặn lưu nháp, giao diện thông báo và vẫn xuất CSV được.
+6. “Xuất CSV” xuất **toàn bộ 20 frame**, kể cả khi đang lọc. “Nhập CSV” chỉ nhận đủ frame, không trùng ID, không đổi điểm hoặc thông tin queue. File tải về giữ định dạng `review_queue_reviewed.csv`.
+
+Xuất CSV không tự sửa file trong repository. Nháp và thao tác thử không thay bản ký duyệt đã lưu.
+
+## Chạy lại pipeline với review đã xác nhận
+
+```bash
+make t02-submission OUT=out/demo-new
+cat out/demo-new/reproduce/poc/decision.json
+```
+
+Lệnh tái tạo baseline, PoC, review đã xác nhận, ablation và OOD ở thư mục riêng. PoC phải có `n_human_reviewed=20`, **REWORK / QUALITY_RECAPTURE_REQUIRED**. Thư mục có sẵn review sẽ giữ nguyên; để kiểm tra sạch dùng tên thư mục mới.
+
+Chỉ chạy scoring bằng `make run OUT=out/scoring` vẫn tạo đủ output. Nếu chưa có CSV review trong thư mục đó, decision là HOLD vì thiếu review. Mở giao diện đã ký duyệt bằng `make review-ui` thay vì nhầm với queue trống của lần scoring mới.
+
+## Chạy CSV vừa xuất qua pipeline
+
+```bash
+mkdir -p out/review-new
+cp ~/Downloads/review_queue_reviewed.csv out/review-new/review_queue_reviewed.csv
+.venv/bin/python -m src.main --config configs/lab.yaml --output out/review-new --offline --seed 42
+cat out/review-new/decision.json
+```
+
+Chỉ dùng tên/thời điểm của người đã trực tiếp review; không ghi đè bằng chứng cũ khi luyện thao tác. Lệnh trên chạy ở thư mục mới và không cập nhật report chính. Score/ranking giữ nguyên; kết quả vẫn REWORK khi còn yêu cầu thu lại ảnh.
+
+## Kiểm chứng
+
+```bash
+make test
+make preflight verify
+.venv/bin/python -m tools.t02_cvat_review
+.venv/bin/python -m tools.t02_human_review
+.venv/bin/python -m tools.t02_verify
+```
+
+Kiểm thử UI bằng Node và Playwright có sẵn trên máy:
+
+```bash
+PLAYWRIGHT_MODULE=/home/dzerok/lemo-opuscar/node_modules/playwright-core node tools/test_review_ui.cjs
+```
+
+Máy khác đặt `PLAYWRIGHT_MODULE` tới package Playwright đã cài và `CHROMIUM_PATH` tới Chromium. Script kiểm tra thật trong trình duyệt, ghi CSV thử vào `out/ui-test/` và cập nhật ảnh trong `demo/ui/`. Sau khi chụp lại, chạy `make demo` và kiểm tra diff trước cập nhật manifest.

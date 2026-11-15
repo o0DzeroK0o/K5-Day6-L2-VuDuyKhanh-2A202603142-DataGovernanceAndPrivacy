@@ -7,10 +7,12 @@ schema, which `review.load_review_decisions` can read back.
 from __future__ import annotations
 
 import base64
+import hashlib
 import html
 import io
 import json
 import os
+import re
 from pathlib import Path
 from typing import Iterable
 
@@ -63,80 +65,53 @@ def render_contact_sheet(
     out_html.parent.mkdir(parents=True, exist_ok=True)
     root = Path(image_root) if image_root else Path(".")
     fields = list(fields)
+    records = queue.fillna("").astype(str).to_dict(orient="records")
+    if len({r.get("item_id", "") for r in records}) != len(records):
+        raise ValueError("review queue requires unique item_id values")
     cards = []
-    for _, row in queue.iterrows():
+    for index, row in enumerate(records):
         imgs = []
         for col, label in ((before_image_col, "before"), (image_col, "after" if before_image_col else "")):
-            if not col or col not in row or pd.isna(row[col]) or str(row[col]) == "":
+            if not col or not row.get(col):
                 continue
-            p = Path(str(row[col]))
+            p = Path(row[col])
             p = p if p.is_absolute() else root / p
             if not p.exists():
-                imgs.append(f'<div class="missing">missing: {html.escape(str(p))}</div>')
+                imgs.append(f'<div class="missing">Không tìm thấy ảnh: {html.escape(str(p))}</div>')
                 continue
-            boxes = (boxes_by_item or {}).get(str(row.get("item_id", ""))) if label != "before" else None
-            src = _thumb_data_uri(p, thumb_width, boxes) if embed else os.path.relpath(p, out_html.parent)
+            boxes = (boxes_by_item or {}).get(row.get("item_id", "")) if label != "before" else None
+            src = _thumb_data_uri(p, max(thumb_width, 640), boxes) if embed else os.path.relpath(p, out_html.parent)
             cap = f"<figcaption>{label}</figcaption>" if label else ""
-            imgs.append(f'<figure><img src="{src}" width="{thumb_width}">{cap}</figure>')
+            alt = html.escape(f"{row.get('item_id', '')} {label}".strip(), quote=True)
+            imgs.append(f'<figure><button type="button" class="zoom" aria-label="Phóng to {alt}">'
+                        f'<img alt="{alt}" src="{html.escape(src, quote=True)}" width="{thumb_width}"></button>{cap}</figure>')
         meta = "".join(
-            f"<div><b>{html.escape(f)}</b>: {html.escape(str(row[f]))}</div>" for f in fields if f in row
+            f"<div><dt>{html.escape(f)}</dt><dd>{html.escape(row[f])}</dd></div>" for f in fields if f in row
         )
-        opts = "".join(f'<option value="{d}">{d or "— decision —"}</option>' for d in DECISIONS)
-        item_id = html.escape(str(row.get("item_id", "")))
+        labels = {"": "Chưa chọn", "approve": "Đồng ý đề nghị", "edit": "Sửa hành động",
+                  "reject": "Từ chối đề nghị", "escalate": "Cần xác minh", "skip": "Bỏ qua / xem sau"}
+        opts = "".join(f'<option value="{d}">{labels[d]}</option>' for d in DECISIONS)
+        item_id = html.escape(row.get("item_id", ""))
+        rank = html.escape(row.get("rank", str(index + 1)))
+        action = html.escape(row.get("suggested_action", ""))
         cards.append(
-            f'<div class="card" data-item="{item_id}" data-rank="{html.escape(str(row.get("rank", "")))}" '
-            f'data-score="{html.escape(str(row.get("score", "")))}">'
-            f'<div class="imgs">{"".join(imgs)}</div><div class="meta">{meta}</div>'
-            f'<select class="dec">{opts}</select>'
-            f'<input class="ov" placeholder="override value (optional)">'
-            f'<input class="note" placeholder="reason / note"></div>'
+            f'<article class="card" data-index="{index}" data-item="{item_id}">'
+            f'<div class="card-head"><span class="rank">{rank.zfill(2)}</span><h2>{item_id}</h2>'
+            f'<span class="action">{action}</span></div><div class="imgs">{"".join(imgs)}</div>'
+            f'<div class="card-body"><details><summary>Thông tin và tín hiệu</summary><dl>{meta}</dl></details>'
+            f'<label for="dec-{index}">Quyết định</label><select id="dec-{index}" class="dec">{opts}</select>'
+            f'<label for="ov-{index}" class="ov-label">Hành động thay thế</label>'
+            f'<input id="ov-{index}" class="ov" placeholder="Giá trị override" autocomplete="off">'
+            f'<label for="note-{index}">Nhận xét chất lượng</label>'
+            f'<textarea id="note-{index}" class="note" rows="2" placeholder="Lỗi quan sát được, lý do giữ hoặc chụp lại…"></textarea>'
+            f'<p class="card-state">Chưa review</p></div></article>'
         )
-    rows_json = json.dumps(queue.astype(str).to_dict(orient="records"))
-    page = _TEMPLATE.replace("__TITLE__", html.escape(title)).replace("__CARDS__", "\n".join(cards))
-    page = page.replace("__ROWS__", rows_json).replace("__N__", str(len(queue)))
+    rows_json = json.dumps(records, ensure_ascii=False).replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
+    assets = Path(__file__).with_name("review_ui")
+    values = {"TITLE": html.escape(title), "CARDS": "\n".join(cards), "ROWS": rows_json,
+              "KEY": hashlib.sha256(rows_json.encode()).hexdigest(), "N": str(len(queue)),
+              "CSS": (assets / "review.css").read_text(), "JS": (assets / "review.js").read_text()}
+    page = re.sub(r"__(TITLE|CARDS|ROWS|KEY|N|CSS|JS)__", lambda m: values[m[1]],
+                  (assets / "index.html").read_text())
     out_html.write_text(page, encoding="utf-8")
     return out_html
-
-
-_TEMPLATE = """<!DOCTYPE html>
-<html lang="vi"><head><meta charset="utf-8"><title>__TITLE__</title>
-<style>
-body{font-family:system-ui,sans-serif;margin:16px;background:#fafafa;color:#222}
-header{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
-.grid{display:flex;flex-wrap:wrap;gap:12px}
-.card{background:#fff;border:1px solid #ddd;border-radius:8px;padding:8px;width:min(100%,620px)}
-.imgs{display:flex;gap:6px;flex-wrap:wrap} figure{margin:0} figcaption{font-size:11px;color:#666}
-.meta{font-size:12px;margin:6px 0;word-break:break-all}
-select,input{font-size:12px;margin:2px 0;width:100%;box-sizing:border-box}
-.missing{color:#b00;font-size:12px}
-button{padding:6px 12px}
-</style></head><body>
-<header><h2 style="margin:0">__TITLE__</h2><span>N = __N__</span>
-<label>Reviewer (bắt buộc): <input id="reviewer" style="width:180px"></label>
-<button onclick="exportCsv()">Export decisions CSV</button></header>
-<div class="grid">__CARDS__</div>
-<script>
-const ROWS = __ROWS__;
-const COLS = ["rank","item_id","score","reason","suggested_action","slice","evidence_path",
-              "reviewer","reviewer_decision","override_value","review_note","reviewed_at"];
-function esc(v){v = (v===undefined||v===null)?"":String(v); return /[",\\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;}
-function exportCsv(){
-  const reviewer = document.getElementById('reviewer').value.trim();
-  if(!reviewer){alert('Nhập tên reviewer trước khi export'); return;}
-  const now = new Date().toISOString();
-  const cards = document.querySelectorAll('.card');
-  const lines = [COLS.join(',')];
-  cards.forEach((c,i)=>{
-    const r = Object.assign({}, ROWS[i]);
-    const dec = c.querySelector('.dec').value;
-    r.reviewer = dec ? reviewer : ''; r.reviewer_decision = dec;
-    r.override_value = c.querySelector('.ov').value; r.review_note = c.querySelector('.note').value;
-    r.reviewed_at = dec ? now : '';
-    lines.push(COLS.map(k=>esc(r[k])).join(','));
-  });
-  const blob = new Blob([lines.join('\\n')+'\\n'], {type:'text/csv'});
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-  a.download = 'review_queue_reviewed.csv'; a.click();
-}
-</script></body></html>
-"""

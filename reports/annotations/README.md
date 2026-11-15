@@ -1,9 +1,11 @@
-# Nhãn kiểm tra nội bộ, KHÔNG phải GT giảng viên
+# Nhãn kiểm tra nội bộ, không phải GT giảng viên
 
-`internal_eval_labels.csv`: Codex đã quan sát trực tiếp 40 ảnh eval sau commit freeze `6c525dc`, chưa xem điểm dự đoán để gán nhãn. Nhãn dựa trên khả năng nhìn rõ xe/người/biển synthetic. Cam_B hơi mềm và night còn hữu ích được giữ. Severity là ước lượng bằng mắt. Không lấy nhãn từ tên file, thứ tự ảnh hay GT ẩn.
+`internal_eval_labels.csv` gồm 40 nhãn quan sát sau commit freeze `6c525dc`, không dùng điểm dự đoán khi gán nhãn. Nguồn cụ thể giữ trong cột `annotator`, phương pháp ở `annotation_basis`, thời điểm ở `annotated_at`; các trường nguồn gốc không thay đổi trong nhiệm vụ giao diện/review.
 
-Một reviewer AI, không có đồng thuận độc lập, không có nhãn chính thức, nên các metric chỉ chứng minh luồng tự kiểm và mô tả trên proxy. Người thật cần kiểm lại toàn bộ nhãn, đặc biệt glare nhẹ và nén nhẹ. Không đổi nhãn để làm đẹp số.
+Nhãn dựa trên khả năng nhìn rõ xe/người/biển synthetic. Cam_B hơi mềm và night còn hữu ích được giữ. Severity là ước lượng bằng quan sát. Không lấy nhãn từ tên file, thứ tự ảnh hay GT ẩn. Một nguồn nhãn, chưa có đồng thuận độc lập hoặc GT chính thức; các metric mô tả trên proxy và chưa bao gồm sai số gán nhãn.
 
-`ood_visual_labels.csv`: 10 ảnh đầu theo image_id của T13, đã chọn protocol trước eval. Dữ liệu 256x144 cùng họ generator nên chỉ là kiểm thử khác track/độ phân giải; chưa chứng minh OOD đời thực. Tất cả được AI đánh giá còn dùng được, tập này không đủ để đo recall lỗi.
+Vũ Duy Khanh đã xác nhận trực tiếp 20 frame trong review queue. Xác nhận này không chứng nhận toàn bộ 40 nhãn eval; `human_verified` của tập eval không được đổi. Không sửa nhãn để làm đẹp số.
 
-Pipeline không nhập/đọc các file này. Chỉ evaluator và công cụ đóng gói bằng chứng dùng chúng sau inference. Vòng AI review sử dụng lại nhận xét thị giác này, không tuyên bố là người thật hay một nguồn nhãn độc lập.
+`ood_visual_labels.csv` gồm 10 ảnh đầu theo image_id của T13, protocol chọn trước eval. Dữ liệu 256×144 cùng họ generator, tất cả clean theo nhãn quan sát; chỉ kiểm thử khác track/độ phân giải, không đủ để đo recall lỗi hoặc chứng minh OOD đời thực.
+
+Pipeline không đọc các file nhãn này. Evaluator và công cụ đóng gói bằng chứng dùng chúng sau inference. Review hiện tại và lịch sử được phân biệt bằng [bản xác nhận](../human_review_confirmation.json).

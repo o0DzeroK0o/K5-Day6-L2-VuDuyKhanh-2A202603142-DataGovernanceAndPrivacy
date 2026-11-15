@@ -164,7 +164,7 @@ def test_five_slides_embed_actual_cvat_screenshots_and_regenerate_exactly():
     parser.feed(text)
     evidence = [img for img in parser.images if "data-evidence" in img]
     assert {img["data-evidence"] for img in evidence} == {
-        "cvat/01-task.jpg", "cvat/03-save-verify.jpg", "cvat/04-export-dialog.jpg",
+        "ui/01-workspace.png", "ui/02-overrides.png", "cvat/03-save-verify.jpg", "cvat/04-export-dialog.jpg",
         "cvat/05-export-finished.jpg", "cvat/06-summary.jpg",
     }
     for img in evidence:

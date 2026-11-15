@@ -13,10 +13,10 @@ def test_report_only_fills_answers_without_changing_template():
     assert [s for s in original.splitlines() if s.startswith('#')]==[s for s in filled.splitlines() if s.startswith('#')]
     assert '____' not in filled
     assert '- [x] Có baseline/PoC metrics, ≥1 failure case, reviewer evidence, decision log.' in filled
-    assert 'Xác nhận người học còn chờ.' in filled and 'chưa push' in filled
+    assert 'xác nhận đã trực tiếp review đủ 20 frame' in filled and 'chưa push' in filled
     decision = next(line for line in filled.splitlines() if line.startswith('- Decision policy'))
-    assert 'HOLD / HUMAN_REVIEW_REQUIRED' in decision
-    assert 'n_human_reviewed=0' in decision and 'human_review_confirmed=false' in decision
+    assert 'REWORK / QUALITY_RECAPTURE_REQUIRED' in decision
+    assert 'n_human_reviewed=20' in decision and 'human_review_confirmed=true' in decision
     assert filled.count('| Member')==6
 
 
@@ -31,7 +31,7 @@ def test_demo_contains_five_offline_pages_and_real_evidence():
     text=Path('demo/t004_demo.html').read_text()
     assert len(re.findall(r'<section id="s\d+">',text))==5
     assert 'data:image/jpeg;base64,' in text
-    assert 'HUMAN_REVIEW_REQUIRED' in text
+    assert 'QUALITY_RECAPTURE_REQUIRED' in text
     assert 'chưa phải điểm chính thức' in text
     assert not re.search(r'(?:src|href)="https?://',text)
 

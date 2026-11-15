@@ -22,7 +22,7 @@ import yaml
 from src.common.io import read_json, resolve_config, sha256_file, write_json
 from src.common.manifest import build_manifest, write_manifest
 from src.common.review import REVIEW_COLUMNS
-from tools.t02_cvat_review import export_review
+from tools.t02_human_review import export_current_review
 
 
 LABELS = Path("reports/annotations/internal_eval_labels.csv")
@@ -151,7 +151,7 @@ def main(argv=None):
         if name=="poc":
             reviewed=target/"review_queue_reviewed.csv"
             if not reviewed.exists():
-                export_review(reviewed)
+                export_current_review(reviewed)
             command("src.main","--output",target,"--run-name",name,"--offline","--seed","42")
         command("src.evaluate","--track","t02","--gt",LABELS,"--pred",target/"ranked_review.csv",
                 "--run-name",name,"--out",report/f"metrics_{name}.json","--slices-out",report/f"slices_{name}.csv")
@@ -175,7 +175,7 @@ def main(argv=None):
     # Conventional evidence paths required by the handout.
     for source,name in (("review_queue_reviewed.csv","review_queue.csv"),("decision_log.csv","decision_log.csv"),("audit_log.jsonl","audit_log.jsonl"),("contact_sheet.html","contact_sheet.html")):
         shutil.copy2(out/"poc"/source,report/name)
-    print(f"T004 evidence generated at {report}; saved CVAT review imported, real human sign-off still pending.")
+    print(f"T004 evidence generated at {report}; saved review imported; inspect decision.json for the current batch outcome.")
     return 0
 
 

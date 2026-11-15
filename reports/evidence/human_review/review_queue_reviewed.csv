@@ -1,0 +1,21 @@
+rank,item_id,score,reason,suggested_action,slice,evidence_path,reviewer,reviewer_decision,override_value,review_note,reviewed_at
+1,img_13_3,0.969944,blur;camera=cam_A;light=night,RECAPTURE,night,images/img_13_3.jpg,Vũ Duy Khanh,approve,,"Mờ toàn ảnh, xe mất cạnh.",2026-11-15T03:28:46+00:00
+2,img_15_2,0.940191,blur;camera=cam_B;light=dusk,RECAPTURE,dusk,images/img_15_2.jpg,Vũ Duy Khanh,approve,,"Mờ mạnh, xe và người mất chi tiết.",2026-11-15T03:28:46+00:00
+3,img_19_3,0.924955,blur;camera=cam_A;light=day,RECAPTURE,day,images/img_19_3.jpg,Vũ Duy Khanh,approve,,Cạnh xe và người bị nhòe trên toàn ảnh.,2026-11-15T03:28:46+00:00
+4,img_16_2,0.919553,blur;camera=cam_A;light=day,RECAPTURE,day,images/img_16_2.jpg,Vũ Duy Khanh,approve,,"Mờ toàn cục, chi tiết biển và cạnh xe khó đọc.",2026-11-15T03:28:46+00:00
+5,img_17_2,0.909091,glare;camera=cam_A;light=day,RECAPTURE,day,images/img_17_2.jpg,Vũ Duy Khanh,approve,,"Lóa trắng lớn che vùng giữa, mất chi tiết xe và cảnh.",2026-11-15T03:28:46+00:00
+6,img_15_3,0.905411,dark;camera=cam_B;light=dusk,RECAPTURE,dusk,images/img_15_3.jpg,Vũ Duy Khanh,approve,,"Thiếu sáng nặng, xe và người chìm trong vùng tối.",2026-11-15T03:28:46+00:00
+7,img_23_3,0.901978,dark;camera=cam_A;light=day,RECAPTURE,day,images/img_23_3.jpg,Vũ Duy Khanh,approve,,"Thiếu sáng nặng, mất chi tiết xe và vùng đường.",2026-11-15T03:28:46+00:00
+8,img_17_3,0.890566,dark;camera=cam_A;light=day,RECAPTURE,day,images/img_17_3.jpg,Vũ Duy Khanh,approve,,"Ảnh quá tối, người và xe khó phân biệt.",2026-11-15T03:28:46+00:00
+9,img_05_3,0.834143,glare;camera=cam_A;light=day,RECAPTURE,day,images/img_05_3.jpg,Vũ Duy Khanh,approve,,"Lóa cục bộ trên xe, vùng biển mất tương phản.",2026-11-15T03:28:46+00:00
+10,img_06_2,0.808508,compression;camera=cam_B;light=night,RECAPTURE,night,images/img_06_2.jpg,Vũ Duy Khanh,approve,,"Nén khối mạnh, cạnh xe và đèn bị vỡ.",2026-11-15T03:28:46+00:00
+11,img_05_2,0.749149,compression;camera=cam_A;light=day,RECAPTURE,day,images/img_05_2.jpg,Vũ Duy Khanh,approve,,"Nén tạo khối và viền giả, mất chi tiết biển.",2026-11-15T03:28:46+00:00
+12,img_01_2,0.742344,dark;camera=cam_A;light=night,RECAPTURE,night,images/img_01_2.jpg,Vũ Duy Khanh,approve,,"Thiếu sáng, xe và người bị mất chi tiết trong bóng tối.",2026-11-15T03:28:46+00:00
+13,img_23_2,0.740039,compression;camera=cam_A;light=day,RECAPTURE,day,images/img_23_2.jpg,Vũ Duy Khanh,approve,,"Nén tạo ô và viền răng cưa quanh xe, người.",2026-11-15T03:28:46+00:00
+14,img_01_3,0.704417,compression;camera=cam_A;light=night,RECAPTURE,night,images/img_01_3.jpg,Vũ Duy Khanh,approve,,"Nén tạo khối, cạnh xe và các điểm sáng bị vỡ.",2026-11-15T03:28:46+00:00
+15,img_13_2,0.656572,compression;camera=cam_A;light=night,RECAPTURE,night,images/img_13_2.jpg,Vũ Duy Khanh,approve,,"Nén khối, biển và cạnh xe có viền giả.",2026-11-15T03:28:46+00:00
+16,img_16_3,0.561171,compression;camera=cam_A;light=day,RECAPTURE,day,images/img_16_3.jpg,Vũ Duy Khanh,approve,,"Nén nhẹ nhưng làm nhòe và răng cưa ở cạnh xe, biển.",2026-11-15T03:28:46+00:00
+17,img_03_3,0.530217,compression;camera=cam_B;light=night,RECAPTURE,night,images/img_03_3.jpg,Vũ Duy Khanh,approve,,Nén gây viền răng cưa và mất chi tiết vùng biển.,2026-11-15T03:28:46+00:00
+18,img_19_2,0.448521,compression;camera=cam_A;light=day,KEEP,day,images/img_19_2.jpg,Vũ Duy Khanh,edit,RECAPTURE,"Override KEEP: nén, mất chi tiết biển.",2026-11-15T03:28:46+00:00
+19,img_23_1,0.416171,compression;camera=cam_A;light=day,KEEP,day,images/img_23_1.jpg,Vũ Duy Khanh,approve,,Cạnh xe và người rõ. KEEP.,2026-11-15T03:28:46+00:00
+20,img_06_3,0.388292,glare;camera=cam_B;light=night,KEEP,night,images/img_06_3.jpg,Vũ Duy Khanh,edit,RECAPTURE,Override KEEP: quầng lóa giữa ảnh giảm tương phản xe và đường.,2026-11-15T03:28:46+00:00

@@ -64,8 +64,14 @@ def export_review(output, directory=Path("demo/cvat")):
     return entries
 
 
-def check_run(output, evidence):
-    expected = review_rows(evidence)
+def check_run(output, evidence, confirmation=None):
+    human = confirmation is not None
+    if human:
+        from tools.t02_human_review import signed_rows
+        expected = signed_rows(evidence, confirmation)
+    else:
+        expected = review_rows(evidence)
+    reviewer = confirmation['reviewer'] if human else evidence['operator']
     if rows(output / "review_queue_reviewed.csv") != expected:
         raise ValueError("Pipeline review differs from saved CVAT observations")
     frozen = pd.read_csv(QUEUE.parent / "raw_predictions.csv", dtype=str).fillna("")
@@ -78,12 +84,12 @@ def check_run(output, evidence):
         item = items.loc[row["item_id"]]
         prediction = ranked.loc[ranked.image_id == row["item_id"]].iloc[0]
         if (item.pred_action != frame["action"] or prediction.pred_action != frame["action"]
-                or item.reviewer != evidence["operator"] or item.review_state != "ai"):
+                or item.reviewer != reviewer or item.review_state != ("human" if human else "ai")):
             raise ValueError("Final item action/provenance differs from CVAT")
     decision = json.loads((output / "decision.json").read_text())
     run = json.loads((output / "run_info.json").read_text())
-    if (decision["metrics"]["n_reviewed"] != 20 or decision["metrics"]["n_human_reviewed"] != 0
-            or decision["status"] != "HOLD" or decision["reason_code"] != "HUMAN_REVIEW_REQUIRED"
+    if (decision["metrics"]["n_reviewed"] != 20 or decision["metrics"]["n_human_reviewed"] != (20 if human else 0)
+            or decision["status"] != ("REWORK" if human else "HOLD") or decision["reason_code"] != ("QUALITY_RECAPTURE_REQUIRED" if human else "HUMAN_REVIEW_REQUIRED")
             or not decision["owner"].startswith(evidence["review_source"])
             or run["status"] != 0 or not run["offline"] or run["seed"] != 42):
         raise ValueError("Invalid completed pipeline run or human sign-off")
@@ -91,17 +97,25 @@ def check_run(output, evidence):
     for row in expected:
         fingerprint = hashlib.sha256(json.dumps(row, sort_keys=True).encode()).hexdigest()
         events = [event for event in audit if event.get("extra", {}).get("review_fingerprint") == fingerprint]
-        if (len(events) != 1 or events[0]["actor"] != evidence["operator"]
+        if (len(events) != 1 or events[0]["actor"] != reviewer
                 or events[0]["item_id"] != row["item_id"]
                 or events[0]["action"] != "review:" + row["reviewer_decision"]
                 or events[0]["before"] != row["suggested_action"]
                 or events[0]["after"] != (row["override_value"] or row["suggested_action"])
-                or events[0]["reason"] != row["review_note"] or events[0]["extra"]["human_confirmed"] is not False):
+                or events[0]["reason"] != row["review_note"] or events[0]["extra"]["human_confirmed"] is not human):
             raise ValueError("Missing, duplicate or inconsistent CVAT review audit")
     return decision
 
 
 def sync_report(output, directory=Path("demo/cvat")):
+    from tools.t02_human_review import RECEIPT as HUMAN_RECEIPT
+    if HUMAN_RECEIPT.exists():
+        # Validate the candidate before refusing to supersede a later sign-off.
+        check_run(output, verify(directory))
+        for name in ("audit_log.jsonl", "decision_log.csv"):
+            if not (output / name).read_text().startswith((QUEUE.parent / name).read_text()):
+                raise ValueError(f"Refusing to replace prior append-only history: {name}")
+        raise ValueError("A later human confirmation exists; keep this historical import unchanged")
     evidence = verify(directory)
     decision = check_run(output, evidence)
     # The previous review/audit remains in Git. Logs also retain their full prefix.
@@ -153,7 +167,10 @@ def verify_import(directory=Path("demo/cvat")):
             or receipt["status"] != decision["status"] or receipt["reason_code"] != decision["reason_code"]
             or receipt["owner"] != decision["owner"]):
         raise ValueError("Import receipt differs from pipeline evidence")
-    if (Path("reports/review_queue.csv").read_bytes() != (QUEUE.parent / "review_queue_reviewed.csv").read_bytes()
+    from tools.t02_human_review import RECEIPT as HUMAN_RECEIPT, verify_confirmation
+    if HUMAN_RECEIPT.exists():
+        verify_confirmation()
+    elif (Path("reports/review_queue.csv").read_bytes() != (QUEUE.parent / "review_queue_reviewed.csv").read_bytes()
             or Path("reports/audit_log.jsonl").read_bytes() != (QUEUE.parent / "audit_log.jsonl").read_bytes()
             or Path("reports/decision_log.csv").read_bytes() != (QUEUE.parent / "decision_log.csv").read_bytes()):
         raise ValueError("Conventional report paths differ from CVAT pipeline evidence")

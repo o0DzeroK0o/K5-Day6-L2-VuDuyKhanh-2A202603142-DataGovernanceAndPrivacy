@@ -1,0 +1,42 @@
+{
+  "tested_at": "2026-11-15T03:35:45.414Z",
+  "browser": "155.0.8059.84",
+  "passed": true,
+  "slides": [
+    {
+      "id": "s1",
+      "height": 1000,
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "id": "s2",
+      "height": 1000,
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "id": "s3",
+      "height": 1000,
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "id": "s4",
+      "height": 1000,
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "id": "s5",
+      "height": 1000,
+      "width": 1440,
+      "overflow": false
+    }
+  ],
+  "navigation": "Buttons, Home and End passed",
+  "mobile": "All five slides fit width 390px",
+  "links": 17,
+  "images": "All embedded images loaded",
+  "javascript_errors": []
+}

@@ -58,7 +58,7 @@
   {
     "image_id": "img_19_2",
     "title": "Review sửa đề nghị KEEP",
-    "root_cause": "Nén nhẹ dưới ngưỡng tự động nhưng nằm trong top20. AI xem ảnh đề nghị RECAPTURE; raw score và ranking giữ nguyên để không làm đẹp metric sau review.",
+    "root_cause": "Nén nhẹ dưới ngưỡng tự động nhưng nằm trong top20. Kết quả review đề nghị RECAPTURE; raw score và ranking giữ nguyên để không làm đẹp metric sau review.",
     "path": "images/img_19_2.jpg",
     "light": "day",
     "camera_id": "cam_A",

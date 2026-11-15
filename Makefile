@@ -57,3 +57,10 @@ t02-baseline:        ## required global Laplacian baseline (random is wiring onl
 
 t02-submission:      ## safe reproduction, separate from committed report / human review
 	$(PY) -m tools.t02_submission --output $(OUT)/reproduce --reports $(OUT)/reproduce/reports
+
+.PHONY: review-ui demo
+review-ui:           ## reviewed offline workspace, with all saved decisions
+	$(PY) -m tools.t02_review_ui
+
+demo: review-ui      ## rebuild the five-slide demo from saved, verified evidence
+	$(PY) -m tools.t02_artifacts
