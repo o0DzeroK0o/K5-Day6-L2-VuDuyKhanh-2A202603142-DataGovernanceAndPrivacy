@@ -1,5 +1,5 @@
 {
-  "tested_at": "2026-11-15T03:35:45.414Z",
+  "tested_at": "2026-11-15T04:05:49.241Z",
   "browser": "155.0.8059.84",
   "passed": true,
   "slides": [
@@ -36,7 +36,7 @@
   ],
   "navigation": "Buttons, Home and End passed",
   "mobile": "All five slides fit width 390px",
-  "links": 17,
+  "links": 16,
   "images": "All embedded images loaded",
   "javascript_errors": []
 }

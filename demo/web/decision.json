@@ -1,0 +1,26 @@
+{
+  "status": "REWORK",
+  "reason_code": "QUALITY_RECAPTURE_REQUIRED",
+  "reason": "Có ảnh cần thu lại; không release batch còn lỗi.",
+  "owner": "Vũ Duy Khanh — T004 / reviewer",
+  "scope": "T004:T02:triage",
+  "evidence": [
+    "ranked_review.csv",
+    "review_queue.csv",
+    "audit_log.jsonl",
+    "item_decisions.csv"
+  ],
+  "metrics": {
+    "n_items": 96,
+    "algorithm": "multifeature_v1",
+    "review_pool": 40,
+    "review_budget": 20,
+    "review_split": "eval",
+    "queue_size": 20,
+    "n_reviewed": 20,
+    "n_human_reviewed": 20,
+    "n_escalated": 0
+  },
+  "ts": "2026-11-15T04:05:31+00:00",
+  "canonical": "REWORK"
+}

@@ -33,7 +33,10 @@ const assert=require('node:assert/strict');
      assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
    }
    const links=await page.locator('a').evaluateAll(links=>links.map(a=>a.getAttribute('href')));
-   for(const link of links){assert.ok(!/^https?:/.test(link));await fs.access(path.resolve('demo',link));}
+   for(const link of links){
+     if (/^https?:/.test(link)) {assert.equal(link,'http://127.0.0.1:8765');continue;}
+     await fs.access(path.resolve('demo',link));
+   }
    assert.deepEqual(errors,[]);
    const report={tested_at:new Date().toISOString(),browser:await browser.version(),passed:true,slides:sizes,
      navigation:'Buttons, Home and End passed',mobile:'All five slides fit width 390px',links:links.length,

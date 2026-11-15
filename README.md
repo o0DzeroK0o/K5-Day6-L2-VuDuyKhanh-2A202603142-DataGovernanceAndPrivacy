@@ -8,19 +8,21 @@
 >
 > **Đã xác nhận review trực tiếp:** Vũ Duy Khanh đã xem đủ 20 frame, đồng ý **19 RECAPTURE / 1 KEEP** (`img_23_1`) và hai override `img_19_2`, `img_06_3`. Pipeline: **REWORK / QUALITY_RECAPTURE_REQUIRED**, `n_human_reviewed=20`. [Xác nhận](reports/human_review_confirmation.json) · [Decision hiện tại](reports/evidence/human_review/decision.json).
 >
-> **Demo mới:** [5 slides offline](demo/t004_demo.html) · [Ảnh 5 slide](demo/slides/) · [Công cụ review](reports/contact_sheet.html) · [Ảnh thao tác UI](demo/ui/) · [20 frame CVAT local](demo/cvat/index.html) · [XML export](demo/cvat/annotations.xml). Bản trình chiếu cũ và preview cũ đã được thay thế. Ảnh CVAT gốc được giữ để đối chiếu.
+> **Demo mới:** [5 slides offline](demo/t004_demo.html) · [Ảnh 5 slide](demo/slides/) · [Ứng dụng web](http://127.0.0.1:8765) · [Ảnh thao tác web](demo/web/index.html) · [Bản review HTML](reports/contact_sheet.html) · [20 frame CVAT local](demo/cvat/index.html) · [XML export](demo/cvat/annotations.xml). Bản trình chiếu cũ và preview cũ đã được thay thế. Ảnh CVAT gốc được giữ để đối chiếu.
 >
 > Số liệu dùng nhãn quan sát nội bộ, chưa phải GT giảng viên. Xác nhận 20 frame không thay thế kiểm định toàn bộ 40 nhãn eval. [Nguồn nhãn](reports/annotations/README.md) · [Hướng dẫn chạy](docs/HUONG_DAN_CHAY_DEMO_T004.md).
 
-Mở ngay giao diện và slides trên máy này:
+Chạy ứng dụng web tương tác đủ năm bước:
 
 ```bash
-make demo
-omarchy launch browser "file://$PWD/reports/contact_sheet.html"
-omarchy launch browser "file://$PWD/demo/t004_demo.html"
+make web
 ```
 
-Máy không có Omarchy dùng `xdg-open reports/contact_sheet.html` và `xdg-open demo/t004_demo.html`.
+Mở **http://127.0.0.1:8765**, chọn **Lượt mới** và bấm **Load → Process → Rank → Review → Decide**. Các nút gọi Python xử lý thật, lưu review/audit theo từng phiên bản và cho tải kết quả. Ở Review, “Nạp 20 quyết định đã xác nhận” khôi phục đúng bản duyệt CVAT đã kiểm chứng; một lượt mới không tự được xác nhận. Giữ terminal chạy; Ctrl+C để dừng. Kết quả giữ trong `out/web/` và mở lại được sau khi khởi động server.
+
+Đây là web HTTP trên máy local, không cần Internet khi xử lý. Mở `out/poc/contact_sheet.html` chỉ xem bản HTML, không chạy các bước trên máy chủ. [Hướng dẫn chi tiết](docs/HUONG_DAN_CHAY_DEMO_T004.md) · [Ảnh thực thi năm bước](demo/web/index.html).
+
+Slides minh họa: `make demo`, rồi `xdg-open demo/t004_demo.html`.
 
 ```bash
 # Python 3.12, đã cài .venv; activate để dùng đúng python của bài:

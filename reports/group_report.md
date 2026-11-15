@@ -39,7 +39,7 @@
 ## 03 · Research & design
 
 - 2–3 references (URL + ngày xem) và **vì sao** chọn kỹ thuật: OpenCV Laplace Operator và SciPy ndimage.convolve, xem 2026-11-14 (URL ở mục 11). Chọn Laplacian vì đo biến thiên cạnh rẻ trên CPU; mode reflect giúp xác định biên convolution tái lập. ROI/JPEG/camera là heuristic nhóm thử trên dev, không quy kết các nguồn chứng minh ngưỡng này.
-- Sơ đồ data flow (input → process → rank/QC → review → decision → report): input + sha256 → pixel features → sort score, top20 eval → CVAT tag + export XML → CSV review theo image_id → override hành động + audit append-only → decision.json → evaluator riêng và report.
+- Sơ đồ data flow (input → process → rank/QC → review → decision → report): Web HTTP chạy bằng `make web`: Load kiểm input + sha256 → Process tính pixel features → Rank lấy top20 eval → Review lưu quyết định hoặc nhập bản CVAT đã xác nhận → Decide áp policy và tạo decision/audit. Mỗi nút thực thi hàm tương ứng trong src.pipeline qua worker riêng; kết quả và phiên bản giữ trong out/web/. [Hướng dẫn](../docs/HUONG_DAN_CHAY_DEMO_T004.md), [ảnh thực thi](../demo/web/index.html). Evaluator và report chạy riêng, không dùng GT khi xử lý.
 - Thành phần offline (model/weights + checksum + license nếu có): Không pretrained model, không weights/API. NumPy/Pillow/SciPy; môi trường Python 3.12.16, phiên bản ở requirements-lock.txt. Hash input trong manifest, hash protocol trong protocol_freeze.json.
 - Trade-offs đã cân nhắc: Max của các tín hiệu giải thích được và chạy CPU; ROI bỏ sky giảm báo nhầm nhưng glare nhẹ chưa cháy trắng vẫn lọt. Camera/light thresholds giảm loại nhầm night/cam_B nhưng cần metadata đúng. 10 OOD synthetic không thay dữ liệu thật.
 
@@ -79,10 +79,10 @@
 
 ## 07 · Human & decision
 
-- Review queue (file, B, cách ưu tiên): reports/review_queue.csv: đã nhập 20/20 quyết định từ CVAT task/job #17, 19 RECAPTURE / 1 KEEP. [Ảnh từng frame](../demo/cvat/index.html), [XML](../demo/cvat/annotations.xml), [biên nhận nhập](cvat_review_import.json). review_source=Vũ Duy Khanh; review_note giữ nhận xét CVAT; reviewer pipeline hiện tại là Vũ Duy Khanh. Học viên xác nhận đã trực tiếp review đủ 20 frame và đồng ý kết quả; [xác nhận](human_review_confirmation.json). [Công cụ review](contact_sheet.html).
+- Review queue (file, B, cách ưu tiên): reports/review_queue.csv: đã nhập 20/20 quyết định từ CVAT task/job #17, 19 RECAPTURE / 1 KEEP. [Ảnh từng frame](../demo/cvat/index.html), [XML](../demo/cvat/annotations.xml), [biên nhận nhập](cvat_review_import.json). review_source=Vũ Duy Khanh; review_note giữ nhận xét CVAT; reviewer pipeline hiện tại là Vũ Duy Khanh. Học viên xác nhận đã trực tiếp review đủ 20 frame và đồng ý kết quả; [xác nhận](human_review_confirmation.json). [Ứng dụng web và hướng dẫn](../docs/HUONG_DAN_CHAY_DEMO_T004.md); [bản review HTML](contact_sheet.html).
 - Cách override + audit log (`out/audit_log.jsonl`): Đã áp 2 override KEEP→RECAPTURE cho img_19_2 và img_06_3 từ export CVAT, chạy lại pipeline offline và thêm audit mới với ghi chú nguyên văn. Giữ toàn bộ audit cũ, raw_predictions, score và ranking. Verifier đối chiếu đủ 20 quyết định CSV, hành động cuối và audit với XML/API.
 - Decision policy + `reason_code` + owner: REWORK / QUALITY_RECAPTURE_REQUIRED; owner Vũ Duy Khanh. n_reviewed=20, n_human_reviewed=20; human_review_confirmed=true. Đã ghi lần ký duyệt mới sau xác nhận trực tiếp của học viên; giữ nguyên lịch sử nhập CVAT.
-- Khi nào HOLD/REWORK thay vì tự động release: HOLD khi thiếu review/escalate/domain mới; REWORK khi còn RECAPTURE; không ép GO để đẹp bài. [Hướng dẫn từng bước export CSV và xác nhận](../docs/HUONG_DAN_HOAN_TAT_T004.md).
+- Khi nào HOLD/REWORK thay vì tự động release: HOLD khi thiếu review/escalate/domain mới; REWORK khi còn RECAPTURE; không ép GO để đẹp bài. [Hướng dẫn review, xác nhận và quyết định](../docs/HUONG_DAN_HOAN_TAT_T004.md).
 
 ## 08 · Reproduce & tests
 
@@ -93,7 +93,7 @@ python -m src.evaluate --track t02 --pred out/ranked_review.csv --gt reports/ann
 pytest -q
 ```
 
-- Output của `pytest -q`: 120 passed, 39 skipped in 8.64s; các skip yêu cầu GT giảng viên, không tắt test. Preflight 0 FAIL/2 WARN tùy chọn; verify 14 manifests; compileall và kiểm contract pass. Chạy trong .venv (source .venv/bin/activate).
+- Output của `pytest -q`: 147 passed, 39 skipped in 54.72s; các skip yêu cầu GT giảng viên, không tắt test. Preflight 0 FAIL/2 WARN tùy chọn; verify 14 manifests; compileall và kiểm contract pass. Chạy trong .venv (source .venv/bin/activate).
 - Máy / CPU / OS / Python: Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz; Linux-7.2.15-1-omarchy-x86_64-with-glibc2.44; Python 3.12.16 · git sha: 6c525dc
 
 ## 09 · Limitations & ethics

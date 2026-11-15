@@ -18,3 +18,4 @@
 - [Kiểm tra log Chromium và mở contact sheet trên Omarchy](2026-11-15-101326-kiem-tra-loi-mo-chromium.md)
 
 - [Xây dựng UI và xác nhận review trực tiếp](2026-11-15-102502-xay-dung-ui-va-xac-nhan-review.md)
+- [Ứng dụng web chạy thật năm bước pipeline](2026-11-15-104451-web-pipeline-tuong-tac.md)

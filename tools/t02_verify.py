@@ -79,6 +79,9 @@ def verify_evidence():
     except (ValueError, KeyError, OSError) as e:problems.append(f'CVAT demo: {e}')
     try:verify_cvat_import()
     except (ValueError, KeyError, OSError) as e:problems.append(f'CVAT review import: {e}')
+    from tools.t02_web_demo import verify as verify_web
+    try:verify_web()
+    except (ValueError, KeyError, OSError) as e:problems.append(f'Web pipeline demo: {e}')
     manifest=Path('reports/evidence_manifest.json')
     if manifest.exists():
         expected=read_json(manifest)['files']

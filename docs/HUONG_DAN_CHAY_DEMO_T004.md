@@ -1,66 +1,90 @@
-# Chạy công cụ review và demo T004
+# Chạy pipeline web và demo T004
 
-## Mở giao diện và slides mới
+## Khởi động ứng dụng
 
-Tại gốc repository:
+Tại gốc repository, giữ terminal này chạy:
+
+```bash
+make web
+```
+
+Mở **http://127.0.0.1:8765** trong trình duyệt. Có thể dùng terminal khác:
+
+```bash
+xdg-open http://127.0.0.1:8765
+```
+
+Ứng dụng HTTP gọi Python để thực thi từng bước và lưu kết quả trên máy chủ local. Không cần Internet trong lúc xử lý. Đây là địa chỉ trên máy đang chạy lệnh, chưa triển khai lên hosting công khai. `out/poc/contact_sheet.html` và `reports/contact_sheet.html` là bản review HTML riêng, không có máy chủ để chạy năm bước.
+
+Lệnh tương đương: `.venv/bin/python -m src.web_app --port 8765 --output out/web`. Nếu cổng đang được dùng, mở trang đang chạy hoặc chọn `make web PORT=8766 OUT=out/alternate` rồi mở cổng mới. Dừng bằng **Ctrl+C**; kết quả đã lưu vẫn còn. Khởi động lại với cùng `OUT` để mở lại lịch sử.
+
+Máy mới cần Python 3.12 và dependency trước lần đầu:
+
+```bash
+python3.12 -m venv .venv
+.venv/bin/python -m pip install -r requirements-lock.txt
+make web
+```
+
+## Thao tác đủ năm bước
+
+1. **Lượt mới → Load → Nạp dữ liệu**: đọc 96 ảnh synthetic, metadata và kiểm manifest SHA-256. Gallery hiện ảnh đã nạp.
+2. **Process → Chạy Process**: tính độ nét, độ sáng, lóa ROI, blockiness JPEG và score từ pixel. Xem 96 dòng tín hiệu; tải `raw_predictions.csv` để đối chiếu.
+3. **Rank → Xếp hạng queue**: chọn top 20 trên pool 40 ảnh eval. Bấm mã ảnh để chuyển tới Review của frame đó.
+4. **Review**: chọn từng frame 01–20, bấm ảnh để phóng to, nhập người review và quyết định. Sửa/từ chối phải có KEEP hoặc RECAPTURE cùng nhận xét. Bấm **Lưu review lên máy chủ**. Nếu đã trực tiếp xem và chịu trách nhiệm cho các quyết định đang nhập, tích ô xác nhận trước khi lưu.
+5. **Decide → Chạy Decide**: áp policy trên review đã lưu và tạo decision, CSV, audit. Có thể tải file từ “Kết quả và lịch sử thực thi”.
+
+Bản duyệt CVAT của **Vũ Duy Khanh** đã được xác nhận đủ 20 frame. Để trình diễn lại kết quả này, sau Rank bấm **Nạp 20 quyết định đã xác nhận**, rồi chạy Decide. Máy chủ kiểm queue, điểm, ảnh và biên nhận trước khi nhập. Kết quả: **19 RECAPTURE, 1 KEEP (`img_23_1`)**, hai override `img_19_2`, `img_06_3`, batch **REWORK / QUALITY_RECAPTURE_REQUIRED**. Không phải xác nhận lại cho cùng bằng chứng.
+
+Một lượt mới bắt đầu chưa xác nhận. Review chưa đủ hoặc chưa xác nhận sẽ cho HOLD; `escalate` cũng cho HOLD. Sửa dữ liệu trong form bỏ dấu xác nhận và khóa Decide cho đến khi lưu. Bản review mới không tự kế thừa xác nhận CVAT. Máy chủ kiểm dữ liệu lần nữa, giữ nguyên nháp khi yêu cầu bị từ chối và báo khi tab đang dùng phiên bản cũ.
+
+## Kết quả lưu ở đâu
+
+Mỗi lượt có một thư mục `out/web/<run_id>/`. `current.json` trỏ tới phiên bản hiện hành trong `revisions/`; mỗi bước tạo một phiên bản mới. Chọn lượt ở góc trên bên phải để mở lại. Lịch sử bước, thời gian thực thi và audit hiện trên giao diện. Chỉ chạy một server cho mỗi thư mục output; dùng `OUT=out/thu-nghiem` nếu cần server riêng.
+
+| Bước | File tải được sau khi hoàn tất |
+|---|---|
+| Load | `loaded_images.csv`, `loaded_manifest.csv` |
+| Process | `raw_predictions.csv` |
+| Rank | `review_queue.csv` |
+| Review | `review_queue_reviewed.csv`, `ranked_review.csv`, `item_decisions.csv`, `review_confirmation.json`, `audit_log.jsonl` |
+| Decide | `decision.json`, `decision_log.csv` |
+| Mọi bước | `workflow.json`, `run_info.json` |
+
+Review thay đổi sẽ làm decision hiện hành hết hiệu lực; bấm Decide để tính lại. Phiên bản cũ và decision log vẫn được giữ. Xóa `out/web/` sẽ xóa các lượt chạy local, vì vậy sao lưu các file cần nộp trước khi dọn thư mục.
+
+Các lượt chạy web không tự ghi đè report đã ký duyệt, metric, nhãn hoặc cấu hình đã khóa. Xác nhận chỉ bao phủ 20 frame review, không phải toàn bộ 40 nhãn eval.
+
+## Slides và ảnh demo
 
 ```bash
 make demo
-omarchy launch browser "file://$PWD/reports/contact_sheet.html"
-omarchy launch browser "file://$PWD/demo/t004_demo.html"
+xdg-open demo/t004_demo.html
+xdg-open demo/web/index.html
 ```
 
-`make demo` dựng lại giao diện và 5 slide từ bằng chứng đã lưu, không cần web server hoặc mạng. Trên Linux khác dùng `xdg-open` với hai đường dẫn trên. Cách mở qua launcher Omarchy tránh khởi động thêm một Chromium không cần thiết; [lần kiểm tra lỗi zygote trước đó](2026-11-15-101326-kiem-tra-loi-mo-chromium.md) không xác định nguyên nhân gốc của log broken pipe.
+- [5 slides mới](../demo/t004_demo.html) dùng ảnh thực thi HTTP và CVAT local; phím **← / →**, **PageUp / PageDown**, **Home / End** để chuyển slide.
+- [Ảnh đủ năm bước web](../demo/web/index.html), [kết quả kiểm thử trình duyệt](../demo/web/verification.json), [decision tải từ server](../demo/web/decision.json).
+- [20 frame CVAT local](../demo/cvat/index.html), [XML export](../demo/cvat/annotations.xml), [xác nhận trực tiếp](../reports/human_review_confirmation.json).
+- [Ảnh 5 slide](../demo/slides/). Bản trình chiếu cũ đã được thay tại cùng đường dẫn.
 
-Slides dùng phím **→ / ←**, **PageDown / PageUp**, **Home / End**, hoặc hai nút ở cuối màn hình. Bấm ảnh để mở ảnh gốc. [Ảnh 5 slide mới](../demo/slides/) và [ảnh thao tác UI](../demo/ui/) được chụp bằng Chromium. Bản preview cũ đã xóa.
+`make demo` dựng lại tài liệu minh họa từ bằng chứng đã lưu. `make web` khởi động ứng dụng tương tác.
 
-## Thao tác công cụ review
-
-1. Giao diện mở đủ **20 frame**, người review **Vũ Duy Khanh**, **2 override**, **0 frame cần xem tiếp**.
-2. Tìm mã ảnh, nhận xét hoặc nhóm; lọc “Đã sửa đề nghị” để thấy `img_19_2` và `img_06_3`.
-3. Bấm ảnh để phóng to; Esc hoặc Đóng để quay lại. Xem thông tin điểm/lý do trong “Thông tin và tín hiệu”.
-4. `Đồng ý đề nghị` giữ hành động gợi ý. `Sửa hành động` / `Từ chối đề nghị` cần KEEP hoặc RECAPTURE và nhận xét. `Cần xác minh` / `Bỏ qua` chưa được tính hoàn tất.
-5. Nháp tự lưu trên trình duyệt. Dùng “Bỏ bản nháp” để trở lại dữ liệu gốc. Nếu trình duyệt chặn lưu nháp, giao diện thông báo và vẫn xuất CSV được.
-6. “Xuất CSV” xuất **toàn bộ 20 frame**, kể cả khi đang lọc. “Nhập CSV” chỉ nhận đủ frame, không trùng ID, không đổi điểm hoặc thông tin queue. File tải về giữ định dạng `review_queue_reviewed.csv`.
-
-Xuất CSV không tự sửa file trong repository. Nháp và thao tác thử không thay bản ký duyệt đã lưu.
-
-## Chạy lại pipeline với review đã xác nhận
+## Tái lập và kiểm thử
 
 ```bash
 make t02-submission OUT=out/demo-new
-cat out/demo-new/reproduce/poc/decision.json
-```
-
-Lệnh tái tạo baseline, PoC, review đã xác nhận, ablation và OOD ở thư mục riêng. PoC phải có `n_human_reviewed=20`, **REWORK / QUALITY_RECAPTURE_REQUIRED**. Thư mục có sẵn review sẽ giữ nguyên; để kiểm tra sạch dùng tên thư mục mới.
-
-Chỉ chạy scoring bằng `make run OUT=out/scoring` vẫn tạo đủ output. Nếu chưa có CSV review trong thư mục đó, decision là HOLD vì thiếu review. Mở giao diện đã ký duyệt bằng `make review-ui` thay vì nhầm với queue trống của lần scoring mới.
-
-## Chạy CSV vừa xuất qua pipeline
-
-```bash
-mkdir -p out/review-new
-cp ~/Downloads/review_queue_reviewed.csv out/review-new/review_queue_reviewed.csv
-.venv/bin/python -m src.main --config configs/lab.yaml --output out/review-new --offline --seed 42
-cat out/review-new/decision.json
-```
-
-Chỉ dùng tên/thời điểm của người đã trực tiếp review; không ghi đè bằng chứng cũ khi luyện thao tác. Lệnh trên chạy ở thư mục mới và không cập nhật report chính. Score/ranking giữ nguyên; kết quả vẫn REWORK khi còn yêu cầu thu lại ảnh.
-
-## Kiểm chứng
-
-```bash
 make test
 make preflight verify
-.venv/bin/python -m tools.t02_cvat_review
 .venv/bin/python -m tools.t02_human_review
+.venv/bin/python -m tools.t02_web_demo
 .venv/bin/python -m tools.t02_verify
 ```
 
-Kiểm thử UI bằng Node và Playwright có sẵn trên máy:
+Kiểm thử web bằng Chromium, tự chạy một server riêng và lưu file vào `out/web-ui-test/`:
 
 ```bash
-PLAYWRIGHT_MODULE=/home/dzerok/lemo-opuscar/node_modules/playwright-core node tools/test_review_ui.cjs
+PLAYWRIGHT_MODULE=/home/dzerok/lemo-opuscar/node_modules/playwright-core node tools/test_web_ui.cjs
 ```
 
-Máy khác đặt `PLAYWRIGHT_MODULE` tới package Playwright đã cài và `CHROMIUM_PATH` tới Chromium. Script kiểm tra thật trong trình duyệt, ghi CSV thử vào `out/ui-test/` và cập nhật ảnh trong `demo/ui/`. Sau khi chụp lại, chạy `make demo` và kiểm tra diff trước cập nhật manifest.
+Máy khác đặt `PLAYWRIGHT_MODULE` tới package Playwright đã cài và `CHROMIUM_PATH` tới Chromium. Để chủ động cập nhật ảnh demo từ server đang chạy, dùng thêm `WEB_BASE_URL=http://127.0.0.1:8765 WEB_CAPTURE_DIR=demo/web`, kiểm tra ảnh/diff rồi `make demo`. Không cập nhật manifest trước khi đối chiếu kết quả.

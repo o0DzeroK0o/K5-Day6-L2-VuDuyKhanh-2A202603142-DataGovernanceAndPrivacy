@@ -1,0 +1,49 @@
+{
+  "reviewer": "Vũ Duy Khanh",
+  "confirmed_at": "2026-11-15T03:28:46+00:00",
+  "source": "Explicit reviewer confirmation in the project conversation",
+  "statement": "Đã xem đủ 20 frame và đồng ý kết quả này",
+  "question": "Bạn xác nhận đã trực tiếp xem đủ 20 frame và duyệt kết quả 19 RECAPTURE, 1 KEEP (img_23_1), gồm hai override img_19_2 và img_06_3 chứ?",
+  "human_review_confirmed": true,
+  "frame_count": 20,
+  "action_counts": {
+    "RECAPTURE": 19,
+    "KEEP": 1
+  },
+  "item_ids": [
+    "img_13_3",
+    "img_15_2",
+    "img_19_3",
+    "img_16_2",
+    "img_17_2",
+    "img_15_3",
+    "img_23_3",
+    "img_17_3",
+    "img_05_3",
+    "img_06_2",
+    "img_05_2",
+    "img_01_2",
+    "img_23_2",
+    "img_01_3",
+    "img_13_2",
+    "img_16_3",
+    "img_03_3",
+    "img_19_2",
+    "img_23_1",
+    "img_06_3"
+  ],
+  "override_ids": [
+    "img_19_2",
+    "img_06_3"
+  ],
+  "annotation_sha256": "45d767672403de1b5842a121c01361c324ea2fb13050ea5d56f4138404235008",
+  "queue_sha256": "8973fdb6e27bebd86c4fcee46d7145b97bed24d0361b9d49ace450032adb719c",
+  "previous_import": "reports/cvat_review_import.json",
+  "previous_import_sha256": "d3986905b464f277debf23dd6987a00db8779de2c8f2880e929df0e46a33fcb6",
+  "scope": "20 queue frames and their saved CVAT decisions; does not validate all 40 evaluation labels",
+  "review_csv": "reports/evidence/human_review/review_queue_reviewed.csv",
+  "review_csv_sha256": "b40a8b8dba479ac374ef4ecb6c405bbd8a6cc073896be7a8876d725ebab696b6",
+  "status": "REWORK",
+  "reason_code": "QUALITY_RECAPTURE_REQUIRED",
+  "imported_at": "2026-11-15T04:05:29.902372+00:00"
+}

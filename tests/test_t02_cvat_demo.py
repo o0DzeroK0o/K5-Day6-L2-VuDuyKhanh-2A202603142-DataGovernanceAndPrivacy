@@ -164,13 +164,12 @@ def test_five_slides_embed_actual_cvat_screenshots_and_regenerate_exactly():
     parser.feed(text)
     evidence = [img for img in parser.images if "data-evidence" in img]
     assert {img["data-evidence"] for img in evidence} == {
-        "ui/01-workspace.png", "ui/02-overrides.png", "cvat/03-save-verify.jpg", "cvat/04-export-dialog.jpg",
-        "cvat/05-export-finished.jpg", "cvat/06-summary.jpg",
+        "web/02-process.png", "web/04-review.png", "web/05-decide.png", "cvat/03-save-verify.jpg",
     }
     for img in evidence:
         assert base64.b64decode(img["src"].split(",", 1)[1]) == (Path("demo") / img["data-evidence"]).read_bytes()
     assert "Vũ Duy Khanh" in text and "Vũ Duy Khánh" not in text
-    assert not re.search(r'(?:src|href)="https?://', text)
+    assert re.findall(r'(?:src|href)="(https?://[^\"]+)"', text) == ['http://127.0.0.1:8765']
     gallery = Path("demo/cvat/index.html").read_text()
     assert gallery.count("<article>") == 20
     assert all((Path("demo/cvat") / link).is_file() for link in re.findall(r'src="([^"]+)"', gallery))

@@ -1,7 +1,7 @@
 {
-  "tests": "120 passed, 39 skipped in 8.64s",
+  "tests": "147 passed, 39 skipped in 54.72s",
   "tests_command": ".venv/bin/python -m pytest -o addopts= -q",
-  "verification_scope": "Current review UI and later explicit human confirmation; historical snapshots retained below.",
+  "verification_scope": "Live HTTP application executing all five frozen pipeline stages, persistent review, updated demo and unchanged scoring evidence.",
   "cpu": "Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz",
   "preflight": {
     "fail": 0,
@@ -21,7 +21,7 @@
     "reason": "instructor GT not distributed"
   },
   "human_review_completed": true,
-  "browser": "Chromium 155: 20 enlarged frames, search/filter, validation, draft reload, CSV round-trip, desktop/mobile; 5 slides, buttons/keyboard, local links. See ui_verification.json and demo_verification.json.",
+  "browser": "Chromium 155: live Load/Process/Rank/Review/Decide, all 20 frames, server save/reload, CSV/JSON download, validation, stale revisions, connection failures and 390px layouts; five slides rendered and inspected. See demo/web/verification.json and reports/demo_verification.json.",
   "clean_output_reproduction": "Exit 0; four raw prediction tables, all evaluator metric arrays, full analysis/bootstrap equal original evidence. 20 confirmed decisions reproduce REWORK; no score or label changes.",
   "clean_output_reproduction_command": ".venv/bin/python -m tools.t02_submission --output out/final-ui-reproduce --reports out/final-ui-reproduce/reports",
   "cvat_review_import": {
@@ -55,5 +55,28 @@
     "status": "REWORK",
     "reason_code": "QUALITY_RECAPTURE_REQUIRED"
   },
-  "csv_browser_pipeline": "Browser-exported CSV exactly matches signed queue; real offline pipeline exited 0 with 20 human reviews and REWORK; all raw predictions unchanged."
+  "csv_browser_pipeline": "Browser-exported CSV exactly matches signed queue; real offline pipeline exited 0 with 20 human reviews and REWORK; all raw predictions unchanged.",
+  "previous_ui_verification": {
+    "tests": "120 passed, 39 skipped in 8.64s",
+    "browser": "Chromium 155: 20 enlarged frames, search/filter, validation, draft reload, CSV round-trip, desktop/mobile; 5 slides, buttons/keyboard, local links. See ui_verification.json and demo_verification.json.",
+    "scope": "Completed review UI and human-confirmation task before the HTTP application."
+  },
+  "clean_output_reproduction_scope": "Verified before adding the HTTP app. The current web run also reproduces the frozen raw_predictions.csv byte-for-byte.",
+  "web_pipeline": {
+    "command": "make web",
+    "url": "http://127.0.0.1:8765",
+    "evidence": "demo/web/verification.json",
+    "run_id": "50fa40d8de1e438ab884a30802e58b7f",
+    "revision": 5,
+    "visited_frames": 20,
+    "status": "REWORK",
+    "n_human_reviewed": 20,
+    "raw_predictions": "byte-for-byte match with reports/evidence/poc/raw_predictions.csv",
+    "restart": "Actual HTTP server stopped and restarted; saved revision, all 20 reviews and decision preserved.",
+    "isolated_browser_test": "tools/test_web_ui.cjs also passed with its own ephemeral server; output in out/web-ui-test/.",
+    "javascript_syntax": "node --check src/web_ui/app.js and tools/test_web_ui.cjs passed",
+    "hosting_scope": "HTTP on this machine only; no public deployment",
+    "test_run_id": "60b4865d2f7b44a7a06e54139c8b8e21",
+    "evidence_scope": "Clean five-stage run with only the imported, already confirmed CVAT review. Validation tests use a separate run."
+  }
 }

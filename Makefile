@@ -3,12 +3,13 @@ PY ?= .venv/bin/python
 PYTHON ?= python3.12
 TRACK ?= t02
 OUT ?= out
+PORT ?= 8765
 PRED = $(shell $(PY) -c "from src.metrics.tracks import get_track;print(get_track('$(TRACK)').pred_file)")
 
 .PHONY: help setup preflight test fixtures verify baseline run eval-baseline eval-poc compare real-data tag-demo tag-final
 
 help:
-	@echo "make setup | preflight | test | verify | baseline TRACK=t11 | run TRACK=t02 | eval-baseline | eval-poc | compare"
+	@echo "make web [PORT=8765] | demo | setup | preflight | test | verify | baseline TRACK=t11 | run TRACK=t02 | eval-baseline | eval-poc | compare"
 
 setup:
 	$(PYTHON) -m venv .venv && $(PY) -m pip install -q -r requirements-lock.txt
@@ -58,9 +59,13 @@ t02-baseline:        ## required global Laplacian baseline (random is wiring onl
 t02-submission:      ## safe reproduction, separate from committed report / human review
 	$(PY) -m tools.t02_submission --output $(OUT)/reproduce --reports $(OUT)/reproduce/reports
 
-.PHONY: review-ui demo
+.PHONY: web review-ui demo
+web:                 ## live HTTP app: Load -> Process -> Rank -> Review -> Decide
+	$(PY) -m src.web_app --port $(PORT) --output $(OUT)/web
+
 review-ui:           ## reviewed offline workspace, with all saved decisions
 	$(PY) -m tools.t02_review_ui
 
 demo: review-ui      ## rebuild the five-slide demo from saved, verified evidence
+	$(PY) -m tools.t02_web_demo
 	$(PY) -m tools.t02_artifacts

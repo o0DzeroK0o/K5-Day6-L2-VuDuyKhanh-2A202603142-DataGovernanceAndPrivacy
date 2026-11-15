@@ -889,14 +889,14 @@ make tag-final   <span class="c"># +24h nộp</span></pre>
         </ol>
 
         <h3>Checklist nhanh riêng T02</h3>
-        <p>T004: <strong>6/7 mục đã đạt</strong>; còn review người thật.</p>
+        <p>T004: <strong>7/7 mục đã đạt</strong>; đã xác nhận trực tiếp 20 frame. Chạy <code>make web</code> và mở <a href="http://127.0.0.1:8765">ứng dụng năm bước</a>.</p>
         <ul class="checklist">
           <li><input type="checkbox" checked disabled aria-label="Đã đạt">Đã đọc <code>docs/tracks/T02.md</code></li>
           <li><input type="checkbox" checked disabled aria-label="Đã đạt"><code>lab.yaml</code> trỏ <code>track: t02</code> + <code>fixtures/t02_raw_qc</code></li>
           <li><input type="checkbox" checked disabled aria-label="Đã đạt">Baseline T02 chạy được</li>
           <li><input type="checkbox" checked disabled aria-label="Đã đạt"><code>process()</code> trả DataFrame có <code>image_id, score</code></li>
           <li><input type="checkbox" checked disabled aria-label="Đã đạt">PoC chạy xong → có <code>out/poc/ranked_review.csv</code></li>
-          <li><input type="checkbox" disabled aria-label="Chưa đạt">Có ít nhất một vòng review người thật<span class="pending-note">Chưa đạt: bạn cần tự review ảnh và xuất CSV; vòng review AI chưa thay cho người thật.</span></li>
+          <li><input type="checkbox" checked disabled aria-label="Đã đạt">Có ít nhất một vòng review người thật<span class="pending-note">Vũ Duy Khanh đã xác nhận trực tiếp review đủ 20 frame. <a href="reports/human_review_confirmation.json">Bản xác nhận</a>.</span></li>
           <li><input type="checkbox" checked disabled aria-label="Đã đạt">Report nêu failure mode (night / glare / cam_B)</li>
         </ul>
       </section>
@@ -919,14 +919,14 @@ make tag-final   <span class="c"># +24h nộp</span></pre>
 
       <section id="checklist">
         <h2>Checklist trước khi nộp</h2>
-        <p>T004: <strong>6/8 mục đã đạt</strong>. Các mục chưa tích có ghi rõ việc còn lại. <a href="docs/HUONG_DAN_HOAN_TAT_T004.md">Xem hướng dẫn thực hiện</a>.</p>
+        <p>T004: <strong>7/8 mục đã đạt</strong>. Các mục chưa tích có ghi rõ việc còn lại. <a href="docs/HUONG_DAN_HOAN_TAT_T004.md">Xem hướng dẫn thực hiện</a>.</p>
         <ul class="checklist">
           <li><input type="checkbox" checked disabled aria-label="Đã đạt">Đã chọn 1 track và đọc hết đề <code>docs/tracks/TXX.md</code></li>
           <li><input type="checkbox" checked disabled aria-label="Đã đạt">Đã sửa <code>configs/lab.yaml</code> (group_id, owner, track)</li>
           <li><input type="checkbox" checked disabled aria-label="Đã đạt">Setup + test chạy ổn (theo tab hệ điều hành ở bước “Bật máy”)</li>
           <li><input type="checkbox" checked disabled aria-label="Đã đạt">PoC chạy ra file đúng contract trong <code>out/poc/</code></li>
           <li><input type="checkbox" checked disabled aria-label="Đã đạt">Có baseline + PoC + giải thích trong report</li>
-          <li><input type="checkbox" disabled aria-label="Chưa đạt">Có vòng review người thật (queue / audit)<span class="pending-note">Chưa đạt: cần review thật 20 ảnh và lưu tên reviewer/quyết định vào audit.</span></li>
+          <li><input type="checkbox" checked disabled aria-label="Đã đạt">Có vòng review người thật (queue / audit)<span class="pending-note">20/20 frame, 19 RECAPTURE và 1 KEEP. <a href="reports/evidence/human_review/decision.json">Decision sau xác nhận</a> · <a href="docs/HUONG_DAN_CHAY_DEMO_T004.md">Chạy pipeline web</a>.</span></li>
           <li><input type="checkbox" checked disabled aria-label="Đã đạt">Có <code>group_report.md</code> + <code>team_contributions.csv</code></li>
           <li><input type="checkbox" disabled aria-label="Chưa đạt">Đã tag demo / final theo mốc thời gian<span class="pending-note">Đã tạo hai tag cục bộ demo-180m và final-24h. Còn xác nhận đúng mốc giờ của lớp; chưa push/nộp.</span></li>
         </ul>

@@ -33,7 +33,30 @@ def test_demo_contains_five_offline_pages_and_real_evidence():
     assert 'data:image/jpeg;base64,' in text
     assert 'QUALITY_RECAPTURE_REQUIRED' in text
     assert 'chưa phải điểm chính thức' in text
-    assert not re.search(r'(?:src|href)="https?://',text)
+    assert re.findall(r'(?:src|href)="(https?://[^\"]+)"',text)==['http://127.0.0.1:8765']
+    assert all(f'web/{name}' in text for name in ('02-process.png','04-review.png','05-decide.png'))
+    assert 'make web' in text
+
+
+def test_web_demo_is_actual_complete_execution():
+    from tools.t02_web_demo import verify
+    report=verify()
+    assert len(report['visited_frames'])==20 and report['human_reviewed']==20
+    assert report['final_status']=='REWORK'
+
+
+def test_web_demo_rejects_changed_review_even_with_same_counts(tmp_path):
+    import csv
+    import shutil
+    from tools.t02_web_demo import verify
+    shutil.copytree('demo/web',tmp_path/'web')
+    path=tmp_path/'web/review_queue_reviewed.csv'
+    with path.open(newline='') as stream:
+        rows=list(csv.DictReader(stream))
+    rows[0]['review_note']='A different, unconfirmed quality observation'
+    with path.open('w',newline='') as stream:
+        writer=csv.DictWriter(stream,fieldnames=list(rows[0]));writer.writeheader();writer.writerows(rows)
+    with pytest.raises(ValueError,match='signed CVAT decisions'):verify(tmp_path/'web')
 
 
 def test_evidence_matches_shared_evaluator_and_frozen_protocol():

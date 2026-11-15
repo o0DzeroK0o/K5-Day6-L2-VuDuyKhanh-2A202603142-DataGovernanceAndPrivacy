@@ -1,0 +1,2 @@
+ts,scope,status,canonical,reason_code,reason,owner,evidence
+2026-11-15T04:05:31+00:00,T004:T02:triage,REWORK,REWORK,QUALITY_RECAPTURE_REQUIRED,Có ảnh cần thu lại; không release batch còn lỗi.,Vũ Duy Khanh — T004 / reviewer,ranked_review.csv;review_queue.csv;audit_log.jsonl;item_decisions.csv

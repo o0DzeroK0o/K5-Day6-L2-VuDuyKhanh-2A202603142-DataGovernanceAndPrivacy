@@ -25,17 +25,17 @@ Hạn do học viên điền: **11:00 15/11/2026**, giờ Việt Nam. Nhóm th�
 | Xác nhận của học viên | [human_review_confirmation.json](../reports/human_review_confirmation.json) |
 | Pipeline sau xác nhận | [evidence/human_review/](../reports/evidence/human_review/) |
 | Lịch sử nhập CVAT trước xác nhận | [cvat_review_import.json](../reports/cvat_review_import.json), [evidence/poc/](../reports/evidence/poc/) |
-| Giao diện mới | [contact_sheet.html](../reports/contact_sheet.html), [kiểm thử trình duyệt](../reports/ui_verification.json) |
-| Demo mới và ảnh chụp | [5 slides](../demo/t004_demo.html), [ảnh slide](../demo/slides/), [ảnh UI](../demo/ui/), [20 frame CVAT](../demo/cvat/index.html) |
+| Ứng dụng web | `make web` → http://127.0.0.1:8765; [ảnh đủ năm bước](../demo/web/index.html), [kiểm thử trình duyệt](../demo/web/verification.json) |
+| Demo mới và ảnh chụp | [5 slides](../demo/t004_demo.html), [ảnh slide](../demo/slides/), [ảnh web](../demo/web/index.html), [20 frame CVAT](../demo/cvat/index.html) |
 
 Các sự kiện cũ giữ thời điểm và nguồn gốc của chúng. Biên nhận nhập trước đó có HOLD; lần ký duyệt mới có REWORK. Dùng `evidence/human_review/decision.json` để đọc trạng thái hiện tại.
 
 ## Mở và tái lập
 
 ```bash
-make demo
-xdg-open reports/contact_sheet.html
-xdg-open demo/t004_demo.html
+make web
+# Terminal khác: xdg-open http://127.0.0.1:8765
+# Slides riêng: make demo && xdg-open demo/t004_demo.html
 make t02-submission OUT=out/check-final
 .venv/bin/python -m tools.t02_human_review
 .venv/bin/python -m tools.t02_verify
@@ -43,7 +43,7 @@ make t02-submission OUT=out/check-final
 
 Chạy lại cùng thư mục sẽ giữ file review đã có. Dùng thư mục mới để kiểm tra tái lập từ đầu. Không cần xác nhận lại hoặc ghi một lần ký duyệt giả; công cụ dùng bản xác nhận đã lưu.
 
-Nếu thực sự đổi quyết định sau này, xuất CSV mới từ giao diện và chạy pipeline trên thư mục riêng để đánh giá; giữ bản cũ và ghi sự kiện xác nhận mới trước khi thay bằng chứng bài nộp. File CSV tải về chưa tự cập nhật audit hoặc decision.
+Nếu đổi quyết định sau này, dùng Review trên web để lưu phiên bản mới và chạy Decide. Mỗi lần lưu giữ audit và phiên bản trước. Lượt chạy web không tự cập nhật bằng chứng bài nộp đã ký duyệt. [Hướng dẫn thao tác](HUONG_DAN_CHAY_DEMO_T004.md).
 
 ## Phần còn lại trước khi nộp
 

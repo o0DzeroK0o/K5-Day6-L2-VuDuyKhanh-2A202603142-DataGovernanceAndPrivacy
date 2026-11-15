@@ -1,0 +1,99 @@
+{
+  "tested_at": "2026-11-15T04:05:31.724Z",
+  "browser": "155.0.8059.84",
+  "base_url": "http://127.0.0.1:8765",
+  "run_id": "50fa40d8de1e438ab884a30802e58b7f",
+  "revision": 5,
+  "test_run_id": "60b4865d2f7b44a7a06e54139c8b8e21",
+  "passed": true,
+  "steps": [
+    {
+      "stage": "load",
+      "revision": 1,
+      "at": "2026-11-15T04:05:24.048831+00:00",
+      "runtime_seconds": 0.0535
+    },
+    {
+      "stage": "process",
+      "revision": 2,
+      "at": "2026-11-15T04:05:26.167874+00:00",
+      "runtime_seconds": 0.7164
+    },
+    {
+      "stage": "rank",
+      "revision": 3,
+      "at": "2026-11-15T04:05:27.528363+00:00",
+      "runtime_seconds": 0.1783
+    },
+    {
+      "stage": "review",
+      "revision": 4,
+      "at": "2026-11-15T04:05:29.954422+00:00",
+      "runtime_seconds": 0.1614
+    },
+    {
+      "stage": "decide",
+      "revision": 5,
+      "at": "2026-11-15T04:05:31.189340+00:00",
+      "runtime_seconds": 0.0364
+    }
+  ],
+  "visited_frames": [
+    "img_13_3",
+    "img_15_2",
+    "img_19_3",
+    "img_16_2",
+    "img_17_2",
+    "img_15_3",
+    "img_23_3",
+    "img_17_3",
+    "img_05_3",
+    "img_06_2",
+    "img_05_2",
+    "img_01_2",
+    "img_23_2",
+    "img_01_3",
+    "img_13_2",
+    "img_16_3",
+    "img_03_3",
+    "img_19_2",
+    "img_23_1",
+    "img_06_3"
+  ],
+  "final_status": "REWORK",
+  "human_reviewed": 20,
+  "checks": [
+    "real pixel processing matches frozen predictions",
+    "all 20 frames opened",
+    "image zoom",
+    "invalid edit retained and rejected",
+    "partial unconfirmed review produces HOLD",
+    "verified CVAT confirmation import",
+    "stale revision rejected",
+    "editing clears confirmation and blocks Decide",
+    "server state restored after reload",
+    "draft survives HTTP rejection and lost connection",
+    "decision download matches server",
+    "scores unchanged after review",
+    "five mobile views fit 390px",
+    "no external requests"
+  ],
+  "javascript_errors": [],
+  "post_requests": [
+    "/api/runs",
+    "/api/runs/60b4865d2f7b44a7a06e54139c8b8e21/steps/load",
+    "/api/runs/60b4865d2f7b44a7a06e54139c8b8e21/steps/process",
+    "/api/runs/60b4865d2f7b44a7a06e54139c8b8e21/steps/rank",
+    "/api/runs/60b4865d2f7b44a7a06e54139c8b8e21/steps/review",
+    "/api/runs/60b4865d2f7b44a7a06e54139c8b8e21/steps/decide",
+    "/api/runs/60b4865d2f7b44a7a06e54139c8b8e21/steps/review",
+    "/api/runs/60b4865d2f7b44a7a06e54139c8b8e21/steps/review",
+    "/api/runs/60b4865d2f7b44a7a06e54139c8b8e21/steps/decide",
+    "/api/runs",
+    "/api/runs/50fa40d8de1e438ab884a30802e58b7f/steps/load",
+    "/api/runs/50fa40d8de1e438ab884a30802e58b7f/steps/process",
+    "/api/runs/50fa40d8de1e438ab884a30802e58b7f/steps/rank",
+    "/api/runs/50fa40d8de1e438ab884a30802e58b7f/steps/review",
+    "/api/runs/50fa40d8de1e438ab884a30802e58b7f/steps/decide"
+  ]
+}
