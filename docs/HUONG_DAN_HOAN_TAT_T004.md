@@ -1,14 +1,14 @@
 # T004 / T02 — kiểm tra và hoàn tất bài nộp
 
-Bài có 1 thành viên. Tên Vũ Duy Khánh được suy từ tên thư mục, Git author hiện có là Duy Khanh. Agent đã thực hiện code, chạy kiểm thử, gán nhãn nội bộ bằng quan sát AI, điền review AI, áp override, lưu audit, tạo metrics/ablation/OOD, report và demo. **Chưa có người thật review; chưa push/nộp; chưa biết deadline lớp.** Không có yêu cầu bạn làm lại phần kỹ thuật đã hoàn thành.
+Bài có 1 thành viên. Tên Vũ Duy Khanh đã được người dùng xác nhận, Git author hiện có là Duy Khanh. Agent đã thực hiện code, chạy kiểm thử, gán nhãn nội bộ bằng quan sát AI, điền review AI, áp override, lưu audit, tạo metrics/ablation/OOD, report và demo. **Chưa có người thật review; chưa push/nộp; chưa biết deadline lớp.** Không có yêu cầu bạn làm lại phần kỹ thuật đã hoàn thành.
 
 ## Checklist trước khi nộp — đối chiếu nguyên ý hướng dẫn
 
 **Đã đạt 6/8 mục.** Dấu `[x]` là đã có bằng chứng; dấu `[ ]` là bạn còn cần xử lý.
 
 - [x] Đã chọn 1 track và đọc hết đề `docs/tracks/TXX.md` — T02; có nhật ký và metric contract.
-- [x] Đã sửa `configs/lab.yaml` (group_id, owner, track) — T004, nhóm 1 người. Tên/owner đã điền, bạn kiểm tra lại thông tin cá nhân.
-- [x] Setup + test chạy ổn — 69 passed, 39 skipped do thiếu GT giảng viên; xem `reports/verification.json`.
+- [x] Đã sửa `configs/lab.yaml` (group_id, owner, track) — T004, nhóm 1 người. Tên/owner đã cập nhật theo xác nhận: Vũ Duy Khanh.
+- [x] Setup + test chạy ổn — kết quả kiểm thử mới nhất trong `reports/verification.json`; các skip cần GT giảng viên.
 - [x] PoC chạy ra file đúng contract trong `out/poc/` — có ranked_review, queue, contact sheet, decision và audit.
 - [x] Có baseline + PoC + giải thích trong report — cùng pool, budget, seed; số liệu tự kiểm bằng nhãn AI, chưa phải điểm chính thức.
 - [ ] Có vòng review người thật (queue / audit) — **bạn cần tự xem 20 ảnh, xuất CSV và chạy lại để có audit mang tên mình**. AI đã review, nhưng chưa thay người thật. Làm mục 1 bên dưới.
@@ -18,11 +18,14 @@ Bài có 1 thành viên. Tên Vũ Duy Khánh được suy từ tên thư mục, 
 **Các việc đã làm liên quan đến mục còn mở:**
 
 - [x] Tạo tag `demo-180m` tại commit `1d2d4a6` và `final-24h` tại commit `83ca5cc`, ghi thời điểm thực tế.
-- [x] Chuẩn bị 20 quyết định review AI và 2 override có audit để bạn tham khảo.
-- [ ] Xác nhận tên/mã học viên và điền deadline chính thức.
+- [x] Hoàn tất 20 frame trên CVAT, nhập 20 quyết định và 2 override vào pipeline, giữ ghi chú chất lượng và lịch sử audit. [Biên nhận](../reports/cvat_review_import.json).
+- [x] Xác nhận tên: Vũ Duy Khanh.
+- [ ] Xác nhận mã học viên và điền deadline chính thức.
 - [ ] Push commit/tag cần nộp và gửi link qua cổng lớp.
 
 Checklist riêng T02: đã có threshold theo camera/ánh sáng, ROI glare, phân tích night/glare/cam_B và đã xem 10 ảnh proxy OOD (synthetic T13). Chưa phải 10 ảnh đời thực và tập proxy này không có ảnh lỗi nên recall không xác định. Không đánh dấu review người thật hoặc deadline là đạt khi chưa có bằng chứng.
+
+Đã có [gallery CVAT đủ 20 frame](../demo/cvat/index.html), XML và CSV review đã đồng bộ. Các câu nhắc tên cũ trong protocol/audit lịch sử được giữ nguyên để bảo toàn bằng chứng tại thời điểm ghi; tên hiện hành trong cấu hình và báo cáo là Vũ Duy Khanh.
 
 ## 1. Làm vòng review người thật (khoảng 10–15 phút)
 
@@ -65,7 +68,7 @@ Checklist riêng T02: đã có threshold theo camera/ánh sáng, ROI glare, phâ
 
 - `reports/annotations/internal_eval_labels.csv` gồm 40 nhận xét thị giác AI, **không phải GT chính thức**. Nếu muốn dùng làm gold set nội bộ, tự xem 40 ảnh và ghi tên reviewer, ngày, lý do sửa nhãn; giữ lịch sử Git. Chú ý `img_03_2` glare nhẹ, `img_19_2` nén nhẹ, cam_B mềm và night còn hữu ích.
 - Không sửa nhãn chỉ để tăng điểm. Không tune lại ngưỡng trên 40 ảnh này. Nếu nghiên cứu tiếp, lập protocol/split mới.
-- Kiểm tra tên Vũ Duy Khánh, mã học viên 2A202603142 theo tên thư mục, Group T004, nhóm 1 người, Git author/email trong `reports/team_contributions.csv`. Không tự giả danh nhiều thành viên.
+- Tên đã xác nhận là Vũ Duy Khanh; kiểm tra mã học viên 2A202603142 theo tên thư mục, Group T004, nhóm 1 người, Git author/email trong `reports/team_contributions.csv`. Không tự giả danh nhiều thành viên.
 - Điền deadline chính thức ở Header report. Giữ các dòng Member 2–6 là “Không áp dụng”; nhãn “Thành viên (5–6)” thuộc mẫu nên chưa sửa.
 - Report đã ghi AI hỗ trợ code và draft. Bạn cần đọc, hiểu và chịu trách nhiệm khi trình bày. Có thể tập theo `demo/t004_demo.html` và `demo/SHOWCASE_SCRIPT.md`.
 

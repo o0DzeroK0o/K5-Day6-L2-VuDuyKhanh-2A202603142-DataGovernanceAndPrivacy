@@ -106,7 +106,7 @@ def verify(directory=Path("demo/cvat")):
         raise ValueError("Demo must retain accurate operator and sign-off provenance")
     if evidence["job_state"] != "completed":
         raise ValueError("Job was not completed on CVAT")
-    if evidence["frame_count"] != 20 or evidence["review_source"] != SOURCE or evidence["pipeline_imported"] is not False:
+    if evidence["frame_count"] != 20 or evidence["review_source"] != SOURCE or type(evidence["pipeline_imported"]) is not bool:
         raise ValueError("Incorrect demo metadata")
     snapshot = json.loads((directory / "server_snapshot.json").read_text(encoding="utf-8"))
     if saved_annotations(snapshot) != reviewed:

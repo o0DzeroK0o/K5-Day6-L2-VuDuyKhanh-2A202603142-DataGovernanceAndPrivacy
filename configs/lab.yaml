@@ -1,6 +1,6 @@
-# T004: one member. Identity inferred from project name; confirm before submitting.
+# T004: one member. Name confirmed by the user; human review sign-off is separate.
 group_id: T004
-owner: "Vũ Duy Khánh — T004 / reviewer (chờ xác nhận người thật)"
+owner: "Vũ Duy Khanh — T004 / reviewer (chờ xác nhận người thật)"
 track_config: tracks/t02.yaml
 track: t02
 input: fixtures/t02_raw_qc

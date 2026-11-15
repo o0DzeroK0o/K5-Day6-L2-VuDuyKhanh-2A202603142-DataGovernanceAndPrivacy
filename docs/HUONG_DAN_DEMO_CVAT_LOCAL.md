@@ -16,7 +16,7 @@ Ngày 2026-11-15, **đã xem, gán tag và lưu đủ 20/20 frame**, từ frame 
 
 Tên **Vũ Duy Khanh** được điền theo chỉ định rõ của người dùng. Người thao tác thực tế là trợ lý AI qua Playwright/Chromium, được người dùng cho phép sau khi công cụ Computer Use mất kết nối. Provenance này nằm riêng trong `evidence.json` (`operator: AI:Codex`, `human_review_confirmed: false`) và tài liệu này. Tên trong `review_source` không tự xác nhận học viên đã trực tiếp review.
 
-`completed` là trạng thái gán nhãn trong CVAT. Cột “Manually” của Info đếm tag tạo qua giao diện, không phải chứng nhận reviewer là người thật. Pipeline vẫn **HOLD / HUMAN_REVIEW_REQUIRED**. Annotation CVAT **chưa nhập vào pipeline**, không đổi nhãn chấm điểm, score, ranking, threshold hoặc metric đã freeze.
+`completed` là trạng thái gán nhãn trong CVAT. Cột “Manually” của Info đếm tag tạo qua giao diện, không phải chứng nhận reviewer là người thật. Pipeline vẫn **HOLD / HUMAN_REVIEW_REQUIRED**. Đã nhập đủ **20 quyết định CVAT vào pipeline**, cập nhật `reports/review_queue.csv` và audit. `review_note` giữ nguyên nhận xét CVAT; `reviewer=AI:Codex` ghi người thao tác thực tế riêng với tên hiển thị `review_source`. [Biên nhận nhập](../reports/cvat_review_import.json) ghi hai override, checksum XML/CSV và kết quả HOLD. Nhãn chấm điểm, score, ranking, threshold và metric đã freeze giữ nguyên.
 
 ## Bằng chứng đã lưu
 
@@ -46,6 +46,19 @@ Tên **Vũ Duy Khanh** được điền theo chỉ định rõ của người d�
 5. Đối chiếu XML tải về với API, queue đã freeze và SHA-256 ảnh gốc. Bộ demo giữ XML đã loại metadata tài khoản; ZIP gốc nằm ở `out/cvat-demo/t004_cvat_local_final.zip`, không commit.
 
 `out/cvat-demo/t004_top20_images.zip` là gói nhập gốc, SHA-256 `0294bee490ecb7f475ada8247ba4f7e3681bb53da9a985d945473203ff7bb918`. Queue score làm tròn 6 chữ số theo contract; mapping lưu thêm raw score. Gợi ý PoC không được coi là ground truth. Không đọc GT giảng viên.
+
+## Đồng bộ vào pipeline sau review
+
+Các lệnh dưới đây dùng `out/poc/` đang giữ đầy đủ audit/decision log trước lần đồng bộ. Trên bản clone mới hoặc khi đã xóa output cũ, dùng `make t02-submission OUT=out/cvat-reproduction` để tái lập vào thư mục riêng; bước sync sẽ từ chối thay bằng chứng nếu thiếu lịch sử audit cũ.
+
+```bash
+.venv/bin/python -m tools.t02_cvat_review --output out/poc/review_queue_reviewed.csv
+.venv/bin/python -m src.main --input fixtures/t02_raw_qc --config configs/lab.yaml --output out/poc --run-name poc --offline --seed 42
+.venv/bin/python -m tools.t02_cvat_review --sync-output out/poc
+.venv/bin/python -m tools.t02_cvat_review
+```
+
+Bước chuyển đổi lấy image_id và các trường queue đã freeze, giữ nguyên ghi chú từ XML, tạo `approve` hoặc `edit` đúng theo tag. Review cũ được sao lưu vào `out/poc/review_history/`; công cụ từ chối ghi đè CSV có reviewer người thật. Bước đồng bộ chỉ nhận output đã chạy thành công, đủ 20 quyết định khớp CVAT, raw predictions không đổi và audit còn nguyên lịch sử. Sau đó cập nhật biên nhận nhập và `pipeline_imported: true`. Công cụ không xác nhận review của người học.
 
 ## Tái kiểm tra offline
 

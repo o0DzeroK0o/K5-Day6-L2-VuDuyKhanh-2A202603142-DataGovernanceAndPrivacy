@@ -10,7 +10,7 @@
 |---|---|
 | Group ID | T004 |
 | Challenge | T02 · Raw QC Triage: ảnh mờ, lóa, tối và nén JPEG |
-| Thành viên (5–6) + vai trò | 1. Vũ Duy Khánh, kiêm toàn bộ vai trò (Lead/Integrator) · 2. Không áp dụng (Data & fixtures) · 3. Không áp dụng (Core algorithm) · 4. Không áp dụng (QA/metric) · 5. Không áp dụng (Review + report) · 6. Không áp dụng; nhóm thực tế **1 người**. Tên suy từ thư mục, cần xác nhận; AI hỗ trợ code/draft, chưa thay review người thật. |
+| Thành viên (5–6) + vai trò | 1. Vũ Duy Khanh, kiêm toàn bộ vai trò (Lead/Integrator) · 2. Không áp dụng (Data & fixtures) · 3. Không áp dụng (Core algorithm) · 4. Không áp dụng (QA/metric) · 5. Không áp dụng (Review + report) · 6. Không áp dụng; nhóm thực tế **1 người**. Tên do học viên xác nhận; AI hỗ trợ code/draft và thao tác CVAT, chưa thay xác nhận review người thật. |
 | Git URL | https://github.com/o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy (commit/tag hiện cục bộ, chưa push) |
 | Tag `demo-180m` (commit) | `demo-180m` → `1d2d4a6bd0587ed2b2531c42572cda72a43d1e5b` (tạo 2026-11-14 16:40:25 +07); tạo thực tế khi hoàn tất demo, không khẳng định đúng phút 180 của lớp. |
 | Tag `final-24h` (commit) | `final-24h^{commit}` — xem `git rev-parse final-24h^{commit}`; hash bàn giao sau commit, không khẳng định đúng deadline +24h. |
@@ -39,7 +39,7 @@
 ## 03 · Research & design
 
 - 2–3 references (URL + ngày xem) và **vì sao** chọn kỹ thuật: OpenCV Laplace Operator và SciPy ndimage.convolve, xem 2026-11-14 (URL ở mục 11). Chọn Laplacian vì đo biến thiên cạnh rẻ trên CPU; mode reflect giúp xác định biên convolution tái lập. ROI/JPEG/camera là heuristic nhóm thử trên dev, không quy kết các nguồn chứng minh ngưỡng này.
-- Sơ đồ data flow (input → process → rank/QC → review → decision → report): input + sha256 → pixel features → sort score, top20 eval → người review/AI simulation → override hành động + audit append-only → decision.json → evaluator riêng và report.
+- Sơ đồ data flow (input → process → rank/QC → review → decision → report): input + sha256 → pixel features → sort score, top20 eval → CVAT tag + export XML → CSV review theo image_id → override hành động + audit append-only → decision.json → evaluator riêng và report.
 - Thành phần offline (model/weights + checksum + license nếu có): Không pretrained model, không weights/API. NumPy/Pillow/SciPy; môi trường Python 3.12.16, phiên bản ở requirements-lock.txt. Hash input trong manifest, hash protocol trong protocol_freeze.json.
 - Trade-offs đã cân nhắc: Max của các tín hiệu giải thích được và chạy CPU; ROI bỏ sky giảm báo nhầm nhưng glare nhẹ chưa cháy trắng vẫn lọt. Camera/light thresholds giảm loại nhầm night/cam_B nhưng cần metadata đúng. 10 OOD synthetic không thay dữ liệu thật.
 
@@ -79,9 +79,9 @@
 
 ## 07 · Human & decision
 
-- Review queue (file, B, cách ưu tiên): reports/review_queue.csv, 20 ảnh eval theo score giảm; contact_sheet.html nhúng ảnh. Đã review bằng AI:Codex, chưa có review người thật; xem hướng dẫn hoàn tất.
-- Cách override + audit log (`out/audit_log.jsonl`): AI đã đổi KEEP→RECAPTURE cho img_19_2 và img_06_3 sau quan sát. Lưu raw_predictions và item_decisions, audit ghi actor/before/after/note; không đổi score. Có test chặn ID trùng/lạ, score stale, thiếu reviewer hoặc override sai.
-- Decision policy + `reason_code` + owner: HOLD / HUMAN_REVIEW_REQUIRED; owner Vũ Duy Khánh (chờ xác nhận). n_reviewed=20, n_human_reviewed=0. AI không ký thay người dùng; human_review_confirmed=false.
+- Review queue (file, B, cách ưu tiên): reports/review_queue.csv: đã nhập 20/20 quyết định từ CVAT task/job #17, 19 RECAPTURE / 1 KEEP. [Ảnh từng frame](../demo/cvat/index.html), [XML](../demo/cvat/annotations.xml), [biên nhận nhập](cvat_review_import.json). review_source=Vũ Duy Khanh; review_note giữ nhận xét CVAT; reviewer pipeline là AI:Codex theo người thao tác thực tế. Xác nhận người học còn chờ.
+- Cách override + audit log (`out/audit_log.jsonl`): Đã áp 2 override KEEP→RECAPTURE cho img_19_2 và img_06_3 từ export CVAT, chạy lại pipeline offline và thêm audit mới với ghi chú nguyên văn. Giữ toàn bộ audit cũ, raw_predictions, score và ranking. Verifier đối chiếu đủ 20 quyết định CSV, hành động cuối và audit với XML/API.
+- Decision policy + `reason_code` + owner: HOLD / HUMAN_REVIEW_REQUIRED; owner Vũ Duy Khanh (tên đã xác nhận). n_reviewed=20, n_human_reviewed=0; human_review_confirmed=false. Hoàn tất job CVAT không tự xác nhận review của người học.
 - Khi nào HOLD/REWORK thay vì tự động release: HOLD khi thiếu review/escalate/domain mới; REWORK khi còn RECAPTURE; không ép GO để đẹp bài. [Hướng dẫn từng bước export CSV và xác nhận](../docs/HUONG_DAN_HOAN_TAT_T004.md).
 
 ## 08 · Reproduce & tests
@@ -93,7 +93,7 @@ python -m src.evaluate --track t02 --pred out/ranked_review.csv --gt reports/ann
 pytest -q
 ```
 
-- Output của `pytest -q`: 69 passed, 39 skipped in 5.19s; các skip yêu cầu GT giảng viên, không tắt test. Preflight 0 FAIL/2 WARN tùy chọn; verify 14 manifests; compileall và kiểm contract pass. Chạy trong .venv (source .venv/bin/activate).
+- Output của `pytest -q`: 103 passed, 39 skipped in 7.12s; các skip yêu cầu GT giảng viên, không tắt test. Preflight 0 FAIL/2 WARN tùy chọn; verify 14 manifests; compileall và kiểm contract pass. Chạy trong .venv (source .venv/bin/activate).
 - Máy / CPU / OS / Python: Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz; Linux-7.2.15-1-omarchy-x86_64-with-glibc2.44; Python 3.12.16 · git sha: 6c525dc
 
 ## 09 · Limitations & ethics
@@ -109,7 +109,7 @@ pytest -q
 
 | Học viên | Git author/email | Module / vai trò | Commit SHA / diff chứng minh | Trình bày? |
 |---|---|---|---|---|
-| Member 1 — Vũ Duy Khánh | Duy Khanh / khanhvd.ldm.0299@gmail.com | Integration / CLI; toàn bộ vai trò nhóm 1 người, AI hỗ trợ code/draft | 6c525dc: pipeline + baseline + tests + protocol; commit bằng chứng theo team_contributions.csv | Có kịch bản, chưa diễn ra trình bày thật |
+| Member 1 — Vũ Duy Khanh | Duy Khanh / khanhvd.ldm.0299@gmail.com | Integration / CLI; toàn bộ vai trò nhóm 1 người, AI hỗ trợ code/draft | 6c525dc: pipeline + baseline + tests + protocol; 28092af: demo CVAT 20 frame; commit bằng chứng theo team_contributions.csv | Có kịch bản, chưa diễn ra trình bày thật |
 | Member 2 | Không áp dụng: nhóm 1 người | Data + GT — do Member 1 đảm nhiệm với hỗ trợ AI | Không giả thành viên/commit | Không áp dụng |
 | Member 3 | Không áp dụng: nhóm 1 người | Core algorithm — do Member 1 đảm nhiệm với hỗ trợ AI | Không giả thành viên/commit | Không áp dụng |
 | Member 4 | Không áp dụng: nhóm 1 người | Metric + tests — do Member 1 đảm nhiệm với hỗ trợ AI | Không giả thành viên/commit | Không áp dụng |
@@ -118,8 +118,8 @@ pytest -q
 
 ## 11 · References
 
-| URL | Ngày xem | 1–2 dòng ý nghĩa (không chép nguyên văn) |
-|---|---|---|
+| URL                                                                                                                                                                                                       | Ngày xem   | 1–2 dòng ý nghĩa (không chép nguyên văn)                                                                                                                                                                       |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | https://github.com/opencv/opencv/blob/4.x/doc/tutorials/imgproc/imgtrans/laplace_operator/laplace_operator.markdown <br> https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.convolve.html | 2026-11-14 | OpenCV: cơ sở toán học đạo hàm bậc hai/cạnh, chọn baseline rẻ trên CPU. SciPy: convolution và reflect để tái lập primitive. Không sao chép nguyên văn hoặc coi đây là bằng chứng cho threshold riêng của nhóm. |
 
 ---

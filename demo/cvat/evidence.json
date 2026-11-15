@@ -12,7 +12,7 @@
   "human_review_confirmed": false,
   "review_source_note": "Name entered at the user's explicit request; not human sign-off.",
   "export_format": "CVAT for images 1.1",
-  "pipeline_imported": false,
+  "pipeline_imported": true,
   "export_zip_sha256": "5b635d5f9df4ef622947fe2b92d0619e03509b432043047a310b93556b708cd5",
   "original_xml_sha256": "a0a86344985275d94a46b48796a71a2504fbf676917f4f55eae836dbada5ab97",
   "annotation_sha256": "45d767672403de1b5842a121c01361c324ea2fb13050ea5d56f4138404235008",
@@ -166,5 +166,6 @@
       "review_source": "Vũ Duy Khanh",
       "review_note": "Override KEEP: quầng lóa giữa ảnh giảm tương phản xe và đường."
     }
-  ]
+  ],
+  "pipeline_import_receipt": "reports/cvat_review_import.json"
 }

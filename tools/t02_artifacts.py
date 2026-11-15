@@ -59,6 +59,8 @@ def render_demo(summary, cvat):
     ci = summary["uncertainty"]["results"]["paired_delta"]["ci95"]
     count, counts = cvat["frame_count"], cvat["action_counts"]
     source = html.escape(cvat["review_source"])
+    import_status = ('Đã nhập 20 quyết định CVAT vào pipeline, kiểm khớp CSV và audit.'
+                     if cvat["pipeline_imported"] else 'Annotation CVAT chưa nhập vào pipeline.')
     task = cvat_image("01-task.jpg", f'Task #{cvat["task_id"]}, job #{cvat["job_id"]}: {count} frame, completed')
     saved = cvat_image("03-save-verify.jpg", "Frame 17 mở lại sau Save: img_19_2, RECAPTURE")
     export = cvat_image("04-export-dialog.jpg", "Export job dataset: CVAT for images 1.1, không kèm ảnh", "dialog")
@@ -93,7 +95,7 @@ def render_demo(summary, cvat):
         ('Bằng chứng CVAT và bàn giao', f'''<div class="columns closing"><div>
         <p class="lead">CVAT: {count}/{count} frame</p><p><a href="cvat/index.html">Gallery từng frame</a><br><a href="cvat/evidence.json">Metadata và checksum</a><br><a href="../docs/HUONG_DAN_DEMO_CVAT_LOCAL.md">Hướng dẫn CVAT local</a></p>
         <p><strong>Pipeline: HOLD</strong><br><code>HUMAN_REVIEW_REQUIRED</code></p>
-        </div>{overview}</div><p class="note">Trợ lý AI thực hiện thao tác demo. Tên trong thuộc tính theo yêu cầu của Vũ Duy Khanh. Xác nhận review của người học còn chờ. Annotation CVAT chưa nhập vào pipeline.</p>
+        </div>{overview}</div><p class="note">Trợ lý AI thực hiện thao tác demo. Tên trong thuộc tính theo yêu cầu của Vũ Duy Khanh. Xác nhận review của người học còn chờ. {import_status}</p>
         <p class="note">Đã kiểm 10 ảnh proxy T13. Chưa có dữ liệu thật hoặc GT giảng viên. <a href="../docs/HUONG_DAN_HOAN_TAT_T004.md">Các bước người học cần xác nhận</a>.</p>'''),
     ]
     pages = ''.join(f'<section id="s{i}"><div class="eyebrow">T004 / AI20K DAY 06</div><h1>{title}</h1>{body}<footer>{i} / {len(deck)} · Ảnh CVAT thật, bấm để mở bản đầy đủ</footer></section>' for i, (title, body) in enumerate(deck, 1))

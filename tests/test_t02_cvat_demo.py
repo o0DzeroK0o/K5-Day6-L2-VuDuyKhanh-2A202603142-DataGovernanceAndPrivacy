@@ -38,7 +38,7 @@ def test_saved_export_covers_every_frozen_frame():
     assert all(frame["review_source"] == SOURCE for frame in evidence["frames"])
     assert evidence["job_state"] == "completed"
     assert not evidence["human_review_confirmed"]
-    assert not evidence["pipeline_imported"]
+    assert evidence["pipeline_imported"]
 
 
 @pytest.mark.parametrize("change", [

@@ -1,0 +1,26 @@
+{
+  "imported_at": "2026-11-15T02:21:02+00:00",
+  "task_id": 17,
+  "job_id": 17,
+  "annotation_sha256": "45d767672403de1b5842a121c01361c324ea2fb13050ea5d56f4138404235008",
+  "queue_sha256": "8973fdb6e27bebd86c4fcee46d7145b97bed24d0361b9d49ace450032adb719c",
+  "review_source": "Vũ Duy Khanh",
+  "operator": "AI:Codex",
+  "human_review_confirmed": false,
+  "frame_count": 20,
+  "action_counts": {
+    "RECAPTURE": 19,
+    "KEEP": 1
+  },
+  "override_ids": [
+    "img_19_2",
+    "img_06_3"
+  ],
+  "review_csv": "reports/evidence/poc/review_queue_reviewed.csv",
+  "review_csv_sha256": "b73a8a94a9e966e0a6faac9dfb9dd0ef901c964f2d3fede39be678c6bad78a8e",
+  "raw_predictions_sha256": "c09870de55c0788b045e5b1a22748afb5006477919e6858c0457f3c777d01c0e",
+  "status": "HOLD",
+  "reason_code": "HUMAN_REVIEW_REQUIRED",
+  "owner": "Vũ Duy Khanh — T004 / reviewer (chờ xác nhận người thật)",
+  "note": "Imported CVAT observations into review only; scoring and evaluation labels unchanged."
+}

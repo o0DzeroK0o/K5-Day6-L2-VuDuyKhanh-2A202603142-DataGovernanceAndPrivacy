@@ -54,16 +54,17 @@ Audit ghi quyết định; ranking/score giữ nguyên. Nếu đang luyện thao
 make t02-submission OUT=out/demo-comparison
 ```
 
-Lệnh tạo baseline Laplacian, PoC, review AI, ablation và số liệu tự kiểm trong `out/demo-comparison/reproduce/`; báo cáo nằm ở thư mục con `reports/`. Số liệu dùng nhãn AI nội bộ, chưa phải điểm GT giảng viên. Bản trình chiếu không tự cập nhật theo lần chạy mới.
+Lệnh tạo baseline Laplacian, PoC, nhập review CVAT đã lưu, chạy ablation và sinh số liệu tự kiểm trong `out/demo-comparison/reproduce/`; báo cáo nằm ở thư mục con `reports/`. Nếu thư mục đích đã có CSV review, công cụ giữ nguyên file đó. Số liệu dùng nhãn AI nội bộ, chưa phải điểm GT giảng viên. Bản trình chiếu không tự cập nhật theo lần chạy mới.
 
 ## 5. Xác minh và sinh lại demo đã lưu
 
 ```bash
 .venv/bin/python -m tools.t02_cvat_demo
+.venv/bin/python -m tools.t02_cvat_review
 .venv/bin/python -m tools.t02_artifacts
 .venv/bin/python -m tools.t02_verify
 ```
 
-Lệnh đầu đối chiếu XML, snapshot API, đủ 20 frame, mapping/ảnh gốc và thuộc tính. Lệnh thứ hai sinh lại đúng 5 slides từ bằng chứng và số liệu đã lưu. Lệnh cuối kiểm cả protocol, metric, cấu trúc report và manifest; mọi thay đổi ngoài nhiệm vụ trong `reports/` có thể khiến hash không khớp và cần được xử lý riêng. Không dùng `--write-manifest` để che một sai khác chưa xem xét.
+Lệnh đầu đối chiếu XML, snapshot API, đủ 20 frame, mapping/ảnh gốc và thuộc tính. Lệnh thứ hai kiểm kết quả nhập CVAT với CSV, hành động cuối, audit và biên nhận. Lệnh thứ ba sinh lại đúng 5 slides từ bằng chứng và số liệu đã lưu. Lệnh cuối kiểm cả protocol, metric, cấu trúc report và manifest; mọi thay đổi ngoài nhiệm vụ trong `reports/` có thể khiến hash không khớp và cần được xử lý riêng. Không dùng `--write-manifest` để che một sai khác chưa xem xét.
 
-Để đóng gói một lần export mới, xem lệnh `--export` trong [hướng dẫn CVAT](HUONG_DAN_DEMO_CVAT_LOCAL.md). Annotation CVAT chưa tự chuyển thành CSV review của pipeline. Xác nhận người học vẫn là bước riêng.
+Để đóng gói một lần export mới, xem lệnh `--export` trong [hướng dẫn CVAT](HUONG_DAN_DEMO_CVAT_LOCAL.md). Đủ 20 quyết định CVAT đã được chuyển sang CSV review, chạy lại pipeline và đồng bộ audit theo các lệnh trong hướng dẫn CVAT. Xác nhận người học vẫn là bước riêng.

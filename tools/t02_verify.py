@@ -15,6 +15,7 @@ from src.common.manifest import verify_manifest
 from src.metrics.tracks import eval_t02
 from tools.t02_fill_report import TEMPLATE, validate_structure
 from tools.t02_cvat_demo import verify as verify_cvat_demo
+from tools.t02_cvat_review import verify_import as verify_cvat_import
 
 
 def evidence_files():
@@ -70,6 +71,8 @@ def verify_evidence():
         problems.append('one-member contribution evidence incomplete')
     try:verify_cvat_demo()
     except (ValueError, KeyError, OSError) as e:problems.append(f'CVAT demo: {e}')
+    try:verify_cvat_import()
+    except (ValueError, KeyError, OSError) as e:problems.append(f'CVAT review import: {e}')
     manifest=Path('reports/evidence_manifest.json')
     if manifest.exists():
         expected=read_json(manifest)['files']

@@ -8,7 +8,7 @@
 >
 > **Trạng thái trung thực:** pipeline và tự kiểm đã chạy; số liệu dùng nhãn quan sát AI nội bộ, không phải GT giảng viên. Có review AI và audit, còn chờ review người thật. Batch **HOLD**. Chi tiết/bằng chứng: `reports/analysis_summary.json` và `reports/evidence/`.
 >
-> **Demo CVAT local đã hoàn tất 20/20 frame:** task/job #17, 19 RECAPTURE và 1 KEEP, đã Save, mở lại kiểm tra và export XML. `review_source=Vũ Duy Khanh`; `review_note` chỉ ghi nhận xét chất lượng. [5 slides có ảnh CVAT thật](demo/t004_demo.html) · [Ảnh chụp đủ 20 frame](demo/cvat/index.html) · [XML export](demo/cvat/annotations.xml) · [Hướng dẫn và nguồn bằng chứng](docs/HUONG_DAN_DEMO_CVAT_LOCAL.md). Demo do trợ lý AI thao tác, xác nhận review của người học còn chờ; pipeline giữ HOLD.
+> **Demo CVAT local đã hoàn tất 20/20 frame:** task/job #17, 19 RECAPTURE và 1 KEEP, đã Save, mở lại kiểm tra và export XML. `review_source=Vũ Duy Khanh`; `review_note` chỉ ghi nhận xét chất lượng. [5 slides có ảnh CVAT thật](demo/t004_demo.html) · [Ảnh chụp đủ 20 frame](demo/cvat/index.html) · [XML export](demo/cvat/annotations.xml) · [Hướng dẫn và nguồn bằng chứng](docs/HUONG_DAN_DEMO_CVAT_LOCAL.md). Đã nhập đủ 20 quyết định vào pipeline và cập nhật audit; [biên nhận nhập CVAT](reports/cvat_review_import.json). Demo do trợ lý AI thao tác, xác nhận review của người học còn chờ; pipeline giữ HOLD.
 
 ```bash
 # Python 3.12, đã cài .venv; activate để dùng đúng python của bài:
@@ -19,7 +19,7 @@ python -m src.main --input fixtures/t02_raw_qc --config configs/lab.yaml --outpu
 python -m src.evaluate --track t02 --gt reports/annotations/internal_eval_labels.csv --pred out/poc/ranked_review.csv --out out/metrics_poc_internal.json
 # 1 lệnh tests
 python -m pytest -q
-# Tái tạo baseline + PoC + review AI + ablation + OOD + CI ở thư mục riêng
+# Tái tạo baseline + PoC + review CVAT đã lưu + ablation + OOD + CI ở thư mục riêng
 make t02-submission
 ```
 

@@ -6,7 +6,7 @@ Mở `t004_demo.html` offline. Phím mũi tên hoặc PageDown chuyển trang. B
 2. Trang 2 (80 giây): chỉ ảnh mở lại frame 17 sau Save, `review_source=Vũ Duy Khanh` và nhận xét lỗi nén trong `review_note`. So gợi ý KEEP với tag RECAPTURE. Mở gallery để xem đủ 20 frame, gồm frame 18 KEEP và frame 19 override do quầng lóa. Score/ranking giữ nguyên.
 3. Trang 3 (50 giây): chỉ định dạng CVAT for images 1.1 và Requests Finished. Mở XML và mapping, đối chiếu 20 image/20 tag với 19 RECAPTURE + 1 KEEP. Nêu export đã kiểm khớp API sau lưu.
 4. Trang 4 (60 giây): giải thích Recall@20, TP/denominator, so baseline/PoC cùng budget. CI chênh lệch chứa 0. Chỉ glare nhẹ `img_03_2` còn bị bỏ sót; mở gallery failure cases khi cần giải thích night và cam_B. Các nhãn tự kiểm do AI quan sát, chưa là điểm chính thức.
-5. Trang 5 (60 giây): chỉ tổng 20 tag trong CVAT Info và các đường dẫn evidence. Nêu rõ trợ lý AI đã thao tác demo, tên thuộc tính theo yêu cầu học viên; review người thật còn chờ. Pipeline HOLD / HUMAN_REVIEW_REQUIRED, annotation CVAT chưa tự nhập vào pipeline. Mở hướng dẫn chạy nếu muốn trình diễn `make run OUT=out/demo-live` và contact sheet.
+5. Trang 5 (60 giây): chỉ tổng 20 tag trong CVAT Info và các đường dẫn evidence. Nêu rõ trợ lý AI đã thao tác demo, tên thuộc tính theo yêu cầu học viên; review người thật còn chờ. Pipeline HOLD / HUMAN_REVIEW_REQUIRED, đủ 20 quyết định CVAT đã nhập vào pipeline, CSV và audit khớp XML. Mở hướng dẫn chạy nếu muốn trình diễn `make run OUT=out/demo-live` và contact sheet.
 
 ## Câu hỏi phản biện và cách trả lời
 

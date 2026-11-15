@@ -10,6 +10,7 @@ from decimal import Decimal
 from pathlib import Path
 
 import pandas as pd
+from tools.t02_cvat_demo import SOURCE
 
 TEMPLATE=Path('tests/assets/group_report_template.md')
 
@@ -51,6 +52,7 @@ def validate_structure(original: str, filled: str):
 def build_report(root=Path('reports')):
     b=json.loads((root/'metrics_baseline.json').read_text());p=json.loads((root/'metrics_poc.json').read_text())
     summary=json.loads((root/'analysis_summary.json').read_text());verification=json.loads((root/'verification.json').read_text())
+    cvat=json.loads((root/'cvat_review_import.json').read_text())
     bs,ps=summary['runs']['baseline'],summary['runs']['poc'];ci=summary['uncertainty']['results']
     s=TEMPLATE.read_text()
     def replace(old,new):
@@ -65,7 +67,7 @@ def build_report(root=Path('reports')):
         replace(old,old.replace('____',str(value),1))
     cell('Group ID','T004')
     cell('Challenge','T02 · Raw QC Triage: ảnh mờ, lóa, tối và nén JPEG')
-    cell('Thành viên (5–6) + vai trò','1. Vũ Duy Khánh, kiêm toàn bộ vai trò (Lead/Integrator) · 2. Không áp dụng (Data & fixtures) · 3. Không áp dụng (Core algorithm) · 4. Không áp dụng (QA/metric) · 5. Không áp dụng (Review + report) · 6. Không áp dụng; nhóm thực tế **1 người**. Tên suy từ thư mục, cần xác nhận; AI hỗ trợ code/draft, chưa thay review người thật.')
+    cell('Thành viên (5–6) + vai trò',f'1. {SOURCE}, kiêm toàn bộ vai trò (Lead/Integrator) · 2. Không áp dụng (Data & fixtures) · 3. Không áp dụng (Core algorithm) · 4. Không áp dụng (QA/metric) · 5. Không áp dụng (Review + report) · 6. Không áp dụng; nhóm thực tế **1 người**. Tên do học viên xác nhận; AI hỗ trợ code/draft và thao tác CVAT, chưa thay xác nhận review người thật.')
     cell('Git URL','https://github.com/o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy (commit/tag hiện cục bộ, chưa push)')
     cell('Tag `demo-180m` (commit)','`demo-180m^{commit}` — xem `git rev-parse demo-180m^{commit}`; tạo thực tế khi hoàn tất demo, không khẳng định đúng phút 180 của lớp.')
     cell('Tag `final-24h` (commit)','`final-24h^{commit}` — xem `git rev-parse final-24h^{commit}`; hash bàn giao sau commit, không khẳng định đúng deadline +24h.')
@@ -82,7 +84,7 @@ def build_report(root=Path('reports')):
     replace('verified (sha256): có / không','verified (sha256): có')
     answer('- Dữ liệu thật dùng','Không dùng. Kiểm thêm 10 ảnh synthetic T13 256×144, đã xem bằng mắt AI; chỉ proxy khác track, 0 positive nên không có recall OOD. [OOD](ood_check.csv).')
     answer('- 2–3 references','OpenCV Laplace Operator và SciPy ndimage.convolve, xem 2026-11-14 (URL ở mục 11). Chọn Laplacian vì đo biến thiên cạnh rẻ trên CPU; mode reflect giúp xác định biên convolution tái lập. ROI/JPEG/camera là heuristic nhóm thử trên dev, không quy kết các nguồn chứng minh ngưỡng này.')
-    answer('- Sơ đồ data flow','input + sha256 → pixel features → sort score, top20 eval → người review/AI simulation → override hành động + audit append-only → decision.json → evaluator riêng và report.')
+    answer('- Sơ đồ data flow','input + sha256 → pixel features → sort score, top20 eval → CVAT tag + export XML → CSV review theo image_id → override hành động + audit append-only → decision.json → evaluator riêng và report.')
     answer('- Thành phần offline','Không pretrained model, không weights/API. NumPy/Pillow/SciPy; môi trường Python 3.12.16, phiên bản ở requirements-lock.txt. Hash input trong manifest, hash protocol trong protocol_freeze.json.')
     answer('- Trade-offs đã cân nhắc','Max của các tín hiệu giải thích được và chạy CPU; ROI bỏ sky giảm báo nhầm nhưng glare nhẹ chưa cháy trắng vẫn lọt. Camera/light thresholds giảm loại nhầm night/cam_B nhưng cần metadata đúng. 10 OOD synthetic không thay dữ liệu thật.')
     answer('- Baseline (mô tả','Một ngưỡng Laplacian 400, score=400/(400+variance); src.t02_baseline, config đã freeze, commit 6c525dc. Random baseline chỉ thử wiring.')
@@ -107,9 +109,9 @@ def build_report(root=Path('reports')):
     answer('- Failure case 1','[img_03_0](../fixtures/t02_raw_qc/images/img_03_0.jpg), cam_B/night sạch theo AI: baseline rank13 loại nhầm do quang học mềm; PoC rank30 giữ. [img_05_3](../fixtures/t02_raw_qc/images/img_05_3.jpg) glare cục bộ: baseline rank31 bỏ sót; ROI giúp PoC rank9. [Gallery](failure_gallery.html).')
     answer('- Failure case 2','[img_03_2](../fixtures/t02_raw_qc/images/img_03_2.jpg) glare nhẹ chưa cháy trắng: PoC rank21 bỏ sót. img_23_1 sạch rank19 do cạnh trùng lưới 8 pixel và quota top20. Bỏ ROI recall='+str(summary['runs']['no_roi']['recall'])+'; bỏ ngưỡng riêng recall='+str(summary['runs']['global_thresholds']['recall'])+'. Không sửa ngưỡng sau kết quả này.')
     answer('- Latency / compute',f'{verification["cpu"]}, {p["machine"]["platform"]}; baseline {b["runtime_seconds"]} s / {b["n_items"]} ảnh, PoC {p["runtime_seconds"]} s / {p["n_items"]} ảnh; PoC {1000*p["runtime_seconds"]/p["n_items"]} ms/ảnh. Đo một lần gồm I/O, chưa benchmark lặp.')
-    answer('- Review queue','reports/review_queue.csv, 20 ảnh eval theo score giảm; contact_sheet.html nhúng ảnh. Đã review bằng AI:Codex, chưa có review người thật; xem hướng dẫn hoàn tất.')
-    answer('- Cách override','AI đã đổi KEEP→RECAPTURE cho img_19_2 và img_06_3 sau quan sát. Lưu raw_predictions và item_decisions, audit ghi actor/before/after/note; không đổi score. Có test chặn ID trùng/lạ, score stale, thiếu reviewer hoặc override sai.')
-    answer('- Decision policy','HOLD / HUMAN_REVIEW_REQUIRED; owner Vũ Duy Khánh (chờ xác nhận). n_reviewed=20, n_human_reviewed=0. AI không ký thay người dùng; human_review_confirmed=false.')
+    answer('- Review queue',f'reports/review_queue.csv: đã nhập {cvat["frame_count"]}/20 quyết định từ CVAT task/job #{cvat["job_id"]}, {cvat["action_counts"]["RECAPTURE"]} RECAPTURE / {cvat["action_counts"]["KEEP"]} KEEP. [Ảnh từng frame](../demo/cvat/index.html), [XML](../demo/cvat/annotations.xml), [biên nhận nhập](cvat_review_import.json). review_source={SOURCE}; review_note giữ nhận xét CVAT; reviewer pipeline là AI:Codex theo người thao tác thực tế. Xác nhận người học còn chờ.')
+    answer('- Cách override',f'Đã áp {len(cvat["override_ids"])} override KEEP→RECAPTURE cho {" và ".join(cvat["override_ids"])} từ export CVAT, chạy lại pipeline offline và thêm audit mới với ghi chú nguyên văn. Giữ toàn bộ audit cũ, raw_predictions, score và ranking. Verifier đối chiếu đủ 20 quyết định CSV, hành động cuối và audit với XML/API.')
+    answer('- Decision policy',f'{cvat["status"]} / {cvat["reason_code"]}; owner {SOURCE} (tên đã xác nhận). n_reviewed=20, n_human_reviewed=0; human_review_confirmed=false. Hoàn tất job CVAT không tự xác nhận review của người học.')
     answer('- Khi nào HOLD/REWORK','HOLD khi thiếu review/escalate/domain mới; REWORK khi còn RECAPTURE; không ép GO để đẹp bài. [Hướng dẫn từng bước export CSV và xác nhận](../docs/HUONG_DAN_HOAN_TAT_T004.md).')
     replace('fixtures/<track>','fixtures/t02_raw_qc')
     replace('python -m src.evaluate --track t__ --pred out/<file> --out reports/metrics_poc.json','python -m src.evaluate --track t02 --pred out/ranked_review.csv --gt reports/annotations/internal_eval_labels.csv --out reports/metrics_poc.json')
@@ -120,7 +122,7 @@ def build_report(root=Path('reports')):
     answer('- Điều chưa biết','Nhãn AI có sai lệch; glare nhẹ, JPEG nhẹ và cảnh tương phản thấp còn khó. Dev night ít, camera mới cần HOLD. Scale 10× chưa đo: xử lý ảnh tuyến tính, sort N log N; nên cache feature, chia batch và đo RAM/latency trước triển khai.')
     answer('- Không tuyên bố','DPO/legal/domain owner phải xác nhận cơ sở xử lý, consent nếu cần, retention, truy cập, license và ngưỡng QC cho dữ liệu thực. PoC chỉ hỗ trợ triage.')
     answer('- Kế hoạch cải tiến','Review người thật và lấy GT chính thức; sau đó lập dev/heldout mới cho contrast glare/ROI detection, thêm camera/ảnh thật có quyền, benchmark lặp. Không tune lại trên eval vừa báo cáo.')
-    replace('| Member 1 | | Integration / CLI | | |','| Member 1 — Vũ Duy Khánh | Duy Khanh / khanhvd.ldm.0299@gmail.com | Integration / CLI; toàn bộ vai trò nhóm 1 người, AI hỗ trợ code/draft | 6c525dc: pipeline + baseline + tests + protocol; commit bằng chứng theo team_contributions.csv | Có kịch bản, chưa diễn ra trình bày thật |')
+    replace('| Member 1 | | Integration / CLI | | |',f'| Member 1 — {SOURCE} | Duy Khanh / khanhvd.ldm.0299@gmail.com | Integration / CLI; toàn bộ vai trò nhóm 1 người, AI hỗ trợ code/draft | 6c525dc: pipeline + baseline + tests + protocol; 28092af: demo CVAT 20 frame; commit bằng chứng theo team_contributions.csv | Có kịch bản, chưa diễn ra trình bày thật |')
     for member,role in [('Member 2','Data + GT'),('Member 3','Core algorithm'),('Member 4','Metric + tests'),('Member 5','Review queue + report'),('Member 6 (nếu có)','Research / ablation / debate')]:
         replace(f'| {member} | | {role} | | |',f'| {member} | Không áp dụng: nhóm 1 người | {role} — do Member 1 đảm nhiệm với hỗ trợ AI | Không giả thành viên/commit | Không áp dụng |')
     replace('| | | |','| https://github.com/opencv/opencv/blob/4.x/doc/tutorials/imgproc/imgtrans/laplace_operator/laplace_operator.markdown <br> https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.convolve.html | 2026-11-14 | OpenCV: cơ sở toán học đạo hàm bậc hai/cạnh, chọn baseline rẻ trên CPU. SciPy: convolution và reflect để tái lập primitive. Không sao chép nguyên văn hoặc coi đây là bằng chứng cho threshold riêng của nhóm. |')

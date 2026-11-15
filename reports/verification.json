@@ -1,5 +1,7 @@
 {
-  "tests": "69 passed, 39 skipped in 5.19s",
+  "tests": "103 passed, 39 skipped in 7.12s",
+  "tests_command": ".venv/bin/python -m pytest -o addopts= -q",
+  "verification_scope": "Working tree after CVAT import on 2026-11-15. clean_committed_source below is historical and applies only to its recorded commit.",
   "cpu": "Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz",
   "preflight": {
     "fail": 0,
@@ -19,8 +21,18 @@
     "reason": "instructor GT not distributed"
   },
   "human_review_completed": false,
-  "browser": "20/20 images loaded; CSV export 20 rows and quote/comma escaping pass. Single-line input strips newlines as expected. All five demo pages visually checked individually.",
-  "clean_output_reproduction": "4 rankings, all evaluator metrics and paired bootstrap exactly match; runtime/timestamps may differ",
+  "browser": "Updated slide 5 visually checked after import; all five slide sections remain 1000px high without horizontal overflow. Existing CVAT screenshots retained; live API annotations and frame order match the saved snapshot exactly.",
+  "clean_output_reproduction": "Fresh out/post-cvat/reproduce run exited 0; all 4 raw rankings, evaluator metric arrays and full analysis/bootstrap summary exactly match saved evidence. PoC CSV matches all 20 CVAT observations with valid audit and HOLD. Runtime/timestamps may differ.",
+  "clean_output_reproduction_command": ".venv/bin/python -m tools.t02_submission --output out/post-cvat/reproduce --reports out/post-cvat/reproduce/reports",
+  "cvat_review_import": {
+    "result": "pass",
+    "receipt": "reports/cvat_review_import.json",
+    "frames": 20,
+    "action_counts": {"RECAPTURE": 19, "KEEP": 1},
+    "checks": "XML/API, queue mapping, verbatim notes, CSV, final actions, actual operator, audit events and receipt agree; prior audit/decision history preserved",
+    "status": "HOLD",
+    "reason_code": "HUMAN_REVIEW_REQUIRED"
+  },
   "make_setup": "make -n setup resolves Python3.12 and requirements-lock.txt",
   "clean_committed_source": {
     "commit": "1d2d4a6bd0587ed2b2531c42572cda72a43d1e5b",
