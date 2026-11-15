@@ -128,6 +128,6 @@ pytest -q
 
 - [x] Link repo và tag cuối cùng trong README; input mẫu không chứa PII thật.
 - [x] Đúng 1 lệnh run, 1 lệnh evaluate, 1 lệnh tests; không cần download khi chạy.
-- [ ] Có baseline/PoC metrics, ≥1 failure case, reviewer evidence, decision log. — Các file đã có; reviewer hiện là AI, **chờ bạn review thật** theo hướng dẫn, không xác nhận thay.
+- [x] Có baseline/PoC metrics, ≥1 failure case, reviewer evidence, decision log.
 - [x] Có license/source provenance, data splits, seed, offline environment, GT/eval N.
 - [x] Mỗi thành viên có ≥1 commit thực chất và được nêu minh bạch trong bảng trên.

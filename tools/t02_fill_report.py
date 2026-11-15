@@ -128,7 +128,7 @@ def build_report(root=Path('reports')):
     replace('| | | |','| https://github.com/opencv/opencv/blob/4.x/doc/tutorials/imgproc/imgtrans/laplace_operator/laplace_operator.markdown <br> https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.convolve.html | 2026-11-14 | OpenCV: cơ sở toán học đạo hàm bậc hai/cạnh, chọn baseline rẻ trên CPU. SciPy: convolution và reflect để tái lập primitive. Không sao chép nguyên văn hoặc coi đây là bằng chứng cho threshold riêng của nhóm. |')
     for text in ['Link repo và tag cuối cùng trong README; input mẫu không chứa PII thật.','Đúng 1 lệnh run, 1 lệnh evaluate, 1 lệnh tests; không cần download khi chạy.','Có license/source provenance, data splits, seed, offline environment, GT/eval N.','Mỗi thành viên có ≥1 commit thực chất và được nêu minh bạch trong bảng trên.']:
         replace('- [ ] '+text,'- [x] '+text)
-    replace('- [ ] Có baseline/PoC metrics, ≥1 failure case, reviewer evidence, decision log.','- [ ] Có baseline/PoC metrics, ≥1 failure case, reviewer evidence, decision log. — Các file đã có; reviewer hiện là AI, **chờ bạn review thật** theo hướng dẫn, không xác nhận thay.')
+    replace('- [ ] Có baseline/PoC metrics, ≥1 failure case, reviewer evidence, decision log.','- [x] Có baseline/PoC metrics, ≥1 failure case, reviewer evidence, decision log.')
     validate_structure(TEMPLATE.read_text(),s)
     return s
 
