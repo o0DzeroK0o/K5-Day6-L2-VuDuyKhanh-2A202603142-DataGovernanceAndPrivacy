@@ -37,7 +37,15 @@ Người dùng yêu cầu đạt mốc repo sạch, sau đó push lên GitHub. P
 | `git -c push.followTags=false push --dry-run origin refs/heads/main:refs/heads/main refs/tags/demo-180m:refs/tags/demo-180m refs/tags/final-24h:refs/tags/final-24h` | Pass quyền push; kế hoạch cập nhật main và thêm hai tag chưa có trên remote, không dùng force. Đây mới là dry-run. |
 | `git -c core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol diff --check` | Pass; giữ CRLF của hướng dẫn HTML. |
 
-Phần ignore là cấu hình, xác minh bằng Git và checksum; không tạo test giả. Logs kiểm tra nằm ở `out/github-20261115-111835/` (gitignored). Kết quả push thật và đối chiếu remote sẽ được bổ sung sau khi commit phần đã kiểm tra.
+Phần ignore là cấu hình, xác minh bằng Git và checksum; không tạo test giả. Logs kiểm tra nằm ở `out/github-20261115-111835/` (gitignored).
+
+## Kết quả push và xác minh
+
+- Commit nội dung `c64d7d6` — `chore: ignore local workspace and prepare GitHub publication`. Ngay sau commit, `git status --porcelain=v1 --untracked-files=all` trả chuỗi trống: không còn thay đổi tracked, staged hoặc untracked.
+- `GIT_TERMINAL_PROMPT=0 git -c push.followTags=false push --atomic -u origin refs/heads/main:refs/heads/main refs/tags/demo-180m:refs/tags/demo-180m refs/tags/final-24h:refs/tags/final-24h` thành công: remote main cập nhật fast-forward từ `b0ce8bf` đến `c64d7d6`, hai tag được thêm. Nhánh `main` theo dõi `origin/main`.
+- Kiểm trực tiếp bằng `git ls-remote --heads --tags origin`: main là `c64d7d67eff94a60e044ac924814cd095bdecfeb`; commit của tag demo là `1d2d4a6bd0587ed2b2531c42572cda72a43d1e5b`, tag final là `83ca5ccc9868bfee89a8f285c3564784c174056b`, đều khớp local.
+- `git rev-list --left-right --count main...origin/main` trả `0 0`; `git status --short --branch` chỉ có `## main...origin/main`.
+- Mốc **repo sạch và push GitHub đã đạt**. [Bản hiện hành trên main](https://github.com/o0DzeroK0o/K5-Day6-L2-VuDuyKhanh-2A202603142-DataGovernanceAndPrivacy/tree/main) có mã nguồn, report, demo web/CVAT và bằng chứng review đã xác nhận.
 
 ## Giới hạn
 
